@@ -16,6 +16,6 @@ jobs:
         dotnet-version: 6.0.x
     - uses: microsoft/setup-msbuild@v1.1
     - name: publish
-      run: dotnet publish src\SIGame\SIGame\SIGame.csproj -c Release -p:PublishSingleFile=true -r win-$platform --self-contained true -p:EnableCompressionInSingleFile=true /property:Version=$version
+      run: dotnet publish src\SIGame\SIGame\SIGame.csproj -c Release -p:PublishSingleFile=true -r win-x64 --self-contained true -p:EnableCompressionInSingleFile=true /property:Version=1.0.0
     - name: build
       run: msbuild .\deploy\SIGame.Setup\SIGame.Setup.wixproj /p:Configuration=Release /p:Platform=$platform /p:OutputPath=bin/Release/$platform /p:BuildProjectReferences=false
