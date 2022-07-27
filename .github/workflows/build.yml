@@ -1,0 +1,21 @@
+name: .NET
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: microsoft/setup-msbuild@v1.1
+    - name: publish
+      run: dotnet publish src\SIGame\SIGame\SIGame.csproj -c Release -p:PublishSingleFile=true -r win-$platform --self-contained true -p:EnableCompressionInSingleFile=true /property:Version=$version
+    - name: build
+      run: msbuild .\deploy\SIGame.Setup\SIGame.Setup.wixproj /p:Configuration=Release /p:Platform=$platform /p:OutputPath=bin/Release/$platform /p:BuildProjectReferences=false
