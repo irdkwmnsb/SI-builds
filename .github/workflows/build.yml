@@ -1,4 +1,4 @@
-name: .NET
+name: Build msi
 
 on:
   workflow_dispatch:
