@@ -30,6 +30,7 @@ jobs:
     - name: Build SImulator
       run: dotnet build --no-restore SImulator.sln
     - name: Upload artifacts
+      uses: actions/checkout@v3
       with:
         name: build
         path: out
