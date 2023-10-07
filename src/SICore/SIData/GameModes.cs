@@ -1,21 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SIData
+namespace SIData;
+
+/// <summary>
+/// Defines game modes.
+/// </summary>
+public enum GameModes
 {
     /// <summary>
-    /// Defines game modes.
+    /// Classic mode (with question selection).
     /// </summary>
-    public enum GameModes
-    {
-        /// <summary>
-        /// Classic mode (with final round and special questions support).
-        /// </summary>
-        [Display(Description = "GameModes_Tv")]
-        Tv,
-        /// <summary>
-        /// Simplified mode (without final round and special questions).
-        /// </summary>
-        [Display(Description = "GameModes_Sport")]
-        Sport
-    }
+    [Display(Description = "GameModes_Tv")]
+    Tv,
+
+    /// <summary>
+    /// Simplified mode (with question sequential play).
+    /// </summary>
+    [Display(Description = "GameModes_Sport")]
+    Sport
 }

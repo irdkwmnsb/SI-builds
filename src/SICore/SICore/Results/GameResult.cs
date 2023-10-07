@@ -1,43 +1,67 @@
-﻿using System.Collections.Generic;
+﻿namespace SICore.Results;
 
-namespace SICore.Results
+/// <summary>
+/// Defines a game result report.
+/// </summary>
+public sealed class GameResult
 {
     /// <summary>
-    /// Результат игры
+    /// Game name.
     /// </summary>
-    public sealed class GameResult
-    {
-        /// <summary>
-        /// Имя пакета
-        /// </summary>
-        public string PackageName { get; set; }
-        /// <summary>
-        /// Уникальный идентификатор пакета
-        /// </summary>
-        public string PackageID { get; set; }
-        /// <summary>
-        /// Выигрыши участников
-        /// </summary>
-        public List<PersonResult> Results { get; set; } = new List<PersonResult>();
-        /// <summary>
-        /// Апеллированные верные ответы
-        /// </summary>
-        public List<AnswerInfo> ApellatedQuestions { get; set; } = new List<AnswerInfo>();
-        /// <summary>
-        /// Полученные неверные ответы
-        /// </summary>
-        public List<AnswerInfo> WrongVersions { get; set; } = new List<AnswerInfo>();
-        /// <summary>
-        /// Помеченные вопросы
-        /// </summary>
-        public List<AnswerInfo> MarkedQuestions { get; set; } = new List<AnswerInfo>();
-        /// <summary>
-        /// Лог ошибок
-        /// </summary>
-        public string ErrorLog { get; set; } = "";
-        /// <summary>
-        /// Комментарии участника
-        /// </summary>
-        public string Comments { get; set; } = "";
-    }
+    public string Name { get; set; } = "";
+
+    /// <summary>
+    /// Game start time.
+    /// </summary>
+    public DateTimeOffset StartTime { get; set; }
+
+    /// <summary>
+    /// Game duration.
+    /// </summary>
+    public TimeSpan Duration { get; set; } = TimeSpan.Zero;
+
+    /// <summary>
+    /// Имя пакета
+    /// </summary>
+    public string? PackageName { get; set; }
+
+    /// <summary>
+    /// Game package hash.
+    /// </summary>
+    public string? PackageHash { get; set; }
+
+    /// <summary>
+    /// Game package authors.
+    /// </summary>
+    public string[] PackageAuthors { get; set; } = Array.Empty<string>();
+
+    /// <summary>
+    /// Players results.
+    /// </summary>
+    public Dictionary<string, int> Results { get; } = new();
+
+    /// <summary>
+    /// Persons reviews.
+    /// </summary>
+    public Dictionary<string, string> Reviews { get; } = new();
+
+    /// <summary>
+    /// Automatically accepted answers.
+    /// </summary>
+    public List<QuestionReport> AcceptedAnswers { get; } = new();
+
+    /// <summary>
+    /// Appellated right answers.
+    /// </summary>
+    public List<QuestionReport> ApellatedAnswers { get; } = new();
+
+    /// <summary>
+    /// Wrong answers.
+    /// </summary>
+    public List<QuestionReport> RejectedAnswers { get; } = new();
+
+    /// <summary>
+    /// Complained by users questions.
+    /// </summary>
+    public List<QuestionReport> ComplainedQuestions { get; } = new();
 }

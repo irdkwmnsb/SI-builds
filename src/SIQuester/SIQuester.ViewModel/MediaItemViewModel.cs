@@ -1,83 +1,32 @@
 ﻿using SIPackages.Core;
-using System;
-using System.Threading.Tasks;
 
-namespace SIQuester.ViewModel
+namespace SIQuester.ViewModel;
+
+/// <summary>
+/// Defines a sidebar media object view model.
+/// </summary>
+public sealed class MediaItemViewModel : MediaOwnerViewModel
 {
-    public sealed class MediaItemViewModel : ModelViewBase, IMediaOwner
+    /// <summary>
+    /// Media item type.
+    /// </summary>
+    public override string Type { get; }
+
+    /// <summary>
+    /// Underlying media object.
+    /// </summary>
+    public Named Model { get; }
+
+    private readonly Func<IMedia> _mediaGetter;
+
+    public MediaItemViewModel(Named named, string type, Func<IMedia> mediaGetter)
     {
-        public string Type { get; }
-
-        public Named Model { get; }
-
-        private readonly Func<IMedia> _mediaGetter;
-
-        private IMedia _media;
-
-        private bool _isMediaLoading;
-
-        public IMedia MediaSource
-        {
-            get
-            {
-                if (_media == null && !_isMediaLoading)
-                    LoadMedia();
-
-                return _media;
-            }
-            set
-            {
-                _media = value;
-                OnPropertyChanged(nameof(MediaSource));
-            }
-        }
-
-        private async void LoadMedia()
-        {
-            try
-            {
-                await LoadMediaAsync();
-            }
-            catch
-            {
-
-            }
-        }
-
-        public async Task<IMedia> LoadMediaAsync()
-        {
-            if (_media != null)
-            {
-                return _media;
-            }
-
-            _isMediaLoading = true;
-            try
-            {
-                return await Task.Run(() =>
-                {
-                    _media = _mediaGetter();
-                    OnPropertyChanged(nameof(MediaSource));
-
-                    return _media;
-                });
-            }
-            catch (Exception exc)
-            {
-                MainViewModel.ShowError(exc);
-                return null;
-            }
-            finally
-            {
-                _isMediaLoading = false;
-            }
-        }
-
-        public MediaItemViewModel(Named named, string type, Func<IMedia> mediaGetter)
-        {
-            Model = named;
-            Type = type;
-            _mediaGetter = mediaGetter;
-        }
+        Model = named;
+        Type = type;
+        _mediaGetter = mediaGetter;
     }
+
+    protected override IMedia GetMedia() => _mediaGetter();
+
+    protected override void OnError(Exception exc) => MainViewModel.ShowError(exc);
 }

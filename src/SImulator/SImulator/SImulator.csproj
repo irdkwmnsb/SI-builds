@@ -1,19 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <AssemblyTitle>SImulator</AssemblyTitle>
     <Company>Khil-soft</Company>
     <Product>SImulator</Product>
     <Description>SIGame emulator</Description>
-    <Copyright>Copyright © Khil-soft 2010 - 2022</Copyright>
-    <Version>2.9.1</Version>
+    <Copyright>Copyright © Khil-soft 2010 - 2023</Copyright>
+    <Version>2.13.0</Version>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <!--<ImplicitUsings>enable</ImplicitUsings>-->
   </PropertyGroup>
   <PropertyGroup>
-    <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+    <SatelliteResourceLanguages>ru-RU</SatelliteResourceLanguages>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>SImulator.App</StartupObject>
@@ -36,9 +38,19 @@
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Images\active_player.png" />
+  </ItemGroup>
+    <ItemGroup>
+      <Content Update="ru-RU\SIUI.resources.dll">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </Content>
+    </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\active_player.png" />
     <Resource Include="Images\logo.png" />
     <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -51,6 +63,7 @@
     <ProjectReference Include="..\..\Common\AppService.Client\AppService.Client.csproj" />
     <ProjectReference Include="..\..\Common\SIEngine\SIEngine.csproj" />
     <ProjectReference Include="..\..\Common\SIPackages\SIPackages.csproj" />
+    <ProjectReference Include="..\..\Common\SIStorageService.ViewModel\SIStorageService.ViewModel.csproj" />
     <ProjectReference Include="..\..\Common\SIUI.ViewModel\SIUI.ViewModel.csproj" />
     <ProjectReference Include="..\..\Common\SIUI\SIUI.csproj" />
     <ProjectReference Include="..\SImulator.ViewModel\SImulator.ViewModel.csproj" />
@@ -58,12 +71,12 @@
   <ItemGroup>
     <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.0.0" />
     <PackageReference Include="SharpDX.DirectInput" Version="4.2.0" />
-    <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+    <PackageReference Include="System.IO.Ports" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -86,6 +99,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="licenses\Newtonsoft.Json.LICENSE.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="licenses\NLog.LICENSE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="licenses\NoSleepJs.LICENSE.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="licenses\SharpDX.LICENSE">
@@ -121,10 +140,16 @@
     <None Update="sounds\round_timeout.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="wwwroot\favicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="wwwroot\index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="wwwroot\logic.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="wwwroot\NoSleep.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="wwwroot\signalr.min.js">

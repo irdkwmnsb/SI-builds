@@ -1,0 +1,13 @@
+<Project>
+	<PropertyGroup>
+		<Authors>Vladimir Khil</Authors>
+		<Company>Khil-soft</Company>
+		<SIGameVersion>7.10.0</SIGameVersion>
+		<SIQuesterVersion>5.10.0</SIQuesterVersion>
+	</PropertyGroup>
+	
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)\obj\$(Platform).$(Configuration)\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+    <OutputPath>$(MSBuildThisFileDirectory)\bin\$(Platform).$(Configuration)\$(MSBuildProjectName)</OutputPath>
+  </PropertyGroup>
+</Project>

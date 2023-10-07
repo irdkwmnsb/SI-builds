@@ -3,25 +3,29 @@ using SIQuester.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SIQuester.Selectors
+namespace SIQuester.Selectors;
+
+public sealed class AtomTypeSelector : DataTemplateSelector
 {
-    public sealed class AtomTypeSelector : DataTemplateSelector
+    public DataTemplate? ImageTemplate { get; set; }
+
+    public DataTemplate? AudioTemplate { get; set; }
+
+    public DataTemplate? VideoTemplate { get; set; }
+
+    public DataTemplate? HtmlTemplate { get; set; }
+
+    public override DataTemplate? SelectTemplate(object item, DependencyObject container)
     {
-        public DataTemplate ImageTemplate { get; set; }
-        public DataTemplate AudioTemplate { get; set; }
-        public DataTemplate VideoTemplate { get; set; }
+        var mediaItem = (MediaItemViewModel)item;
 
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        return mediaItem.Type switch
         {
-            var mediaItem = (MediaItemViewModel)item;
-
-            return mediaItem.Type switch
-            {
-                SIDocument.ImagesStorageName => ImageTemplate,
-                SIDocument.AudioStorageName => AudioTemplate,
-                SIDocument.VideoStorageName => VideoTemplate,
-                _ => base.SelectTemplate(item, container),
-            };
-        }
+            CollectionNames.ImagesStorageName => ImageTemplate,
+            CollectionNames.AudioStorageName => AudioTemplate,
+            CollectionNames.VideoStorageName => VideoTemplate,
+            CollectionNames.HtmlStorageName => HtmlTemplate,
+            _ => base.SelectTemplate(item, container),
+        };
     }
 }

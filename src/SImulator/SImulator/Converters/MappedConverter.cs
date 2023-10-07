@@ -1,32 +1,45 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Data;
 
-namespace SImulator.Converters
+namespace SImulator.Converters;
+
+public sealed class MappedConverter : IValueConverter
 {
-    public sealed class MappedConverter : IValueConverter
+    public StringDictionary? Map { get; set; }
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        public StringDictionary Map { get; set; }
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        if (value == null)
         {
-            if (value == null)
-                return null;
+            return null;
+        }
 
-            if (Map.TryGetValue(value.ToString(), out string result))
-                return result;
+        if (Map != null && Map.TryGetValue(value.ToString() ?? "", out var result))
+        {
+            return result;
+        }
 
+        return value;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (Map == null)
+        {
             return value;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        var val = value?.ToString();
+
+        foreach (var item in Map)
         {
-            var val = value.ToString();
-            foreach (var item in Map)
+            if (item.Value == val)
             {
-                if (item.Value == val)
-                    return item.Key;
+                return item.Key;
             }
-            return value;
         }
+
+        return value;
     }
 }

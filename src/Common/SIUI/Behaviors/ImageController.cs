@@ -1,44 +1,39 @@
 ﻿using SIUI.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SIUI.Behaviors
+namespace SIUI.Behaviors;
+
+/// <summary>
+/// Allows to attach load handler to Image control.
+/// </summary>
+public static class ImageController
 {
-    public static class ImageController
+    public static TableInfoViewModel? GetLoadHandler(DependencyObject obj) => (TableInfoViewModel?)obj.GetValue(LoadHandlerProperty);
+
+    public static void SetLoadHandler(DependencyObject obj, TableInfoViewModel? value) => obj.SetValue(LoadHandlerProperty, value);
+
+    public static readonly DependencyProperty LoadHandlerProperty =
+        DependencyProperty.RegisterAttached("LoadHandler", typeof(TableInfoViewModel), typeof(ImageController), new PropertyMetadata(null, OnLoadHandlerChanged));
+
+    public static void OnLoadHandlerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        public static bool GetIsAttached(DependencyObject obj)
+        var image = (Image)d;
+        var tableInfo = (TableInfoViewModel?)e.NewValue;
+
+        if (tableInfo == null || image == null)
         {
-            return (bool)obj.GetValue(IsAttachedProperty);
+            return;
         }
 
-        public static void SetIsAttached(DependencyObject obj, bool value)
+        image.Loaded += (sender, e2) =>
         {
-            obj.SetValue(IsAttachedProperty, value);
-        }
+            tableInfo.OnMediaLoad();
+        };
 
-        // Using a DependencyProperty as the backing store for IsAttached.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsAttachedProperty =
-            DependencyProperty.RegisterAttached("IsAttached", typeof(bool), typeof(ImageController), new PropertyMetadata(false, OnIsAttachedChanged));
-
-        public static void OnIsAttachedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        image.ImageFailed += (sender, e2) =>
         {
-            var image = (Image)d;
-            var tableInfo = (TableInfoViewModel)image?.DataContext;
-
-            if (tableInfo == null)
-            {
-                return;
-            }
-
-            image.ImageFailed += (sender, e2) =>
-            {
-                tableInfo.OnMediaLoadError(e2.ErrorException);
-            };
-        }
+            tableInfo.OnMediaLoadError(e2.ErrorException);
+        };
     }
 }

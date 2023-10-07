@@ -1,25 +1,28 @@
 ﻿using SIQuester.Model;
-using System;
-using System.Linq;
+using SIQuester.ViewModel.Properties;
 using System.Windows.Input;
+using Utils.Commands;
 
-namespace SIQuester.ViewModel
+namespace SIQuester.ViewModel;
+
+/// <summary>
+/// Defines application settings view model.
+/// </summary>
+public sealed class SettingsViewModel : WorkspaceViewModel
 {
-    public sealed class SettingsViewModel: WorkspaceViewModel
-    {
-        public ICommand Reset { get; private set; }
+    public ICommand Reset { get; private set; }
 
-        public override string Header => "Настройки";
+    public override string Header => Resources.Options;
 
-        public string[] Fonts => System.Windows.Media.Fonts.SystemFontFamilies.Select(ff => ff.Source).OrderBy(f => f).ToArray();
+    public string[] Fonts => System.Windows.Media.Fonts.SystemFontFamilies.Select(ff => ff.Source).OrderBy(f => f).ToArray();
 
-        public bool SpellCheckingEnabled => Environment.OSVersion.Version > new Version(6, 2);
+    public bool SpellCheckingEnabled => Environment.OSVersion.Version > new Version(6, 2);
 
-        public SettingsViewModel()
-        {
-            Reset = new SimpleCommand(Reset_Executed);
-        }
+    public string[] Languages { get; } = new string[] { "ru-RU", "en-US" };
 
-        private void Reset_Executed(object arg) => AppSettings.Default.Reset();
-    }
+    public AppSettings Model => AppSettings.Default;
+
+    public SettingsViewModel() => Reset = new SimpleCommand(Reset_Executed);
+
+    private void Reset_Executed(object? arg) => AppSettings.Default.Reset();
 }

@@ -1,0 +1,1107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About the program…</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddAnswer" xml:space="preserve">
+    <value>Add answer</value>
+  </data>
+  <data name="AddAudio" xml:space="preserve">
+    <value>Add audio</value>
+  </data>
+  <data name="AddComplexAnswer" xml:space="preserve">
+    <value>Add complex answer</value>
+  </data>
+  <data name="AddEmptyQuestion" xml:space="preserve">
+    <value>Add empty question</value>
+  </data>
+  <data name="AddHtml" xml:space="preserve">
+    <value>Add HTML</value>
+  </data>
+  <data name="AddImage" xml:space="preserve">
+    <value>Add image</value>
+  </data>
+  <data name="AddOption" xml:space="preserve">
+    <value>Add answer option</value>
+  </data>
+  <data name="AddOral" xml:space="preserve">
+    <value>Add oral text</value>
+  </data>
+  <data name="AddParameter" xml:space="preserve">
+    <value>Add parameter</value>
+  </data>
+  <data name="AddQuestion" xml:space="preserve">
+    <value>Add question (Insert)</value>
+  </data>
+  <data name="AddRound" xml:space="preserve">
+    <value>Add round (Insert)</value>
+  </data>
+  <data name="AddText" xml:space="preserve">
+    <value>Add text</value>
+  </data>
+  <data name="AddTheme" xml:space="preserve">
+    <value>Add topic (Insert)</value>
+  </data>
+  <data name="AddVideo" xml:space="preserve">
+    <value>Add video</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="AlignAnswersRight" xml:space="preserve">
+    <value>Align answers to the right edge of the window in the tree view</value>
+  </data>
+  <data name="AlignPriceWithQuestionText" xml:space="preserve">
+    <value>The price is written in the same line as the question</value>
+  </data>
+  <data name="AllFiles" xml:space="preserve">
+    <value>All files</value>
+  </data>
+  <data name="Answer" xml:space="preserve">
+    <value>Answer</value>
+  </data>
+  <data name="AnswerHeader" xml:space="preserve">
+    <value>Answer:</value>
+  </data>
+  <data name="AnswerMetaHint" xml:space="preserve">
+    <value>Hint about metacharacters in answers</value>
+  </data>
+  <data name="AnswerOptions" xml:space="preserve">
+    <value>Answer options</value>
+  </data>
+  <data name="AnswersLayout" xml:space="preserve">
+    <value>Answers layout</value>
+  </data>
+  <data name="AnswerType" xml:space="preserve">
+    <value>Answer type</value>
+  </data>
+  <data name="AppAuthor" xml:space="preserve">
+    <value>Vladimir Khil</value>
+  </data>
+  <data name="AppLanguage" xml:space="preserve">
+    <value>App language (restart required)</value>
+  </data>
+  <data name="ApplicationIsClosing" xml:space="preserve">
+    <value>Closing the Application object</value>
+  </data>
+  <data name="AppRunError" xml:space="preserve">
+    <value>Program start error</value>
+  </data>
+  <data name="AppTitle" xml:space="preserve">
+    <value>SIGame question editor</value>
+  </data>
+  <data name="AppWillBeClosed" xml:space="preserve">
+    <value>The program will be closed. If this error occurs again, contact the developer</value>
+  </data>
+  <data name="AttachPackage" xml:space="preserve">
+    <value>Attach package…</value>
+  </data>
+  <data name="AttachPackageHint" xml:space="preserve">
+    <value>Attaching another question file</value>
+  </data>
+  <data name="Audio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Authors" xml:space="preserve">
+    <value>Authors</value>
+  </data>
+  <data name="AuthorsAbsence" xml:space="preserve">
+    <value>No authors</value>
+  </data>
+  <data name="AuthorsHeader" xml:space="preserve">
+    <value>Authors:</value>
+  </data>
+  <data name="AuthorsLayout" xml:space="preserve">
+    <value>Authors layout</value>
+  </data>
+  <data name="AutoDetect" xml:space="preserve">
+    <value>Auto-detect</value>
+  </data>
+  <data name="AutoDetectTemplateWhenImportingText" xml:space="preserve">
+    <value>Automatic template selection when importing text</value>
+  </data>
+  <data name="AutomaticallyDetectTemplates" xml:space="preserve">
+    <value>Define input file templates automatically</value>
+  </data>
+  <data name="AutoSave" xml:space="preserve">
+    <value>Auto-save (application restart required)</value>
+  </data>
+  <data name="AutoSetQuestionPrices" xml:space="preserve">
+    <value>Automatic setting of question costs</value>
+  </data>
+  <data name="BagCat_Knows" xml:space="preserve">
+    <value>Theme and prices are announced</value>
+  </data>
+  <data name="BagCat_Knows_Value_After" xml:space="preserve">
+    <value>After giving</value>
+  </data>
+  <data name="BagCat_Knows_Value_Before" xml:space="preserve">
+    <value>Before giving</value>
+  </data>
+  <data name="BagCat_Knows_Value_Never" xml:space="preserve">
+    <value>Never</value>
+  </data>
+  <data name="BagCat_Self" xml:space="preserve">
+    <value>Can give to yourself</value>
+  </data>
+  <data name="BagCat_Self_Value_False" xml:space="preserve">
+    <value>Disallow</value>
+  </data>
+  <data name="BagCat_Self_Value_True" xml:space="preserve">
+    <value>Allow</value>
+  </data>
+  <data name="BaseAuthors" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="BaseQuestionPrice" xml:space="preserve">
+    <value>Base question price</value>
+  </data>
+  <data name="BaseSources" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="BaseValue" xml:space="preserve">
+    <value>Base value</value>
+  </data>
+  <data name="BasicSettings" xml:space="preserve">
+    <value>Basic settings</value>
+  </data>
+  <data name="BindingDetachedError" xml:space="preserve">
+    <value>It is impossible to perform this operation when the binding is disconnected</value>
+  </data>
+  <data name="BracketsContentToComment" xml:space="preserve">
+    <value>Move brackets content to comment</value>
+  </data>
+  <data name="ByDefault" xml:space="preserve">
+    <value>Reset to default</value>
+  </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>byte</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CancelSearch" xml:space="preserve">
+    <value>Cancel search</value>
+  </data>
+  <data name="Championship" xml:space="preserve">
+    <value>Championship</value>
+  </data>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Change language</value>
+  </data>
+  <data name="CheckFileSize" xml:space="preserve">
+    <value>Check that the question file is suitable for playing through the Game server</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="ClearType" xml:space="preserve">
+    <value>Remove type</value>
+  </data>
+  <data name="CloneQuestion" xml:space="preserve">
+    <value>Clone question</value>
+  </data>
+  <data name="CloneRound" xml:space="preserve">
+    <value>Clone round</value>
+  </data>
+  <data name="CloneTheme" xml:space="preserve">
+    <value>Clone topic</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CollapseAll" xml:space="preserve">
+    <value>Expand all</value>
+  </data>
+  <data name="CollapseAllMedia" xml:space="preserve">
+    <value>Collapse all media</value>
+  </data>
+  <data name="CollapseMedia" xml:space="preserve">
+    <value>Collapse media</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="CommentsHeader" xml:space="preserve">
+    <value>Comments:</value>
+  </data>
+  <data name="Common" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="CommonAppError" xml:space="preserve">
+    <value>Program execution error</value>
+  </data>
+  <data name="ContactAuthor" xml:space="preserve">
+    <value>Write remarks to the author…</value>
+  </data>
+  <data name="ContactAuthorToolTip" xml:space="preserve">
+    <value>Report bugs to the author or make suggestions</value>
+  </data>
+  <data name="ContactUri" xml:space="preserve">
+    <value>Contact address</value>
+  </data>
+  <data name="ConvertToCompSI" xml:space="preserve">
+    <value>Format for TV and Comp-SIGame</value>
+  </data>
+  <data name="ConvertToCompSIHint" xml:space="preserve">
+    <value>Split into rounds and assign television costs</value>
+  </data>
+  <data name="ConvertToCompSISimple" xml:space="preserve">
+    <value>Correct for TV and Comp-SIGame</value>
+  </data>
+  <data name="ConvertToCompSISimpleHint" xml:space="preserve">
+    <value>Change topic names, remove dots at the end of questions</value>
+  </data>
+  <data name="ConvertToMillionaire" xml:space="preserve">
+    <value>Format for "Millionaire"</value>
+  </data>
+  <data name="ConvertToMillionaireHint" xml:space="preserve">
+    <value>Split into groups of 15 questions</value>
+  </data>
+  <data name="ConvertToSportSI" xml:space="preserve">
+    <value>Format for Sport-SIGame</value>
+  </data>
+  <data name="ConvertToSportSIHint" xml:space="preserve">
+    <value>Assign costs of 10, 20, 30, etc.</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Create5QuestionsWithTheme" xml:space="preserve">
+    <value>Create 5 questions along with theme</value>
+  </data>
+  <data name="CreationDate" xml:space="preserve">
+    <value>Creation date</value>
+  </data>
+  <data name="CustomThemes" xml:space="preserve">
+    <value>Custom themes</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Difficulty" xml:space="preserve">
+    <value>Difficulty</value>
+  </data>
+  <data name="DocumentCaption" xml:space="preserve">
+    <value>Document title</value>
+  </data>
+  <data name="DocumentFont" xml:space="preserve">
+    <value>Document font</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Thank the author…</value>
+  </data>
+  <data name="DuplicateAnd" xml:space="preserve">
+    <value>A and B =&gt; A and B + B and A</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditMode" xml:space="preserve">
+    <value>Edit mode</value>
+  </data>
+  <data name="EditModeFixedPanel" xml:space="preserve">
+    <value>Fixed panel</value>
+  </data>
+  <data name="EditModeFloatPanel" xml:space="preserve">
+    <value>Floating panel</value>
+  </data>
+  <data name="EditModeNone" xml:space="preserve">
+    <value>Read only</value>
+  </data>
+  <data name="EditMode_FixedPanel" xml:space="preserve">
+    <value>Fixed panel</value>
+  </data>
+  <data name="EditMode_FloatPanel" xml:space="preserve">
+    <value>Floating panel</value>
+  </data>
+  <data name="EditMode_ReadOnly" xml:space="preserve">
+    <value>Read only</value>
+  </data>
+  <data name="EditText" xml:space="preserve">
+    <value>Edit text</value>
+  </data>
+  <data name="Empty" xml:space="preserve">
+    <value>Untitled</value>
+  </data>
+  <data name="EmptyLineBeforeThemeName" xml:space="preserve">
+    <value>Is an empty line needed after the theme name</value>
+  </data>
+  <data name="EmptyQuestion" xml:space="preserve">
+    <value>(empty)</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Encoding</value>
+  </data>
+  <data name="ExpandAll" xml:space="preserve">
+    <value>Collapse all</value>
+  </data>
+  <data name="ExpandAllMedia" xml:space="preserve">
+    <value>Expand all media</value>
+  </data>
+  <data name="ExpandMedia" xml:space="preserve">
+    <value>Expand media</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="ExportAndPrint" xml:space="preserve">
+    <value>Export and print</value>
+  </data>
+  <data name="ExportFormatsDb" xml:space="preserve">
+    <value>Questions database</value>
+  </data>
+  <data name="ExportFormatsDinabank" xml:space="preserve">
+    <value>Dinabank</value>
+  </data>
+  <data name="ExportFormatsSns" xml:space="preserve">
+    <value>SNS</value>
+  </data>
+  <data name="ExportFormatsTvSI" xml:space="preserve">
+    <value>SIGame TV version</value>
+  </data>
+  <data name="ExportMediaCommand" xml:space="preserve">
+    <value>Unload media…</value>
+  </data>
+  <data name="FileExistReplace" xml:space="preserve">
+    <value>File {0} exists, replace it?</value>
+  </data>
+  <data name="FileImport" xml:space="preserve">
+    <value>Import file</value>
+  </data>
+  <data name="FillPrices" xml:space="preserve">
+    <value>Set costs</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Final" xml:space="preserve">
+    <value>Final</value>
+  </data>
+  <data name="FinalRound" xml:space="preserve">
+    <value>Final round</value>
+  </data>
+  <data name="FinalThemeCount" xml:space="preserve">
+    <value>Final theme count</value>
+  </data>
+  <data name="FlatLayoutModeHeader" xml:space="preserve">
+    <value>Placement of elements in tile mode</value>
+  </data>
+  <data name="FlatLayoutModeList" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="FlatLayoutModeTable" xml:space="preserve">
+    <value>Table</value>
+  </data>
+  <data name="FormattedHtml" xml:space="preserve">
+    <value>Customizable HTML</value>
+  </data>
+  <data name="FormattedHtmlHint" xml:space="preserve">
+    <value>Ability to configure a specific package view</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>from</value>
+  </data>
+  <data name="FullUpdates" xml:space="preserve">
+    <value>Program update to version {0} detected. Additional installation will be performed. Install the update now?</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="HowToUse" xml:space="preserve">
+    <value>How to use the program…</value>
+  </data>
+  <data name="HtmlExportHint" xml:space="preserve">
+    <value>Set the parameters of the output document and press the "Export" button</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="ImportDB" xml:space="preserve">
+    <value>Question database…</value>
+  </data>
+  <data name="ImportSIStorage" xml:space="preserve">
+    <value>Question library…</value>
+  </data>
+  <data name="ImportText" xml:space="preserve">
+    <value>Text…</value>
+  </data>
+  <data name="ImportTextTip" xml:space="preserve">
+    <value>Convert text file to SIQ format</value>
+  </data>
+  <data name="ImportXml" xml:space="preserve">
+    <value>XML file…</value>
+  </data>
+  <data name="Increase" xml:space="preserve">
+    <value>Increment</value>
+  </data>
+  <data name="InstallUpdates" xml:space="preserve">
+    <value>Install updates</value>
+  </data>
+  <data name="InstallUpdatesHint" xml:space="preserve">
+    <value>The program will automatically check for updates on the developer's website and install them</value>
+  </data>
+  <data name="InvalidParameter" xml:space="preserve">
+    <value>Parameter is set incorrectly</value>
+  </data>
+  <data name="JoinWithNext" xml:space="preserve">
+    <value>Merge with the next one (play simultaneously)</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LastWordToNewAnswer" xml:space="preserve">
+    <value>Last word to new answer</value>
+  </data>
+  <data name="Licences" xml:space="preserve">
+    <value>Licenses</value>
+  </data>
+  <data name="List" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="MakeEmpty" xml:space="preserve">
+    <value>Make empty</value>
+  </data>
+  <data name="MakeNonEmpty" xml:space="preserve">
+    <value>Make non-empty</value>
+  </data>
+  <data name="MircScript" xml:space="preserve">
+    <value>mIRC Script</value>
+  </data>
+  <data name="MircScriptHint" xml:space="preserve">
+    <value>Conducting a game in IRC</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>Move down</value>
+  </data>
+  <data name="MoveLeft" xml:space="preserve">
+    <value>Move left</value>
+  </data>
+  <data name="MoveRight" xml:space="preserve">
+    <value>Move right</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>Move up</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="NextFragment" xml:space="preserve">
+    <value>Next fragment</value>
+  </data>
+  <data name="NextSearchResult" xml:space="preserve">
+    <value>Next result</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NonStandardPackageParameters" xml:space="preserve">
+    <value>Custom package settings</value>
+  </data>
+  <data name="NotEnoughMemoryToStartApp" xml:space="preserve">
+    <value>Not enough memory to run the program!</value>
+  </data>
+  <data name="NumberSetModeFixedValue" xml:space="preserve">
+    <value>Fixed value</value>
+  </data>
+  <data name="NumberSetModeMinimumOrMaximumInRound" xml:space="preserve">
+    <value>Minimum or maximum in round</value>
+  </data>
+  <data name="NumberSetModeRange" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="NumberSetModeRangeWithStep" xml:space="preserve">
+    <value>Select with step</value>
+  </data>
+  <data name="NumberThemes" xml:space="preserve">
+    <value>Number the themes</value>
+  </data>
+  <data name="Object" xml:space="preserve">
+    <value>Object</value>
+  </data>
+  <data name="OfficialSite" xml:space="preserve">
+    <value>Official website</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open… (Ctrl+O)</value>
+  </data>
+  <data name="OpenCloseBracketsIncosistency" xml:space="preserve">
+    <value>Mismatch of the number of opening and closing brackets</value>
+  </data>
+  <data name="OpenFileAfterSaving" xml:space="preserve">
+    <value>Open file after saving</value>
+  </data>
+  <data name="OpenPackage" xml:space="preserve">
+    <value>Open package</value>
+  </data>
+  <data name="OpenRecent" xml:space="preserve">
+    <value>Open recent</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="OrientationHorizontal" xml:space="preserve">
+    <value>rows</value>
+  </data>
+  <data name="OrientationVertical" xml:space="preserve">
+    <value>columns</value>
+  </data>
+  <data name="PackageAuthor" xml:space="preserve">
+    <value>Package author</value>
+  </data>
+  <data name="PackageLogo" xml:space="preserve">
+    <value>Package logo</value>
+  </data>
+  <data name="PackageName" xml:space="preserve">
+    <value>Package name</value>
+  </data>
+  <data name="PackageNameFontSize" xml:space="preserve">
+    <value>Package name font size</value>
+  </data>
+  <data name="PackageType" xml:space="preserve">
+    <value>Package template</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="PlayQuestion" xml:space="preserve">
+    <value>Start question</value>
+  </data>
+  <data name="PreviousFragment" xml:space="preserve">
+    <value>Previous fragment</value>
+  </data>
+  <data name="PreviousSearchResult" xml:space="preserve">
+    <value>Previous result</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Print...</value>
+  </data>
+  <data name="PrintedHtml" xml:space="preserve">
+    <value>HTML for printing</value>
+  </data>
+  <data name="Publisher" xml:space="preserve">
+    <value>Publisher</value>
+  </data>
+  <data name="PublisherCompany" xml:space="preserve">
+    <value>Publisher</value>
+  </data>
+  <data name="PublishersAll" xml:space="preserve">
+    <value>(all)</value>
+  </data>
+  <data name="PublishersNotSet" xml:space="preserve">
+    <value>(not set)</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="QuestionParsing" xml:space="preserve">
+    <value>Import questions</value>
+  </data>
+  <data name="QuestionSplitting" xml:space="preserve">
+    <value>Splitting text into questions</value>
+  </data>
+  <data name="QuestionTextFontSize" xml:space="preserve">
+    <value>Question text font size</value>
+  </data>
+  <data name="QuestionType" xml:space="preserve">
+    <value>Question type</value>
+  </data>
+  <data name="Range" xml:space="preserve">
+    <value>Range</value>
+  </data>
+  <data name="RecentFiles" xml:space="preserve">
+    <value>Recent files</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Repeat</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="RemoveAnswer" xml:space="preserve">
+    <value>Remove answer</value>
+  </data>
+  <data name="RemoveComplexAnswer" xml:space="preserve">
+    <value>Remove complex answer</value>
+  </data>
+  <data name="RemoveLink" xml:space="preserve">
+    <value>Remove link</value>
+  </data>
+  <data name="RemoveLogo" xml:space="preserve">
+    <value>Remove logo</value>
+  </data>
+  <data name="RemoveParameter" xml:space="preserve">
+    <value>Remove parameter</value>
+  </data>
+  <data name="RemoveQuestion" xml:space="preserve">
+    <value>Remove question</value>
+  </data>
+  <data name="RemoveRound" xml:space="preserve">
+    <value>Remove round</value>
+  </data>
+  <data name="RemoveTemplate" xml:space="preserve">
+    <value>Delete template</value>
+  </data>
+  <data name="RemoveTheme" xml:space="preserve">
+    <value>Remove topic</value>
+  </data>
+  <data name="RemoveUnusedFiles" xml:space="preserve">
+    <value>Remove unused files</value>
+  </data>
+  <data name="RemoveUnusedMedia" xml:space="preserve">
+    <value>Remove multimedia from the package when the last link to it is deleted</value>
+  </data>
+  <data name="Reserve" xml:space="preserve">
+    <value>Reserve</value>
+  </data>
+  <data name="Restriction" xml:space="preserve">
+    <value>Restriction</value>
+  </data>
+  <data name="RoundCount" xml:space="preserve">
+    <value>Round count</value>
+  </data>
+  <data name="RoundNameFontSize" xml:space="preserve">
+    <value>Round name font size</value>
+  </data>
+  <data name="RoundThemeCount" xml:space="preserve">
+    <value>Theme per round count</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveAll" xml:space="preserve">
+    <value>Save all (Shift+Ctrl+S)</value>
+  </data>
+  <data name="SaveAndExport" xml:space="preserve">
+    <value>Save and export</value>
+  </data>
+  <data name="SaveAs" xml:space="preserve">
+    <value>Save as…</value>
+  </data>
+  <data name="SaveAsTemplate" xml:space="preserve">
+    <value>Save as template…</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Scale</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchFolder" xml:space="preserve">
+    <value>Folder to search...</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>Search results</value>
+  </data>
+  <data name="SearchText" xml:space="preserve">
+    <value>Search text</value>
+  </data>
+  <data name="SecondName" xml:space="preserve">
+    <value>Second name</value>
+  </data>
+  <data name="SecretCanBeGivenToSelf" xml:space="preserve">
+    <value>Question can be given to yourself</value>
+  </data>
+  <data name="SecretNoQuestion" xml:space="preserve">
+    <value>Price is accrued without question</value>
+  </data>
+  <data name="SecretPublicPrice" xml:space="preserve">
+    <value>Theme and cost are announced before question is given</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SelectedToNewAnswer" xml:space="preserve">
+    <value>Selected -&gt; New answer</value>
+  </data>
+  <data name="SelectedToNewComment" xml:space="preserve">
+    <value>Selected -&gt; New comment</value>
+  </data>
+  <data name="SelectedToNewSource" xml:space="preserve">
+    <value>Selected -&gt; New source</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Select file…</value>
+  </data>
+  <data name="SelectionMode" xml:space="preserve">
+    <value>Transfer mode</value>
+  </data>
+  <data name="SelectOptionCount" xml:space="preserve">
+    <value>Default option count</value>
+  </data>
+  <data name="SelectSearchFolder" xml:space="preserve">
+    <value>Select a folder to search</value>
+  </data>
+  <data name="SelectThemes" xml:space="preserve">
+    <value>Select themes…</value>
+  </data>
+  <data name="SelectThemesHint" xml:space="preserve">
+    <value>Save part of the topics of this package into a separate package</value>
+  </data>
+  <data name="SendErrorHeader" xml:space="preserve">
+    <value>Serious application failure. Send a report to the author? (if possible, contact the author personally, as there are only extremely rare errors left in the program)</value>
+  </data>
+  <data name="SendToPCGame" xml:space="preserve">
+    <value>Send to computer game</value>
+  </data>
+  <data name="SetAnswererSelect_Any" xml:space="preserve">
+    <value>To anyone</value>
+  </data>
+  <data name="SetAnswererSelect_ExceptCurrent" xml:space="preserve">
+    <value>To everyone except oneself</value>
+  </data>
+  <data name="SetAnswerTypeType_Select" xml:space="preserve">
+    <value>Select from options</value>
+  </data>
+  <data name="SetAnswerTypeType_Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="SetLogo" xml:space="preserve">
+    <value>Set logo</value>
+  </data>
+  <data name="SetTags" xml:space="preserve">
+    <value>Set tags</value>
+  </data>
+  <data name="SetTime" xml:space="preserve">
+    <value>Specify time interval</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SettingsSavingError" xml:space="preserve">
+    <value>Error saving settings</value>
+  </data>
+  <data name="ShowToolTipsInFlatView" xml:space="preserve">
+    <value>Show tooltips in tile view</value>
+  </data>
+  <data name="ShuffleQuestions" xml:space="preserve">
+    <value>Shuffle questions and costs</value>
+  </data>
+  <data name="SidePanel" xml:space="preserve">
+    <value>Side panel</value>
+  </data>
+  <data name="SIQuestions" xml:space="preserve">
+    <value>SI questions</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="SkipFragment" xml:space="preserve">
+    <value>Skip fragment</value>
+  </data>
+  <data name="SnsTemplatesHint" xml:space="preserve">
+    <value>Use SNS project templates</value>
+  </data>
+  <data name="SortQuestionsByPrice" xml:space="preserve">
+    <value>Sort questions by cost</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="SourceFile" xml:space="preserve">
+    <value>Source file</value>
+  </data>
+  <data name="SourceFragment" xml:space="preserve">
+    <value>Source fragment</value>
+  </data>
+  <data name="Sources" xml:space="preserve">
+    <value>Sources</value>
+  </data>
+  <data name="SourcesAbsense" xml:space="preserve">
+    <value>No sources</value>
+  </data>
+  <data name="SourcesHeader" xml:space="preserve">
+    <value>Sources:</value>
+  </data>
+  <data name="SourcesLayout" xml:space="preserve">
+    <value>Sources layout</value>
+  </data>
+  <data name="SpellChecking" xml:space="preserve">
+    <value>Spell check (Windows 8.1 and above)</value>
+  </data>
+  <data name="StandardLogicDescription" xml:space="preserve">
+    <value>The answer immediately follows the question</value>
+  </data>
+  <data name="StandardLogicHint" xml:space="preserve">
+    <value>Expect that each question is immediately followed by an answer, rather than first reading a group of questions and then a group of answers</value>
+  </data>
+  <data name="StandardValue" xml:space="preserve">
+    <value>Standard value</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="StartImport" xml:space="preserve">
+    <value>Start import</value>
+  </data>
+  <data name="SubfolderSearch" xml:space="preserve">
+    <value>Search in subfolders</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="Table" xml:space="preserve">
+    <value>Table</value>
+  </data>
+  <data name="TableFormat" xml:space="preserve">
+    <value>Table format</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="Template" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="TextBeforeThemeName" xml:space="preserve">
+    <value>Text before theme name</value>
+  </data>
+  <data name="TextToImport" xml:space="preserve">
+    <value>Text for import (copy into the field below or open a file)</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="ThemeNameFontSize" xml:space="preserve">
+    <value>Theme name font size</value>
+  </data>
+  <data name="ThemeQuestionCount" xml:space="preserve">
+    <value>Question per theme count</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>to</value>
+  </data>
+  <data name="ToggleToOralAndBack" xml:space="preserve">
+    <value>Change type (to oral or back)</value>
+  </data>
+  <data name="ToolTipFileSearch" xml:space="preserve">
+    <value>File search</value>
+  </data>
+  <data name="ToolTipNew" xml:space="preserve">
+    <value>New… (Ctrl+N)</value>
+  </data>
+  <data name="TotalThemes" xml:space="preserve">
+    <value>Theme count:</value>
+  </data>
+  <data name="Tour" xml:space="preserve">
+    <value>Tour</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="UnlinkFromNext" xml:space="preserve">
+    <value>Disconnect from the next one</value>
+  </data>
+  <data name="UpdateException" xml:space="preserve">
+    <value>The following error occurred while searching for an update: {0}</value>
+  </data>
+  <data name="UpdatePricesOnDragAndDrop" xml:space="preserve">
+    <value>Change question costs when dragging</value>
+  </data>
+  <data name="UpdatePricesOnDragAndDropHint" xml:space="preserve">
+    <value>Questions will be moved, but the cost distribution will remain the same</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Video" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="ViewModeFlat" xml:space="preserve">
+    <value>Tiles</value>
+  </data>
+  <data name="ViewModeTree" xml:space="preserve">
+    <value>Tree</value>
+  </data>
+  <data name="Wikify" xml:space="preserve">
+    <value>Wikify</value>
+  </data>
+  <data name="WikifyHint" xml:space="preserve">
+    <value>Insert typographic quotes, ellipsis, and dash</value>
+  </data>
+  <data name="WindowsAutomationError" xml:space="preserve">
+    <value>Application startup error related to Windows Automation. Try installing updates for your operating system, for .NET Framework 4, or install the Windows Automation API library (the link is on the application page).</value>
+  </data>
+  <data name="WithStep" xml:space="preserve">
+    <value>with a step</value>
+  </data>
+  <data name="WrongAnswers" xml:space="preserve">
+    <value>Incorrect answers</value>
+  </data>
+  <data name="WrongMultimediaAddress" xml:space="preserve">
+    <value>Incorrect multimedia address. The program terminated abnormally with an error</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>yrs.</value>
+  </data>
+  <data name="YourThemes" xml:space="preserve">
+    <value>Your topics:</value>
+  </data>
+</root>

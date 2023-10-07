@@ -61,11 +61,200 @@ namespace SIQuester.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на О программе….
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Зачёт.
         /// </summary>
         public static string Accept {
             get {
                 return ResourceManager.GetString("Accept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Действия.
+        /// </summary>
+        public static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить ответ.
+        /// </summary>
+        public static string AddAnswer {
+            get {
+                return ResourceManager.GetString("AddAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить аудио.
+        /// </summary>
+        public static string AddAudio {
+            get {
+                return ResourceManager.GetString("AddAudio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить сложный ответ.
+        /// </summary>
+        public static string AddComplexAnswer {
+            get {
+                return ResourceManager.GetString("AddComplexAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить пустой вопрос.
+        /// </summary>
+        public static string AddEmptyQuestion {
+            get {
+                return ResourceManager.GetString("AddEmptyQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить HTML.
+        /// </summary>
+        public static string AddHtml {
+            get {
+                return ResourceManager.GetString("AddHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить изображение.
+        /// </summary>
+        public static string AddImage {
+            get {
+                return ResourceManager.GetString("AddImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить вариант ответа.
+        /// </summary>
+        public static string AddOption {
+            get {
+                return ResourceManager.GetString("AddOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить устный текст.
+        /// </summary>
+        public static string AddOral {
+            get {
+                return ResourceManager.GetString("AddOral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить параметр.
+        /// </summary>
+        public static string AddParameter {
+            get {
+                return ResourceManager.GetString("AddParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить вопрос (Insert).
+        /// </summary>
+        public static string AddQuestion {
+            get {
+                return ResourceManager.GetString("AddQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить раунд (Insert).
+        /// </summary>
+        public static string AddRound {
+            get {
+                return ResourceManager.GetString("AddRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить текст.
+        /// </summary>
+        public static string AddText {
+            get {
+                return ResourceManager.GetString("AddText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить тему (Insert).
+        /// </summary>
+        public static string AddTheme {
+            get {
+                return ResourceManager.GetString("AddTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить видео.
+        /// </summary>
+        public static string AddVideo {
+            get {
+                return ResourceManager.GetString("AddVideo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дополнительно.
+        /// </summary>
+        public static string Advanced {
+            get {
+                return ResourceManager.GetString("Advanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выровнять ответы по правому краю окна в древовидном отображении.
+        /// </summary>
+        public static string AlignAnswersRight {
+            get {
+                return ResourceManager.GetString("AlignAnswersRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Цена пишется в той же строке, что и вопрос.
+        /// </summary>
+        public static string AlignPriceWithQuestionText {
+            get {
+                return ResourceManager.GetString("AlignPriceWithQuestionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Все файлы.
+        /// </summary>
+        public static string AllFiles {
+            get {
+                return ResourceManager.GetString("AllFiles", resourceCulture);
             }
         }
         
@@ -79,11 +268,281 @@ namespace SIQuester.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ответ:.
+        /// </summary>
+        public static string AnswerHeader {
+            get {
+                return ResourceManager.GetString("AnswerHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Подсказка про метасиволы в ответах.
+        /// </summary>
+        public static string AnswerMetaHint {
+            get {
+                return ResourceManager.GetString("AnswerMetaHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Варианты ответа.
+        /// </summary>
+        public static string AnswerOptions {
+            get {
+                return ResourceManager.GetString("AnswerOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ответы пишутся.
+        /// </summary>
+        public static string AnswersLayout {
+            get {
+                return ResourceManager.GetString("AnswersLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Тип ответа.
+        /// </summary>
+        public static string AnswerType {
+            get {
+                return ResourceManager.GetString("AnswerType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Владимир Хиль.
+        /// </summary>
+        public static string AppAuthor {
+            get {
+                return ResourceManager.GetString("AppAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Язык приложения (требуется перезапуск).
+        /// </summary>
+        public static string AppLanguage {
+            get {
+                return ResourceManager.GetString("AppLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Идет завершение работы объекта Application.
+        /// </summary>
+        public static string ApplicationIsClosing {
+            get {
+                return ResourceManager.GetString("ApplicationIsClosing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка запуска программы.
+        /// </summary>
+        public static string AppRunError {
+            get {
+                return ResourceManager.GetString("AppRunError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Редактор вопросов SIGame.
+        /// </summary>
+        public static string AppTitle {
+            get {
+                return ResourceManager.GetString("AppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Программа будет закрыта. При повторном возникновении этой ошибки обратитесь к разработчику.
+        /// </summary>
+        public static string AppWillBeClosed {
+            get {
+                return ResourceManager.GetString("AppWillBeClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Присоединить пакет….
+        /// </summary>
+        public static string AttachPackage {
+            get {
+                return ResourceManager.GetString("AttachPackage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Присоединение другого файла вопросов.
+        /// </summary>
+        public static string AttachPackageHint {
+            get {
+                return ResourceManager.GetString("AttachPackageHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Аудио.
+        /// </summary>
+        public static string Audio {
+            get {
+                return ResourceManager.GetString("Audio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Автор.
         /// </summary>
         public static string Author {
             get {
                 return ResourceManager.GetString("Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Авторы.
+        /// </summary>
+        public static string Authors {
+            get {
+                return ResourceManager.GetString("Authors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отсутствие авторов.
+        /// </summary>
+        public static string AuthorsAbsence {
+            get {
+                return ResourceManager.GetString("AuthorsAbsence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Авторы:.
+        /// </summary>
+        public static string AuthorsHeader {
+            get {
+                return ResourceManager.GetString("AuthorsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Авторы пишутся.
+        /// </summary>
+        public static string AuthorsLayout {
+            get {
+                return ResourceManager.GetString("AuthorsLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автоопределение.
+        /// </summary>
+        public static string AutoDetect {
+            get {
+                return ResourceManager.GetString("AutoDetect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автоматический подбор шаблона при импорте текста.
+        /// </summary>
+        public static string AutoDetectTemplateWhenImportingText {
+            get {
+                return ResourceManager.GetString("AutoDetectTemplateWhenImportingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Определить шаблоны входного файла автоматически.
+        /// </summary>
+        public static string AutomaticallyDetectTemplates {
+            get {
+                return ResourceManager.GetString("AutomaticallyDetectTemplates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автосохранение (требуется перезапуск приложения).
+        /// </summary>
+        public static string AutoSave {
+            get {
+                return ResourceManager.GetString("AutoSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автоматическое задание стоимостей вопросов.
+        /// </summary>
+        public static string AutoSetQuestionPrices {
+            get {
+                return ResourceManager.GetString("AutoSetQuestionPrices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Тема и стоимость известны.
+        /// </summary>
+        public static string BagCat_Knows {
+            get {
+                return ResourceManager.GetString("BagCat_Knows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на После отдачи.
+        /// </summary>
+        public static string BagCat_Knows_Value_After {
+            get {
+                return ResourceManager.GetString("BagCat_Knows_Value_After", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на До отдачи.
+        /// </summary>
+        public static string BagCat_Knows_Value_Before {
+            get {
+                return ResourceManager.GetString("BagCat_Knows_Value_Before", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Никогда.
+        /// </summary>
+        public static string BagCat_Knows_Value_Never {
+            get {
+                return ResourceManager.GetString("BagCat_Knows_Value_Never", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отдать себе.
+        /// </summary>
+        public static string BagCat_Self {
+            get {
+                return ResourceManager.GetString("BagCat_Self", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Нельзя.
+        /// </summary>
+        public static string BagCat_Self_Value_False {
+            get {
+                return ResourceManager.GetString("BagCat_Self_Value_False", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Можно.
+        /// </summary>
+        public static string BagCat_Self_Value_True {
+            get {
+                return ResourceManager.GetString("BagCat_Self_Value_True", resourceCulture);
             }
         }
         
@@ -97,6 +556,15 @@ namespace SIQuester.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Базовая стоимость вопроса.
+        /// </summary>
+        public static string BaseQuestionPrice {
+            get {
+                return ResourceManager.GetString("BaseQuestionPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Источник.
         /// </summary>
         public static string BaseSources {
@@ -106,11 +574,182 @@ namespace SIQuester.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Базовое значение.
+        /// </summary>
+        public static string BaseValue {
+            get {
+                return ResourceManager.GetString("BaseValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Основные настройки.
+        /// </summary>
+        public static string BasicSettings {
+            get {
+                return ResourceManager.GetString("BasicSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Невозможно выполнить эту операцию, когда привязка отсоединена.
+        /// </summary>
+        public static string BindingDetachedError {
+            get {
+                return ResourceManager.GetString("BindingDetachedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Содержимое внутри скобок вынести в комментарий.
+        /// </summary>
+        public static string BracketsContentToComment {
+            get {
+                return ResourceManager.GetString("BracketsContentToComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на По умолчанию.
+        /// </summary>
+        public static string ByDefault {
+            get {
+                return ResourceManager.GetString("ByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на байт.
+        /// </summary>
+        public static string Bytes {
+            get {
+                return ResourceManager.GetString("Bytes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отмена.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отменить поиск.
+        /// </summary>
+        public static string CancelSearch {
+            get {
+                return ResourceManager.GetString("CancelSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Чемпионат.
         /// </summary>
         public static string Championship {
             get {
                 return ResourceManager.GetString("Championship", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Поменять язык.
+        /// </summary>
+        public static string ChangeLanguage {
+            get {
+                return ResourceManager.GetString("ChangeLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Проверять, что файл вопросов подходит для игры через Игровой сервер.
+        /// </summary>
+        public static string CheckFileSize {
+            get {
+                return ResourceManager.GetString("CheckFileSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Город.
+        /// </summary>
+        public static string City {
+            get {
+                return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить тип.
+        /// </summary>
+        public static string ClearType {
+            get {
+                return ResourceManager.GetString("ClearType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Клонировать вопрос.
+        /// </summary>
+        public static string CloneQuestion {
+            get {
+                return ResourceManager.GetString("CloneQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Клонировать раунд.
+        /// </summary>
+        public static string CloneRound {
+            get {
+                return ResourceManager.GetString("CloneRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Клонировать тему.
+        /// </summary>
+        public static string CloneTheme {
+            get {
+                return ResourceManager.GetString("CloneTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Закрыть.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Развернуть всё.
+        /// </summary>
+        public static string CollapseAll {
+            get {
+                return ResourceManager.GetString("CollapseAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Свернуть всё медиа.
+        /// </summary>
+        public static string CollapseAllMedia {
+            get {
+                return ResourceManager.GetString("CollapseAllMedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Свернуть медиа.
+        /// </summary>
+        public static string CollapseMedia {
+            get {
+                return ResourceManager.GetString("CollapseMedia", resourceCulture);
             }
         }
         
@@ -133,11 +772,452 @@ namespace SIQuester.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Комментарии:.
+        /// </summary>
+        public static string CommentsHeader {
+            get {
+                return ResourceManager.GetString("CommentsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Обычный.
+        /// </summary>
+        public static string Common {
+            get {
+                return ResourceManager.GetString("Common", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка выполнения программы.
+        /// </summary>
+        public static string CommonAppError {
+            get {
+                return ResourceManager.GetString("CommonAppError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Написать замечания автору….
+        /// </summary>
+        public static string ContactAuthor {
+            get {
+                return ResourceManager.GetString("ContactAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сообщить автору о багах или что-нибудь предложить.
+        /// </summary>
+        public static string ContactAuthorToolTip {
+            get {
+                return ResourceManager.GetString("ContactAuthorToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Адрес для связи.
+        /// </summary>
+        public static string ContactUri {
+            get {
+                return ResourceManager.GetString("ContactUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Оформить для Теле- и Комп-SIGame.
+        /// </summary>
+        public static string ConvertToCompSI {
+            get {
+                return ResourceManager.GetString("ConvertToCompSI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Разбить по раундам и назначить телевизионные стоимости.
+        /// </summary>
+        public static string ConvertToCompSIHint {
+            get {
+                return ResourceManager.GetString("ConvertToCompSIHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Поправить для Теле- и Комп-SIGame.
+        /// </summary>
+        public static string ConvertToCompSISimple {
+            get {
+                return ResourceManager.GetString("ConvertToCompSISimple", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Изменить названия тем, убрать точки в конце вопросов.
+        /// </summary>
+        public static string ConvertToCompSISimpleHint {
+            get {
+                return ResourceManager.GetString("ConvertToCompSISimpleHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Оформить для &quot;Миллионера&quot;.
+        /// </summary>
+        public static string ConvertToMillionaire {
+            get {
+                return ResourceManager.GetString("ConvertToMillionaire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Разбить на группы по 15 вопросов.
+        /// </summary>
+        public static string ConvertToMillionaireHint {
+            get {
+                return ResourceManager.GetString("ConvertToMillionaireHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Оформить для Спорт-SIGame.
+        /// </summary>
+        public static string ConvertToSportSI {
+            get {
+                return ResourceManager.GetString("ConvertToSportSI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Назначить стоимости 10, 20, 30 и т.д..
+        /// </summary>
+        public static string ConvertToSportSIHint {
+            get {
+                return ResourceManager.GetString("ConvertToSportSIHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Копировать.
+        /// </summary>
+        public static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Страна.
+        /// </summary>
+        public static string Country {
+            get {
+                return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Создать.
+        /// </summary>
+        public static string Create {
+            get {
+                return ResourceManager.GetString("Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Создавать 5 вопросов вместе с темой.
+        /// </summary>
+        public static string Create5QuestionsWithTheme {
+            get {
+                return ResourceManager.GetString("Create5QuestionsWithTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата создания.
+        /// </summary>
+        public static string CreationDate {
+            get {
+                return ResourceManager.GetString("CreationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Точечная выборка.
+        /// </summary>
+        public static string CustomThemes {
+            get {
+                return ResourceManager.GetString("CustomThemes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вырезать.
+        /// </summary>
+        public static string Cut {
+            get {
+                return ResourceManager.GetString("Cut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сложность.
+        /// </summary>
+        public static string Difficulty {
+            get {
+                return ResourceManager.GetString("Difficulty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Заголовок документа.
+        /// </summary>
+        public static string DocumentCaption {
+            get {
+                return ResourceManager.GetString("DocumentCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Шрифт документа.
+        /// </summary>
+        public static string DocumentFont {
+            get {
+                return ResourceManager.GetString("DocumentFont", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Поблагодарить автора….
+        /// </summary>
+        public static string Donate {
+            get {
+                return ResourceManager.GetString("Donate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на A и B =&gt; A и B + B и A.
+        /// </summary>
+        public static string DuplicateAnd {
+            get {
+                return ResourceManager.GetString("DuplicateAnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Длительность.
+        /// </summary>
+        public static string Duration {
+            get {
+                return ResourceManager.GetString("Duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Редактировать.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Способ редактирования.
+        /// </summary>
+        public static string EditMode {
+            get {
+                return ResourceManager.GetString("EditMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Фиксированная панель.
+        /// </summary>
+        public static string EditMode_FixedPanel {
+            get {
+                return ResourceManager.GetString("EditMode_FixedPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Плавающая панель.
+        /// </summary>
+        public static string EditMode_FloatPanel {
+            get {
+                return ResourceManager.GetString("EditMode_FloatPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Только чтение.
+        /// </summary>
+        public static string EditMode_ReadOnly {
+            get {
+                return ResourceManager.GetString("EditMode_ReadOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Фиксированная панель.
+        /// </summary>
+        public static string EditModeFixedPanel {
+            get {
+                return ResourceManager.GetString("EditModeFixedPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Плавающая панель.
+        /// </summary>
+        public static string EditModeFloatPanel {
+            get {
+                return ResourceManager.GetString("EditModeFloatPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Только чтение.
+        /// </summary>
+        public static string EditModeNone {
+            get {
+                return ResourceManager.GetString("EditModeNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Редактировать текст.
+        /// </summary>
+        public static string EditText {
+            get {
+                return ResourceManager.GetString("EditText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Без имени.
         /// </summary>
         public static string Empty {
             get {
                 return ResourceManager.GetString("Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Нужна ли пустая строка после темы.
+        /// </summary>
+        public static string EmptyLineBeforeThemeName {
+            get {
+                return ResourceManager.GetString("EmptyLineBeforeThemeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на (пустой).
+        /// </summary>
+        public static string EmptyQuestion {
+            get {
+                return ResourceManager.GetString("EmptyQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Кодировка.
+        /// </summary>
+        public static string Encoding {
+            get {
+                return ResourceManager.GetString("Encoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Свернуть всё.
+        /// </summary>
+        public static string ExpandAll {
+            get {
+                return ResourceManager.GetString("ExpandAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Развернуть всё медиа.
+        /// </summary>
+        public static string ExpandAllMedia {
+            get {
+                return ResourceManager.GetString("ExpandAllMedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Развернуть медиа.
+        /// </summary>
+        public static string ExpandMedia {
+            get {
+                return ResourceManager.GetString("ExpandMedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Экспорт.
+        /// </summary>
+        public static string Export {
+            get {
+                return ResourceManager.GetString("Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Экспорт и печать.
+        /// </summary>
+        public static string ExportAndPrint {
+            get {
+                return ResourceManager.GetString("ExportAndPrint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на База вопросов.
+        /// </summary>
+        public static string ExportFormatsDb {
+            get {
+                return ResourceManager.GetString("ExportFormatsDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Динабанк.
+        /// </summary>
+        public static string ExportFormatsDinabank {
+            get {
+                return ResourceManager.GetString("ExportFormatsDinabank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на СНС.
+        /// </summary>
+        public static string ExportFormatsSns {
+            get {
+                return ResourceManager.GetString("ExportFormatsSns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Телевизионный аналог SIGame.
+        /// </summary>
+        public static string ExportFormatsTvSI {
+            get {
+                return ResourceManager.GetString("ExportFormatsTvSI", resourceCulture);
             }
         }
         
@@ -151,11 +1231,119 @@ namespace SIQuester.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на ФИНАЛ.
+        ///   Ищет локализованную строку, похожую на Файл {0} существует, заменить?.
+        /// </summary>
+        public static string FileExistReplace {
+            get {
+                return ResourceManager.GetString("FileExistReplace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Импорт файла.
+        /// </summary>
+        public static string FileImport {
+            get {
+                return ResourceManager.GetString("FileImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Задать стоимости.
+        /// </summary>
+        public static string FillPrices {
+            get {
+                return ResourceManager.GetString("FillPrices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Фильтр.
+        /// </summary>
+        public static string Filter {
+            get {
+                return ResourceManager.GetString("Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Финал.
         /// </summary>
         public static string Final {
             get {
                 return ResourceManager.GetString("Final", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Финальный раунд.
+        /// </summary>
+        public static string FinalRound {
+            get {
+                return ResourceManager.GetString("FinalRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Число тем в финале.
+        /// </summary>
+        public static string FinalThemeCount {
+            get {
+                return ResourceManager.GetString("FinalThemeCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Расположение элементов в режиме плиток.
+        /// </summary>
+        public static string FlatLayoutModeHeader {
+            get {
+                return ResourceManager.GetString("FlatLayoutModeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Список.
+        /// </summary>
+        public static string FlatLayoutModeList {
+            get {
+                return ResourceManager.GetString("FlatLayoutModeList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Таблица.
+        /// </summary>
+        public static string FlatLayoutModeTable {
+            get {
+                return ResourceManager.GetString("FlatLayoutModeTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Настраиваемый HTML.
+        /// </summary>
+        public static string FormattedHtml {
+            get {
+                return ResourceManager.GetString("FormattedHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Возможность настройки специфического представления пакета.
+        /// </summary>
+        public static string FormattedHtmlHint {
+            get {
+                return ResourceManager.GetString("FormattedHtmlHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на от.
+        /// </summary>
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
             }
         }
         
@@ -165,6 +1353,33 @@ namespace SIQuester.Properties {
         public static string FullUpdates {
             get {
                 return ResourceManager.GetString("FullUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Помощь.
+        /// </summary>
+        public static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Как использовать программу….
+        /// </summary>
+        public static string HowToUse {
+            get {
+                return ResourceManager.GetString("HowToUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Настройте параметры выходного документа и нажмите кнопку &quot;Экспорт&quot;.
+        /// </summary>
+        public static string HtmlExportHint {
+            get {
+                return ResourceManager.GetString("HtmlExportHint", resourceCulture);
             }
         }
         
@@ -179,11 +1394,551 @@ namespace SIQuester.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Изображения.
+        /// </summary>
+        public static string Images {
+            get {
+                return ResourceManager.GetString("Images", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Импорт.
+        /// </summary>
+        public static string Import {
+            get {
+                return ResourceManager.GetString("Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на База вопросов….
+        /// </summary>
+        public static string ImportDB {
+            get {
+                return ResourceManager.GetString("ImportDB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Библиотека вопросов….
+        /// </summary>
+        public static string ImportSIStorage {
+            get {
+                return ResourceManager.GetString("ImportSIStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Текст….
+        /// </summary>
+        public static string ImportText {
+            get {
+                return ResourceManager.GetString("ImportText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Преобразование текстового файла в SIQ формат.
+        /// </summary>
+        public static string ImportTextTip {
+            get {
+                return ResourceManager.GetString("ImportTextTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на XML-файл….
+        /// </summary>
+        public static string ImportXml {
+            get {
+                return ResourceManager.GetString("ImportXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Приращение.
+        /// </summary>
+        public static string Increase {
+            get {
+                return ResourceManager.GetString("Increase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Устанавливать обновления.
+        /// </summary>
+        public static string InstallUpdates {
+            get {
+                return ResourceManager.GetString("InstallUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Программа будет автоматически проверять наличие обновлений на сайте разработчика и устанавливать их.
+        /// </summary>
+        public static string InstallUpdatesHint {
+            get {
+                return ResourceManager.GetString("InstallUpdatesHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Параметр задан неверно.
+        /// </summary>
+        public static string InvalidParameter {
+            get {
+                return ResourceManager.GetString("InvalidParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Объединить со следующим (играть одновременно).
+        /// </summary>
+        public static string JoinWithNext {
+            get {
+                return ResourceManager.GetString("JoinWithNext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Язык.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Последнее слово в новый ответ.
+        /// </summary>
+        public static string LastWordToNewAnswer {
+            get {
+                return ResourceManager.GetString("LastWordToNewAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Лицензии.
+        /// </summary>
+        public static string Licences {
+            get {
+                return ResourceManager.GetString("Licences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Список.
+        /// </summary>
+        public static string List {
+            get {
+                return ResourceManager.GetString("List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сделать пустым.
+        /// </summary>
+        public static string MakeEmpty {
+            get {
+                return ResourceManager.GetString("MakeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сделать непустым.
+        /// </summary>
+        public static string MakeNonEmpty {
+            get {
+                return ResourceManager.GetString("MakeNonEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Скрипт mIRC.
+        /// </summary>
+        public static string MircScript {
+            get {
+                return ResourceManager.GetString("MircScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Проведение игры в IRC.
+        /// </summary>
+        public static string MircScriptHint {
+            get {
+                return ResourceManager.GetString("MircScriptHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Переместить ниже.
+        /// </summary>
+        public static string MoveDown {
+            get {
+                return ResourceManager.GetString("MoveDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Переместить левее.
+        /// </summary>
+        public static string MoveLeft {
+            get {
+                return ResourceManager.GetString("MoveLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Переместить правее.
+        /// </summary>
+        public static string MoveRight {
+            get {
+                return ResourceManager.GetString("MoveRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Переместить выше.
+        /// </summary>
+        public static string MoveUp {
+            get {
+                return ResourceManager.GetString("MoveUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Имя.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дальше.
+        /// </summary>
+        public static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Следующий фрагмент.
+        /// </summary>
+        public static string NextFragment {
+            get {
+                return ResourceManager.GetString("NextFragment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Следующий результат.
+        /// </summary>
+        public static string NextSearchResult {
+            get {
+                return ResourceManager.GetString("NextSearchResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Нет.
         /// </summary>
         public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Параметры нестандартного пакета.
+        /// </summary>
+        public static string NonStandardPackageParameters {
+            get {
+                return ResourceManager.GetString("NonStandardPackageParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Недостаточно памяти для выполнения программы!.
+        /// </summary>
+        public static string NotEnoughMemoryToStartApp {
+            get {
+                return ResourceManager.GetString("NotEnoughMemoryToStartApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Фиксированное значение.
+        /// </summary>
+        public static string NumberSetModeFixedValue {
+            get {
+                return ResourceManager.GetString("NumberSetModeFixedValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Минимум или максимум в раунде.
+        /// </summary>
+        public static string NumberSetModeMinimumOrMaximumInRound {
+            get {
+                return ResourceManager.GetString("NumberSetModeMinimumOrMaximumInRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выбор.
+        /// </summary>
+        public static string NumberSetModeRange {
+            get {
+                return ResourceManager.GetString("NumberSetModeRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выбор с шагом.
+        /// </summary>
+        public static string NumberSetModeRangeWithStep {
+            get {
+                return ResourceManager.GetString("NumberSetModeRangeWithStep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Нумеровать темы.
+        /// </summary>
+        public static string NumberThemes {
+            get {
+                return ResourceManager.GetString("NumberThemes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Объект.
+        /// </summary>
+        public static string Object {
+            get {
+                return ResourceManager.GetString("Object", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Официальный сайт.
+        /// </summary>
+        public static string OfficialSite {
+            get {
+                return ResourceManager.GetString("OfficialSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на OK.
+        /// </summary>
+        public static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Открыть… (Ctrl+O).
+        /// </summary>
+        public static string Open {
+            get {
+                return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Несоответствие числа открывающих и закрывающих скобок.
+        /// </summary>
+        public static string OpenCloseBracketsIncosistency {
+            get {
+                return ResourceManager.GetString("OpenCloseBracketsIncosistency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Открыть файл после сохранения.
+        /// </summary>
+        public static string OpenFileAfterSaving {
+            get {
+                return ResourceManager.GetString("OpenFileAfterSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Открыть пакет.
+        /// </summary>
+        public static string OpenPackage {
+            get {
+                return ResourceManager.GetString("OpenPackage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Открыть недавние.
+        /// </summary>
+        public static string OpenRecent {
+            get {
+                return ResourceManager.GetString("OpenRecent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на или.
+        /// </summary>
+        public static string Or {
+            get {
+                return ResourceManager.GetString("Or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на в строку.
+        /// </summary>
+        public static string OrientationHorizontal {
+            get {
+                return ResourceManager.GetString("OrientationHorizontal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на в столбец.
+        /// </summary>
+        public static string OrientationVertical {
+            get {
+                return ResourceManager.GetString("OrientationVertical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автор пакета.
+        /// </summary>
+        public static string PackageAuthor {
+            get {
+                return ResourceManager.GetString("PackageAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Логотип пакета.
+        /// </summary>
+        public static string PackageLogo {
+            get {
+                return ResourceManager.GetString("PackageLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Имя пакета.
+        /// </summary>
+        public static string PackageName {
+            get {
+                return ResourceManager.GetString("PackageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Размер шрифта в имени пакета.
+        /// </summary>
+        public static string PackageNameFontSize {
+            get {
+                return ResourceManager.GetString("PackageNameFontSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Шаблон пакета.
+        /// </summary>
+        public static string PackageType {
+            get {
+                return ResourceManager.GetString("PackageType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вставить.
+        /// </summary>
+        public static string Paste {
+            get {
+                return ResourceManager.GetString("Paste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Запустить вопрос.
+        /// </summary>
+        public static string PlayQuestion {
+            get {
+                return ResourceManager.GetString("PlayQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Предыдущий фрагмент.
+        /// </summary>
+        public static string PreviousFragment {
+            get {
+                return ResourceManager.GetString("PreviousFragment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Предыдущий результат.
+        /// </summary>
+        public static string PreviousSearchResult {
+            get {
+                return ResourceManager.GetString("PreviousSearchResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Стоимость.
+        /// </summary>
+        public static string Price {
+            get {
+                return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Печать....
+        /// </summary>
+        public static string Print {
+            get {
+                return ResourceManager.GetString("Print", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на HTML для печати.
+        /// </summary>
+        public static string PrintedHtml {
+            get {
+                return ResourceManager.GetString("PrintedHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Издатель.
+        /// </summary>
+        public static string Publisher {
+            get {
+                return ResourceManager.GetString("Publisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Издательство.
+        /// </summary>
+        public static string PublisherCompany {
+            get {
+                return ResourceManager.GetString("PublisherCompany", resourceCulture);
             }
         }
         
@@ -215,11 +1970,434 @@ namespace SIQuester.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Импорт вопросов.
+        /// </summary>
+        public static string QuestionParsing {
+            get {
+                return ResourceManager.GetString("QuestionParsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Разделение текста на вопросы.
+        /// </summary>
+        public static string QuestionSplitting {
+            get {
+                return ResourceManager.GetString("QuestionSplitting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Размер шрифта в вопросе.
+        /// </summary>
+        public static string QuestionTextFontSize {
+            get {
+                return ResourceManager.GetString("QuestionTextFontSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Тип вопроса.
+        /// </summary>
+        public static string QuestionType {
+            get {
+                return ResourceManager.GetString("QuestionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Интервал.
+        /// </summary>
+        public static string Range {
+            get {
+                return ResourceManager.GetString("Range", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Последние файлы.
+        /// </summary>
+        public static string RecentFiles {
+            get {
+                return ResourceManager.GetString("RecentFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Повторить.
+        /// </summary>
+        public static string Redo {
+            get {
+                return ResourceManager.GetString("Redo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Обновить.
+        /// </summary>
+        public static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить ответ.
+        /// </summary>
+        public static string RemoveAnswer {
+            get {
+                return ResourceManager.GetString("RemoveAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить сложный ответ.
+        /// </summary>
+        public static string RemoveComplexAnswer {
+            get {
+                return ResourceManager.GetString("RemoveComplexAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить ссылку.
+        /// </summary>
+        public static string RemoveLink {
+            get {
+                return ResourceManager.GetString("RemoveLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить логотип.
+        /// </summary>
+        public static string RemoveLogo {
+            get {
+                return ResourceManager.GetString("RemoveLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить параметр.
+        /// </summary>
+        public static string RemoveParameter {
+            get {
+                return ResourceManager.GetString("RemoveParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить вопрос.
+        /// </summary>
+        public static string RemoveQuestion {
+            get {
+                return ResourceManager.GetString("RemoveQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить раунд.
+        /// </summary>
+        public static string RemoveRound {
+            get {
+                return ResourceManager.GetString("RemoveRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить шаблон.
+        /// </summary>
+        public static string RemoveTemplate {
+            get {
+                return ResourceManager.GetString("RemoveTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить тему.
+        /// </summary>
+        public static string RemoveTheme {
+            get {
+                return ResourceManager.GetString("RemoveTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить неиспользуемые файлы.
+        /// </summary>
+        public static string RemoveUnusedFiles {
+            get {
+                return ResourceManager.GetString("RemoveUnusedFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалять мультимедиа из пакета при удалении последней ссылки на него.
+        /// </summary>
+        public static string RemoveUnusedMedia {
+            get {
+                return ResourceManager.GetString("RemoveUnusedMedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Резерв.
+        /// </summary>
+        public static string Reserve {
+            get {
+                return ResourceManager.GetString("Reserve", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ограничение.
+        /// </summary>
+        public static string Restriction {
+            get {
+                return ResourceManager.GetString("Restriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Число раундов.
+        /// </summary>
+        public static string RoundCount {
+            get {
+                return ResourceManager.GetString("RoundCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Размер шрифта в названии раунда.
+        /// </summary>
+        public static string RoundNameFontSize {
+            get {
+                return ResourceManager.GetString("RoundNameFontSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Число тем в раунде.
+        /// </summary>
+        public static string RoundThemeCount {
+            get {
+                return ResourceManager.GetString("RoundThemeCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранить.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранить всё (Shift+Ctrl+S).
+        /// </summary>
+        public static string SaveAll {
+            get {
+                return ResourceManager.GetString("SaveAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранение и экспорт.
+        /// </summary>
+        public static string SaveAndExport {
+            get {
+                return ResourceManager.GetString("SaveAndExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранить как….
+        /// </summary>
+        public static string SaveAs {
+            get {
+                return ResourceManager.GetString("SaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранить как шаблон….
+        /// </summary>
+        public static string SaveAsTemplate {
+            get {
+                return ResourceManager.GetString("SaveAsTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Масштаб.
+        /// </summary>
+        public static string Scale {
+            get {
+                return ResourceManager.GetString("Scale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Поиск.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Папка для поиска....
+        /// </summary>
+        public static string SearchFolder {
+            get {
+                return ResourceManager.GetString("SearchFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Результаты поиска.
+        /// </summary>
+        public static string SearchResults {
+            get {
+                return ResourceManager.GetString("SearchResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Искать текст.
+        /// </summary>
+        public static string SearchText {
+            get {
+                return ResourceManager.GetString("SearchText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отчество.
+        /// </summary>
+        public static string SecondName {
+            get {
+                return ResourceManager.GetString("SecondName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вопрос можно оставить себе.
+        /// </summary>
+        public static string SecretCanBeGivenToSelf {
+            get {
+                return ResourceManager.GetString("SecretCanBeGivenToSelf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сумма начисляется без вопроса.
+        /// </summary>
+        public static string SecretNoQuestion {
+            get {
+                return ResourceManager.GetString("SecretNoQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Тема и стоимость оглашаются до передачи.
+        /// </summary>
+        public static string SecretPublicPrice {
+            get {
+                return ResourceManager.GetString("SecretPublicPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выбрать.
+        /// </summary>
+        public static string Select {
+            get {
+                return ResourceManager.GetString("Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выделенное -&gt; Новый ответ.
+        /// </summary>
+        public static string SelectedToNewAnswer {
+            get {
+                return ResourceManager.GetString("SelectedToNewAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выделенное -&gt; Новый комментарий.
+        /// </summary>
+        public static string SelectedToNewComment {
+            get {
+                return ResourceManager.GetString("SelectedToNewComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выделенное -&gt; Новый источник.
+        /// </summary>
+        public static string SelectedToNewSource {
+            get {
+                return ResourceManager.GetString("SelectedToNewSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выбрать файл….
+        /// </summary>
+        public static string SelectFile {
+            get {
+                return ResourceManager.GetString("SelectFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Режим передачи.
+        /// </summary>
+        public static string SelectionMode {
+            get {
+                return ResourceManager.GetString("SelectionMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Число вариантов ответа по умолчанию.
+        /// </summary>
+        public static string SelectOptionCount {
+            get {
+                return ResourceManager.GetString("SelectOptionCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Выберите папку для поиска.
         /// </summary>
         public static string SelectSearchFolder {
             get {
                 return ResourceManager.GetString("SelectSearchFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выбрать темы….
+        /// </summary>
+        public static string SelectThemes {
+            get {
+                return ResourceManager.GetString("SelectThemes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранить часть тем данного пакета в отдельный пакет.
+        /// </summary>
+        public static string SelectThemesHint {
+            get {
+                return ResourceManager.GetString("SelectThemesHint", resourceCulture);
             }
         }
         
@@ -233,11 +2411,353 @@ namespace SIQuester.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Отправить в компьютерную игру.
+        /// </summary>
+        public static string SendToPCGame {
+            get {
+                return ResourceManager.GetString("SendToPCGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Кому угодно.
+        /// </summary>
+        public static string SetAnswererSelect_Any {
+            get {
+                return ResourceManager.GetString("SetAnswererSelect_Any", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Всем кроме себя.
+        /// </summary>
+        public static string SetAnswererSelect_ExceptCurrent {
+            get {
+                return ResourceManager.GetString("SetAnswererSelect_ExceptCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выбор из вариантов.
+        /// </summary>
+        public static string SetAnswerTypeType_Select {
+            get {
+                return ResourceManager.GetString("SetAnswerTypeType_Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Текст.
+        /// </summary>
+        public static string SetAnswerTypeType_Text {
+            get {
+                return ResourceManager.GetString("SetAnswerTypeType_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Задать логотип.
+        /// </summary>
+        public static string SetLogo {
+            get {
+                return ResourceManager.GetString("SetLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Задать теги.
+        /// </summary>
+        public static string SetTags {
+            get {
+                return ResourceManager.GetString("SetTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Указать временной интервал.
+        /// </summary>
+        public static string SetTime {
+            get {
+                return ResourceManager.GetString("SetTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Настройки.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка сохранения настроек.
+        /// </summary>
+        public static string SettingsSavingError {
+            get {
+                return ResourceManager.GetString("SettingsSavingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Показывать всплывающие подсказки в плиточном отображении.
+        /// </summary>
+        public static string ShowToolTipsInFlatView {
+            get {
+                return ResourceManager.GetString("ShowToolTipsInFlatView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Перемешать вопросы и стоимости.
+        /// </summary>
+        public static string ShuffleQuestions {
+            get {
+                return ResourceManager.GetString("ShuffleQuestions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Боковая панель.
+        /// </summary>
+        public static string SidePanel {
+            get {
+                return ResourceManager.GetString("SidePanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вопросы СИ.
+        /// </summary>
+        public static string SIQuestions {
+            get {
+                return ResourceManager.GetString("SIQuestions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Размер.
+        /// </summary>
+        public static string Size {
+            get {
+                return ResourceManager.GetString("Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Пропустить фрагмент.
+        /// </summary>
+        public static string SkipFragment {
+            get {
+                return ResourceManager.GetString("SkipFragment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Использовать шаблоны проекта СНС.
+        /// </summary>
+        public static string SnsTemplatesHint {
+            get {
+                return ResourceManager.GetString("SnsTemplatesHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отсортировать вопросы по стоимости.
+        /// </summary>
+        public static string SortQuestionsByPrice {
+            get {
+                return ResourceManager.GetString("SortQuestionsByPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Источник.
         /// </summary>
         public static string Source {
             get {
                 return ResourceManager.GetString("Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Исходный файл.
+        /// </summary>
+        public static string SourceFile {
+            get {
+                return ResourceManager.GetString("SourceFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Исходный фрагмент.
+        /// </summary>
+        public static string SourceFragment {
+            get {
+                return ResourceManager.GetString("SourceFragment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Источники.
+        /// </summary>
+        public static string Sources {
+            get {
+                return ResourceManager.GetString("Sources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отсутствие источников.
+        /// </summary>
+        public static string SourcesAbsense {
+            get {
+                return ResourceManager.GetString("SourcesAbsense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Источники:.
+        /// </summary>
+        public static string SourcesHeader {
+            get {
+                return ResourceManager.GetString("SourcesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Авторы пишутся.
+        /// </summary>
+        public static string SourcesLayout {
+            get {
+                return ResourceManager.GetString("SourcesLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Проверка правописания (Windows 8.1 и выше).
+        /// </summary>
+        public static string SpellChecking {
+            get {
+                return ResourceManager.GetString("SpellChecking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ответ следует сразу после вопроса.
+        /// </summary>
+        public static string StandardLogicDescription {
+            get {
+                return ResourceManager.GetString("StandardLogicDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ожидать, что за каждым вопросом немедленно идёт ответ, а не считывать сначала группу вопросов, а затем группу ответов.
+        /// </summary>
+        public static string StandardLogicHint {
+            get {
+                return ResourceManager.GetString("StandardLogicHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Стандартное значение.
+        /// </summary>
+        public static string StandardValue {
+            get {
+                return ResourceManager.GetString("StandardValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Старт.
+        /// </summary>
+        public static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Начать импорт.
+        /// </summary>
+        public static string StartImport {
+            get {
+                return ResourceManager.GetString("StartImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Искать в подпапках.
+        /// </summary>
+        public static string SubfolderSearch {
+            get {
+                return ResourceManager.GetString("SubfolderSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Фамилия.
+        /// </summary>
+        public static string Surname {
+            get {
+                return ResourceManager.GetString("Surname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Таблица.
+        /// </summary>
+        public static string Table {
+            get {
+                return ResourceManager.GetString("Table", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Табличный формат.
+        /// </summary>
+        public static string TableFormat {
+            get {
+                return ResourceManager.GetString("TableFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Теги.
+        /// </summary>
+        public static string Tags {
+            get {
+                return ResourceManager.GetString("Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Шаблон.
+        /// </summary>
+        public static string Template {
+            get {
+                return ResourceManager.GetString("Template", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Текст перед темой.
+        /// </summary>
+        public static string TextBeforeThemeName {
+            get {
+                return ResourceManager.GetString("TextBeforeThemeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Текст для импорта (скопируйте в поле ниже или откройте файл).
+        /// </summary>
+        public static string TextToImport {
+            get {
+                return ResourceManager.GetString("TextToImport", resourceCulture);
             }
         }
         
@@ -251,6 +2771,78 @@ namespace SIQuester.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Размер шрифта в названии темы.
+        /// </summary>
+        public static string ThemeNameFontSize {
+            get {
+                return ResourceManager.GetString("ThemeNameFontSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Число вопросов в теме.
+        /// </summary>
+        public static string ThemeQuestionCount {
+            get {
+                return ResourceManager.GetString("ThemeQuestionCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Название.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на до.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Поменять тип (на устный или обратно).
+        /// </summary>
+        public static string ToggleToOralAndBack {
+            get {
+                return ResourceManager.GetString("ToggleToOralAndBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Поиск файлов.
+        /// </summary>
+        public static string ToolTipFileSearch {
+            get {
+                return ResourceManager.GetString("ToolTipFileSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Новый… (Ctrl+N).
+        /// </summary>
+        public static string ToolTipNew {
+            get {
+                return ResourceManager.GetString("ToolTipNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Всего тем:.
+        /// </summary>
+        public static string TotalThemes {
+            get {
+                return ResourceManager.GetString("TotalThemes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Тур.
         /// </summary>
         public static string Tour {
@@ -260,11 +2852,29 @@ namespace SIQuester.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Файлы вопросов (*.txt) | *.txt.
+        ///   Ищет локализованную строку, похожую на Тип.
         /// </summary>
-        public static string TxtFilesFilter {
+        public static string Type {
             get {
-                return ResourceManager.GetString("TxtFilesFilter", resourceCulture);
+                return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отменить.
+        /// </summary>
+        public static string Undo {
+            get {
+                return ResourceManager.GetString("Undo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отсоединить от следующего.
+        /// </summary>
+        public static string UnlinkFromNext {
+            get {
+                return ResourceManager.GetString("UnlinkFromNext", resourceCulture);
             }
         }
         
@@ -278,11 +2888,137 @@ namespace SIQuester.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Файлы вопросов (*.xml) | *.xml.
+        ///   Ищет локализованную строку, похожую на Изменять стоимости вопросов при перетаскивании.
         /// </summary>
-        public static string XmlFilesFilter {
+        public static string UpdatePricesOnDragAndDrop {
             get {
-                return ResourceManager.GetString("XmlFilesFilter", resourceCulture);
+                return ResourceManager.GetString("UpdatePricesOnDragAndDrop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вопросы будут перемещаться, а распределение стоимостей останется прежним.
+        /// </summary>
+        public static string UpdatePricesOnDragAndDropHint {
+            get {
+                return ResourceManager.GetString("UpdatePricesOnDragAndDropHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Версия.
+        /// </summary>
+        public static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Видео.
+        /// </summary>
+        public static string Video {
+            get {
+                return ResourceManager.GetString("Video", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Представление.
+        /// </summary>
+        public static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Плитки.
+        /// </summary>
+        public static string ViewModeFlat {
+            get {
+                return ResourceManager.GetString("ViewModeFlat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дерево.
+        /// </summary>
+        public static string ViewModeTree {
+            get {
+                return ResourceManager.GetString("ViewModeTree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Викифицировать.
+        /// </summary>
+        public static string Wikify {
+            get {
+                return ResourceManager.GetString("Wikify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вставить типографские кавычки, многоточие и тире.
+        /// </summary>
+        public static string WikifyHint {
+            get {
+                return ResourceManager.GetString("WikifyHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка старта приложения, связанная с Windows Automation. Попробуйте установить обновления для своей операционной системы, для .NET Framework 4 или установить библиотеку API Windows Automation (ссылка находится на странице приложения)..
+        /// </summary>
+        public static string WindowsAutomationError {
+            get {
+                return ResourceManager.GetString("WindowsAutomationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на с шагом.
+        /// </summary>
+        public static string WithStep {
+            get {
+                return ResourceManager.GetString("WithStep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Неправильные ответы.
+        /// </summary>
+        public static string WrongAnswers {
+            get {
+                return ResourceManager.GetString("WrongAnswers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Некорректный адрес мультимедиа. Программа аварийно завершена с ошибкой.
+        /// </summary>
+        public static string WrongMultimediaAddress {
+            get {
+                return ResourceManager.GetString("WrongMultimediaAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Год.
+        /// </summary>
+        public static string Year {
+            get {
+                return ResourceManager.GetString("Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на гг..
+        /// </summary>
+        public static string Years {
+            get {
+                return ResourceManager.GetString("Years", resourceCulture);
             }
         }
         

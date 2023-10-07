@@ -6,12 +6,12 @@
     <Company>Khil-soft</Company>
     <Product>SIGame</Product>
     <Description>Quizz game</Description>
-    <Copyright>Copyright © Khil-soft 2002-2022</Copyright>
-    <Version>7.6.0</Version>
-    <LangVersion>8</LangVersion>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <Copyright>Copyright © Khil-soft 2002-2023</Copyright>
+    <Version>$(SIGameVersion)</Version>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+	<Nullable>enable</Nullable>
+	<!--<ImplicitUsings>enable</ImplicitUsings> Get rid of Windows Forms dependency to enable this-->
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugType>portable</DebugType>
@@ -21,6 +21,7 @@
     <DebugType>portable</DebugType>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
     <Optimize>true</Optimize>
+    <DefineConstants>$(DefineConstants);UPDATE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>game.ico</ApplicationIcon>
@@ -35,23 +36,22 @@
   <PropertyGroup>
     <Win32Resource />
   </PropertyGroup>
-  <PropertyGroup />
   <ItemGroup>
     <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="5.0.1" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Fonts\Phenomena-Bold.otf" />
-    <Resource Include="Fonts\Phenomena-Light.otf" />
-    <Resource Include="Fonts\Phenomena-Thin.otf" />
+    <Resource Include="Fonts\Jost-Bold.ttf" />
+    <Resource Include="Fonts\Jost-Light.ttf" />
+    <Resource Include="Fonts\Jost-Medium.ttf" />
+    <Resource Include="Fonts\Jost-Regular.ttf" />
+    <Resource Include="Fonts\Jost-SemiBold.ttf" />
+    <Resource Include="Fonts\Jost-Thin.ttf" />
     <Resource Include="Resources\ITC_Conduit_Bold_Cyrillic.ttf" />
     <None Include="licenses\Newtonsoft.Json.LICENSE.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="licenses\Nowin.LICENSE.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -137,6 +137,19 @@
     <ProjectReference Include="..\SIGame.ViewModel\SIGame.ViewModel.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\active_player.png" />
+    <Resource Include="Resources\appellation.png" />
+    <Resource Include="Resources\edit.png" />
+    <Resource Include="Resources\exit.png" />
+    <Resource Include="Resources\load.png" />
+    <Resource Include="Resources\move_round.png" />
+    <Resource Include="Resources\next.png" />
+    <Resource Include="Resources\pause.png" />
+    <Resource Include="Resources\protected.png" />
+    <Resource Include="Resources\search.png" />
+    <Resource Include="Resources\settings.png" />
+    <Resource Include="Resources\sound.png" />
+    <Resource Include="Resources\sums.png" />
     <Resource Include="Resources\vk_logo.png" />
     <Resource Include="Resources\qlogo.png" />
     <Resource Include="Resources\avatar-f.png" />
@@ -145,9 +158,6 @@
   <ItemGroup>
     <None Include="Resources\sigame_logo.png" />
     <None Include="Resources\sigame_logo_no_background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Theme\main_background.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Theme\logo.png" />
@@ -160,58 +170,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\game.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="GameData\Photo\Ada_Lovelace.jpg" />
-    <None Include="GameData\Photo\Agatha_Christie.jpg" />
-    <None Include="GameData\Photo\Albert_Einstein.jpg" />
-    <None Include="GameData\Photo\Aristotle.jpg" />
-    <None Include="GameData\Photo\Carl_Gustav_Jung.jpg" />
-    <None Include="GameData\Photo\Dmitriy_Mendeleev.jpg" />
-    <None Include="GameData\Photo\Fedor_Dostoevskiy.jpg" />
-    <None Include="GameData\Photo\Francis_Bacon.jpg" />
-    <None Include="GameData\Photo\Franz_Kafka.jpg" />
-    <None Include="GameData\Photo\Galileo.jpg" />
-    <None Include="GameData\Photo\Giordano_Bruno.jpg" />
-    <None Include="GameData\Photo\Goethe.jpg" />
-    <None Include="GameData\Photo\Heisenberg.jpg" />
-    <None Include="GameData\Photo\Heraclite.JPG" />
-    <None Include="GameData\Photo\Hypatia_Alexandria.jpg" />
-    <None Include="GameData\Photo\IsaacNewton.jpg" />
-    <None Include="GameData\Photo\Johannes_Kepler.jpg" />
-    <None Include="GameData\Photo\Kant.jpg" />
-    <None Include="GameData\Photo\Konfuzius.jpg" />
-    <None Include="GameData\Photo\Lao_Tzu.jpg" />
-    <None Include="GameData\Photo\Leonardo.jpg" />
-    <None Include="GameData\Photo\Leo_Tolstoy.jpg" />
-    <None Include="GameData\Photo\Lise_Meitner.jpg" />
-    <None Include="GameData\Photo\Marie_Curie.jpg" />
-    <None Include="GameData\Photo\Mikhail_Lomonosov.jpg" />
-    <None Include="GameData\Photo\Nicholas_of_Cusa.jpg" />
-    <None Include="GameData\Photo\Niels_Bohr.jpg" />
-    <None Include="GameData\Photo\Nietzsche.jpg" />
-    <None Include="GameData\Photo\Nikolaus_Kopernikus.jpg" />
-    <None Include="GameData\Photo\Paracelsus.jpg" />
-    <None Include="GameData\Photo\Pierre_de_Fermat.jpg" />
-    <None Include="GameData\Photo\Platon.jpg" />
-    <None Include="GameData\Photo\Pythagoras.jpg" />
-    <None Include="GameData\Photo\Rene_Descartes.jpg" />
-    <None Include="GameData\Photo\Sofja_Kovalevskaja.jpg" />
-    <None Include="GameData\Photo\Stephen_Hawking.jpg" />
-    <None Include="GameData\Photo\Tesla.jpg" />
-    <None Include="GameData\Photo\Thomas-Aquinas.jpg" />
-    <None Include="GameData\Photo\Thomas_Edison.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Theme\studia.jpg" />
+    <Resource Include="Theme\main_background.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\fb_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="licenses\Owin.LICENSE.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Theme\studia.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Sounds\answer_wrong.mp3">
@@ -255,23 +218,31 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="obj\x86\Debug\App.g.cs" />
-    <Compile Remove="obj\x86\Debug\App.g.i.cs" />
-    <Compile Remove="obj\x86\Debug\MainWindow.g.cs" />
-    <Compile Remove="obj\x86\Debug\MainWindow.g.i.cs" />
-    <Compile Remove="obj\x86\Release\App.g.cs" />
-    <Compile Remove="obj\x86\Release\App.g.i.cs" />
-    <Compile Remove="obj\x86\Release\MainWindow.g.cs" />
-    <Compile Remove="obj\x86\Release\MainWindow.g.i.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Fonts\10261.otf" />
     <None Remove="Fonts\10262.otf" />
     <None Remove="Fonts\10265.otf" />
-    <None Remove="Fonts\Phenomena-Bold.otf" />
-    <None Remove="Fonts\Phenomena-Light.otf" />
-    <None Remove="Fonts\Phenomena-Thin.otf" />
+    <None Remove="Fonts\Jost-Bold.ttf" />
+    <None Remove="Fonts\Jost-Light.ttf" />
+    <None Remove="Fonts\Jost-Medium.ttf" />
+    <None Remove="Fonts\Jost-Regular.ttf" />
+    <None Remove="Fonts\Jost-SemiBold.ttf" />
+    <None Remove="Fonts\Jost-Thin.ttf" />
+    <None Remove="Resources\active_player.png" />
+    <None Remove="Resources\appellation.png" />
+    <None Remove="Resources\edit.png" />
+    <None Remove="Resources\exit.png" />
     <None Remove="Resources\game_button.png" />
+    <None Remove="Resources\load.png" />
+    <None Remove="Resources\move_round.png" />
+    <None Remove="Resources\next.png" />
+    <None Remove="Resources\pause.png" />
+    <None Remove="Resources\protected.png" />
+    <None Remove="Resources\search.png" />
+    <None Remove="Resources\settings.png" />
+    <None Remove="Resources\sound.png" />
+    <None Remove="Resources\sums.png" />
+    <None Remove="Theme\main_background.png" />
+    <None Remove="Theme\studia.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -290,7 +261,127 @@
     <None Update="licenses\Ben.Demystifier.LICENSE.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="licenses\Jost.OFL.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="licenses\Polly.LICENSE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Ada_Lovelace.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Agatha_Christie.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Albert_Einstein.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Aristotle.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Carl_Gustav_Jung.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Dmitriy_Mendeleev.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Fedor_Dostoevskiy.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Francis_Bacon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Franz_Kafka.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Galileo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Giordano_Bruno.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Goethe.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Heisenberg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Heraclite.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Hypatia_Alexandria.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\IsaacNewton.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Johannes_Kepler.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Kant.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Konfuzius.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Lao_Tzu.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Leonardo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Leo_Tolstoy.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Lise_Meitner.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Marie_Curie.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Mikhail_Lomonosov.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Nicholas_of_Cusa.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Niels_Bohr.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Nietzsche.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Nikolaus_Kopernikus.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Paracelsus.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Pierre_de_Fermat.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Platon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Pythagoras.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Rene_Descartes.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Sofja_Kovalevskaja.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Stephen_Hawking.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Tesla.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Thomas-Aquinas.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Photo\Thomas_Edison.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

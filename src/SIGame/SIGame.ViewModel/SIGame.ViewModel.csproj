@@ -1,33 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
     <Authors>Vladimir Khil</Authors>
     <Company>Khil-soft</Company>
-    <Version>7.6.0</Version>
-    <LangVersion>8</LangVersion>
+    <Version>$(SIGameVersion)</Version>
     <Description>SIGame app</Description>
-    <Copyright>Copyright © Khil-soft 2005 - 2022</Copyright>
+    <Copyright>Copyright © Khil-soft 2005 - 2023</Copyright>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="6.0.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="VKhil.SIContentService.Client" Version="1.0.10" />
+    <PackageReference Include="VKhil.SIStatisticsService.Client" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Notions\Notions.csproj" />
     <ProjectReference Include="..\..\Common\SI.GameServer.Client\SI.GameServer.Client.csproj" />
     <ProjectReference Include="..\..\Common\SIEngine\SIEngine.csproj" />
+    <ProjectReference Include="..\..\Common\SIStorageService.ViewModel\SIStorageService.ViewModel.csproj" />
     <ProjectReference Include="..\..\Common\SIUI.ViewModel\SIUI.ViewModel.csproj" />
-    <ProjectReference Include="..\SI.GameResultService.Client\SI.GameResultService.Client.csproj" />
     <ProjectReference Include="..\SIGame.ViewModel.Web\SIGame.ViewModel.Web.csproj" />
   </ItemGroup>
-  <Import Project="..\..\Common\SIService.ViewModel\SIService.ViewModel.projitems" Label="Shared" />
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>

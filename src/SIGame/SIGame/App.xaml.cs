@@ -1,647 +1,357 @@
-﻿using SICore.PlatformSpecific;
+﻿using AppService.Client;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+using NLog.Web;
+using SI.GameServer.Client;
+using SIContentService.Client;
+using SICore.PlatformSpecific;
+using SIGame.Contracts;
+using SIGame.Helpers;
 using SIGame.Implementation;
 using SIGame.ViewModel;
+using SIGame.ViewModel.Settings;
+using SIStatisticsService.Client;
+using SIStorageService.Client;
+using SIStorageService.ViewModel;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
-using System.IO.IsolatedStorage;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using Utils;
-using AppService.Client;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
-using NLog.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
-using NLog.Web;
-using SI.GameServer.Client;
-using SI.GameResultService.Client;
-using SIGame.Contracts;
-#if !DEBUG
+#if UPDATE
 using AppService.Client.Models;
 using SICore;
+using System.IO;
 using System.Reflection;
 using System.Net.Http;
 using System.Threading.Tasks;
 #endif
 
-namespace SIGame
+namespace SIGame;
+
+/// <summary>
+/// Provides interaction logic for App.xaml.
+/// </summary>
+public partial class App : Application
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
-    public partial class App : Application
-    {
-        private IHost _host;
-        private IConfiguration _configuration;
+    private IHost? _host;
+    private ILogger<App>? _logger;
 
 #pragma warning disable IDE0052
-        private readonly DesktopCoreManager _coreManager = new DesktopCoreManager();
+    private readonly DesktopCoreManager _coreManager = new();
 #pragma warning restore IDE0052
-        private readonly DesktopManager _manager = new DesktopManager();
 
-        private static readonly bool UseSignalRConnection = Environment.OSVersion.Version >= new Version(6, 2);
+    private readonly DesktopManager _manager = new();
 
-        /// <summary>
-        /// Имя приложения
-        /// </summary>
-        public static string ProductName => "SIGame";
+    private AppState _appState = new();
 
-        private async void Application_Startup(object sender, StartupEventArgs e)
-        {
-            _host = new HostBuilder()
+    private static readonly bool UseSignalRConnection = Environment.OSVersion.Version >= new Version(6, 2);
+
+    /// <summary>
+    /// Application name.
+    /// </summary>
+    public static string ProductName => "SIGame";
+
+    private async void Application_Startup(object sender, StartupEventArgs e)
+    {
+        _host = new HostBuilder()
 #if DEBUG
-                .UseEnvironment("Development")
+            .UseEnvironment("Development")
 #endif
-                .ConfigureAppConfiguration((context, configurationBuilder) =>
-                {
-                    var env = context.HostingEnvironment;
-
-                    configurationBuilder
-                        .SetBasePath(context.HostingEnvironment.ContentRootPath)
-                        .AddJsonFile("appsettings.json", optional: true)
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
-                    _configuration = configurationBuilder.Build();
-                })
-                .ConfigureServices(ConfigureServices)
-                .ConfigureLogging((hostingContext, logging) =>
-                {
-                    NLog.LogManager.Configuration = new NLogLoggingConfiguration(hostingContext.Configuration.GetSection("NLog"));
-                })
-                .UseNLog()
-                .Build();
-
-            await _host.StartAsync();
-
-            _manager.ServiceProvider = _host.Services;
-        }
-
-        private void ConfigureServices(IServiceCollection services)
-        {
-            services.AddAppServiceClient(_configuration);
-            services.AddSIGameServerClient(_configuration);
-            services.AddGameResultServiceClient(_configuration);
-
-            services.AddSingleton<IUIThreadExecutor>(_manager);
-            services.AddTransient<IErrorManager, ErrorManager>();
-        }
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-
-            try
+            .ConfigureAppConfiguration((context, configurationBuilder) =>
             {
-                UI.Initialize();
+                var env = context.HostingEnvironment;
 
-                CommonSettings.Default = LoadCommonSettings();
-                UserSettings.Default = LoadUserSettings();
+                configurationBuilder
+                    .SetBasePath(context.HostingEnvironment.ContentRootPath)
+                    .AddJsonFile("appsettings.json", optional: true)
+                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            })
+            .ConfigureServices(ConfigureServices)
+            .ConfigureLogging((hostingContext, logging) =>
+            {
+                NLog.LogManager.Configuration = new NLogLoggingConfiguration(hostingContext.Configuration.GetSection("NLog"));
+            })
+            .UseNLog()
+            .Build();
 
-                if (UserSettings.Default.Language != null)
-                {
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(UserSettings.Default.Language);
-                }
-                else
-                {
-                    var currentLanguage = Thread.CurrentThread.CurrentUICulture.Name;
-                    UserSettings.Default.Language = currentLanguage == "ru-RU" ? currentLanguage : "en-US";
-                }
+        await _host.StartAsync();
 
-                if (e.Args.Length > 0)
-                {
-                    switch (e.Args[0])
-                    {
-                        case "/logs":
-                            UserSettings.Default = LoadUserSettings();
-                            GameCommands.OpenLogs.Execute(null);
-                            break;
+        _manager.ServiceProvider = _host.Services;
+        _logger = _host.Services.GetRequiredService<ILogger<App>>();
+    }
 
-                        case "/feedback":
-                            GameCommands.Comment.Execute(null);
-                            break;
+    private void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
+    {
+        var configuration = ctx.Configuration;
 
-                        case "/help":
-                            GameCommands.Help.Execute(1);
-                            break;
-                    }
+        services.AddAppServiceClient(configuration);
+        services.AddSIGameServerClient(configuration);
+        services.AddSIStatisticsServiceClient(configuration);
+        services.AddSIStorageServiceClient(configuration);
+        services.AddSIContentServiceClient(configuration);
 
-                    Shutdown();
-                    return;
-                }
+        services.AddTransient(typeof(SIStorage));
 
-                if (Environment.OSVersion.Version < new Version(10, 0))
-                {
-                    ServicePointManager.Expect100Continue = true;
-                    try
-                    {
-                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
-                            | SecurityProtocolType.Tls11
-                            | SecurityProtocolType.Tls12;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString(), ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
+        services.AddSingleton(_appState);
 
-                Trace.TraceInformation("Game launched");
+        services.AddSingleton<IUIThreadExecutor>(_manager);
+        services.AddTransient<IErrorManager, ErrorManager>();
+    }
 
-                UserSettings.Default.UseSignalRConnection = UseSignalRConnection;
-                UserSettings.Default.PropertyChanged += Default_PropertyChanged;
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
 
-                MainWindow = new MainWindow
-                {
-                    DataContext = new MainViewModel(CommonSettings.Default, UserSettings.Default, _host.Services)
-                };
+        AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-#if !DEBUG
-				if (UserSettings.Default.SearchForUpdates)
-				{
-					CheckUpdate();
-				}
+        try
+        {
+            UI.Initialize();
 
-                var errorManager = _host.Services.GetRequiredService<IErrorManager>();
-                errorManager.SendDelayedReports();
-#endif
+            CommonSettings.Default = SettingsManager.LoadCommonSettings();
+            UserSettings.Default = SettingsManager.LoadUserSettings() ?? new UserSettings();
+            _appState = SettingsManager.LoadAppState();
 
-                MainWindow.Show();
-
-                if (UserSettings.Default.FullScreen)
-                {
-                    ((MainWindow)MainWindow).Maximize();
-                }
+            if (UserSettings.Default.Language != null)
+            {
+                Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(UserSettings.Default.Language);
             }
-            catch (OutOfMemoryException)
+            else
             {
-                MessageBox.Show(
-                    SIGame.Properties.Resources.Error_IncifficientResources,
-                    CommonSettings.AppName,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                var currentLanguage = Thread.CurrentThread.CurrentUICulture.Name;
+                UserSettings.Default.Language = currentLanguage == "ru-RU" ? currentLanguage : "en-US";
+            }
+
+            if (e.Args.Length > 0)
+            {
+                switch (e.Args[0])
+                {
+                    case "/logs":
+                        GameCommands.OpenLogs.Execute(null);
+                        break;
+
+                    case "/feedback":
+                        GameCommands.Comment.Execute(null);
+                        break;
+
+                    case "/help":
+                        GameCommands.Help.Execute(1);
+                        break;
+                }
 
                 Shutdown();
+                return;
             }
-            catch (System.Windows.Markup.XamlParseException)
-            {
-                MessageBox.Show(
-                    SIGame.Properties.Resources.Error_NetBroken,
-                    CommonSettings.AppName,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
 
-                Shutdown();
-            }
-            catch (Exception exc)
+            if (Environment.OSVersion.Version < new Version(10, 0))
             {
-                MessageBox.Show(exc.Message, CommonSettings.AppName, MessageBoxButton.OK, MessageBoxImage.Error);
-                Shutdown();
-            }
-        }
-
-        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) =>
-            Trace.TraceError($"Common game error: {e.ExceptionObject}");
-
-        private void Default_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(UserSettings.Sound))
-            {
-                if (!UserSettings.Default.Sound)
+                try
                 {
-                    _manager.PlaySoundInternal();
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
+                        | SecurityProtocolType.Tls11
+                        | SecurityProtocolType.Tls12;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-        }
 
-#if !DEBUG
-        private async void CheckUpdate()
-        {
-            try
+            Trace.TraceInformation("Game launched");
+
+            UserSettings.Default.UseSignalRConnection = UseSignalRConnection;
+            UserSettings.Default.PropertyChanged += Default_PropertyChanged;
+
+            MainWindow = new MainWindow
             {
-                var updateInfo = await SearchForUpdatesAsync();
-                if (updateInfo != null)
-                {
-                    SearchForUpdatesFinished(updateInfo);
-                }
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(string.Format(SIGame.Properties.Resources.UpdateException, exc.ToStringDemystified()), ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+                DataContext = new MainViewModel(CommonSettings.Default, UserSettings.Default, _appState, _host.Services)
+            };
 
-        /// <summary>
-        /// Произвести поиск обновлений
-        /// </summary>
-        /// <returns>Нужно ли завершить приложение для выполнения обновления</returns>
-        private async Task<AppInfo> SearchForUpdatesAsync()
-        {
-            using var appService = _host.Services.GetRequiredService<IAppServiceClient>();
-
-            var assembly = Assembly.GetAssembly(typeof(MainViewModel));
-
-            if (assembly == null)
-            {
-                throw new Exception("assembly == null");
-            }
-
-            var currentVersion = assembly.GetName().Version;
-            var product = await appService.GetProductAsync("SI");
-
-            if (product?.Version > currentVersion)
-            {
-                return product;
-            }
-
-            return null;
-        }
-
-        private void SearchForUpdatesFinished(AppInfo updateInfo)
-        {
-            var updateUri = updateInfo.Uri;
-
-            ((MainViewModel)MainWindow.DataContext).UpdateVersion = updateInfo.Version;
-            ((MainViewModel)MainWindow.DataContext).Update = new CustomCommand(obj => Update_Executed(updateUri));
-        }
-
-        private bool _isUpdating = false;
-
-        private async void Update_Executed(Uri updateUri)
-        {
-            if (_isUpdating)
-            {
-                return;
-            }
-
-            _isUpdating = true;
-
-            try
-            {
-                var localFile = Path.Combine(Path.GetTempPath(), "SIGame.Setup.exe");
-
-                using (var httpClient = new HttpClient { DefaultRequestVersion = HttpVersion.Version20 })
-                using (var stream = await httpClient.GetStreamAsync(updateUri))
-                using (var fs = File.Create(localFile))
-                {
-                    await stream.CopyToAsync(fs);
-                }
-
-                Process.Start(localFile, "/passive");
-                Current.Shutdown();
-            }
-            catch (Exception exc)
-            {
-                _isUpdating = false;
-                MessageBox.Show(exc.Message, ProductName, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-#endif
-
-        private async void Application_Exit(object sender, ExitEventArgs e)
-        {
-            await _host.StopAsync();
-        }
-
-        protected override void OnExit(ExitEventArgs e)
-        {
-            if (CommonSettings.Default != null)
-            {
-                SaveCommonSettings(CommonSettings.Default);
-            }
-
-            if (UserSettings.Default != null)
-            {
-                SaveUserSettings(UserSettings.Default);
-            }
-
-            base.OnExit(e);
-        }
-
-        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            var inner = e.Exception;
-            while (inner.InnerException != null)
-            {
-                inner = inner.InnerException;
-            }
-
-            if (inner is OutOfMemoryException)
-            {
-                MessageBox.Show(
-                    SIGame.Properties.Resources.Error_IncifficientResourcesForExecution,
-                    ProductName,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-                
-                return;
-            }
-
-            if (inner is System.Windows.Markup.XamlParseException
-                || inner is NotImplementedException
-                || inner is TypeInitializationException
-                || inner is FileFormatException
-                || inner is SEHException)
-            {
-                MessageBox.Show(
-                    $"{SIGame.Properties.Resources.Error_RuntimeBroken}: {inner.Message}",
-                    CommonSettings.AppName,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-                
-                return;
-            }
-
-            if (inner is FileNotFoundException)
-            {
-                MessageBox.Show(
-                    $"{SIGame.Properties.Resources.Error_FilesBroken}: {inner.Message}. {SIGame.Properties.Resources.TryReinstallApp}.",
-                    CommonSettings.AppName,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-
-                return;
-            }
-
-            if (inner is COMException)
-            {
-                MessageBox.Show(
-                    $"{SIGame.Properties.Resources.Error_DirectXBroken}: {inner.Message}.",
-                    CommonSettings.AppName,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-
-                return;
-            }
-
-            if (inner is FileLoadException
-                || inner is IOException
-                || inner is ArgumentOutOfRangeException && inner.Message.Contains("capacity"))
-            {
-                MessageBox.Show(inner.Message, CommonSettings.AppName, MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            var message = e.Exception.ToString();
-
-            if (message.Contains("System.Windows.Automation")
-                || message.Contains("UIAutomationCore.dll")
-                || message.Contains("UIAutomationTypes"))
-            {
-                MessageBox.Show(
-                    SIGame.Properties.Resources.Error_WindowsAutomationBroken,
-                    ProductName,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-
-                return;
-            }
-
-            if (message.Contains("ApplyTaskbarItemInfo")
-                || message.Contains("GetValueFromTemplatedParent")
-                || message.Contains("IsBadSplitPosition")
-                || message.Contains("IKeyboardInputProvider.AcquireFocus")
-                || message.Contains("ReleaseOnChannel")
-                || message.Contains("ManifestSignedXml2.GetIdElement"))
-            {
-                MessageBox.Show(
-                    SIGame.Properties.Resources.Error_OSBroken,
-                    ProductName,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-
-                return;
-            }
-
-            if (message.Contains("ComputeTypographyAvailabilities") || message.Contains("FontList.get_Item"))
-            {
-                MessageBox.Show(
-                    SIGame.Properties.Resources.Error_Typography,
-                    ProductName,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-
-                return;
-            }
+#if UPDATE
+			if (UserSettings.Default.SearchForUpdates)
+			{
+				CheckUpdate();
+			}
 
             var errorManager = _host.Services.GetRequiredService<IErrorManager>();
-            errorManager.SendErrorReport(e.Exception);
-            e.Handled = true;
-        }
+            errorManager.SendDelayedReports();
+#endif
 
-        /// <summary>
-        /// Имя файла общих настроек
-        /// </summary>
-        internal const string CommonConfigFileName = "app.config";
+            MainWindow.Show();
 
-        /// <summary>
-        /// Имя файла персональных настроек
-        /// </summary>
-        internal static string UserConfigFileName = "user.config";
-
-        public const string SettingsFolderName = "Settings";
-
-        private static readonly string SettingsFolder = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            CommonSettings.ManufacturerEn,
-            CommonSettings.AppNameEn,
-            SettingsFolderName);
-
-        /// <summary>
-        /// Загрузить общие настройки
-        /// </summary>
-        public static CommonSettings LoadCommonSettings()
-        {
-            try
+            if (UserSettings.Default.FullScreen)
             {
-                var commonSettingsFile = Path.Combine(SettingsFolder, CommonConfigFileName);
-                if (File.Exists(commonSettingsFile) && Monitor.TryEnter(CommonConfigFileName, 2000))
-                {
-                    try
-                    {
-                        using var stream = File.Open(commonSettingsFile, FileMode.Open, FileAccess.Read, FileShare.Read);
-                        return CommonSettings.Load(stream);
-                    }
-                    catch (Exception exc)
-                    {
-                        MessageBox.Show(
-                            $"{SIGame.Properties.Resources.Error_SettingsLoading}: {exc.Message}. {SIGame.Properties.Resources.DefaultSettingsWillBeUsed}",
-                            ProductName,
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Exclamation);
-                    }
-                    finally
-                    {
-                        Monitor.Exit(CommonConfigFileName);
-                    }
-                }
-
-                using var file = IsolatedStorageFile.GetMachineStoreForAssembly();
-                if (file.FileExists(CommonConfigFileName) && Monitor.TryEnter(CommonConfigFileName, 2000))
-                {
-                    try
-                    {
-                        using var stream = file.OpenFile(CommonConfigFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                        return CommonSettings.Load(stream);
-                    }
-                    catch (Exception exc)
-                    {
-                        MessageBox.Show(
-                            $"{SIGame.Properties.Resources.Error_SettingsLoading}: {exc.Message}. {SIGame.Properties.Resources.DefaultSettingsWillBeUsed}",
-                            ProductName,
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Exclamation);
-                    }
-                    finally
-                    {
-                        Monitor.Exit(CommonConfigFileName);
-                    }
-                }
-                else
-                {
-                    var oldSettings = CommonSettings.LoadOld(CommonConfigFileName);
-                    if (oldSettings != null)
-                    {
-                        return oldSettings;
-                    }
-                }
-            }
-            catch { }
-
-            return new CommonSettings();
-        }
-
-        /// <summary>
-        /// Сохранить общие настройки
-        /// </summary>
-        private static void SaveCommonSettings(CommonSettings settings)
-        {
-            try
-            {
-                Directory.CreateDirectory(SettingsFolder);
-                var commonSettingsFile = Path.Combine(SettingsFolder, CommonConfigFileName);
-
-                if (Monitor.TryEnter(CommonConfigFileName, 2000))
-                {
-                    try
-                    {
-                        using var stream = File.Create(commonSettingsFile);
-                        settings.Save(stream);
-                    }
-                    finally
-                    {
-                        Monitor.Exit(CommonConfigFileName);
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(
-                    $"{SIGame.Properties.Resources.Error_SettingsSaving}: {exc.Message}",
-                    ProductName,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Exclamation);
+                ((MainWindow)MainWindow).Maximize();
             }
         }
-
-        /// <summary>
-        /// Загрузить общие настройки
-        /// </summary>
-        /// <returns></returns>
-        public static UserSettings LoadUserSettings()
+        catch (OutOfMemoryException)
         {
-            try
-            {
-                var userSettingsFile = Path.Combine(SettingsFolder, UserConfigFileName);
-                if (File.Exists(userSettingsFile) && Monitor.TryEnter(UserConfigFileName, 2000))
-                {
-                    try
-                    {
-                        using var stream = File.Open(userSettingsFile, FileMode.Open, FileAccess.Read, FileShare.Read);
-                        return UserSettings.Load(stream);
-                    }
-                    catch (Exception exc)
-                    {
-                        MessageBox.Show(
-                            $"{SIGame.Properties.Resources.Error_SettingsLoading}: {exc.Message}. {SIGame.Properties.Resources.DefaultSettingsWillBeUsed}",
-                            ProductName,
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Exclamation);
-                    }
-                    finally
-                    {
-                        Monitor.Exit(UserConfigFileName);
-                    }
-                }
+            MessageBox.Show(
+                SIGame.Properties.Resources.Error_IncifficientResources,
+                CommonSettings.AppName,
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
 
-                using var file = IsolatedStorageFile.GetUserStoreForAssembly();
-                if (file.FileExists(UserConfigFileName) && Monitor.TryEnter(UserConfigFileName, 2000))
-                {
-                    try
-                    {
-                        using var stream = file.OpenFile(UserConfigFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                        return UserSettings.Load(stream);
-                    }
-                    catch (Exception exc)
-                    {
-                        MessageBox.Show(
-                            $"{SIGame.Properties.Resources.Error_SettingsLoading}: {exc.Message}. {SIGame.Properties.Resources.DefaultSettingsWillBeUsed}",
-                            ProductName,
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Exclamation);
-
-                    }
-                    finally
-                    {
-                        Monitor.Exit(UserConfigFileName);
-                    }
-                }
-                else
-                {
-                    var oldSettings = UserSettings.LoadOld(UserConfigFileName);
-                    if (oldSettings != null)
-                    {
-                        return oldSettings;
-                    }
-                }
-            }
-            catch { }
-
-            return new UserSettings();
+            Shutdown();
         }
-
-        /// <summary>
-        /// Сохранить общие настройки
-        /// </summary>
-        private static void SaveUserSettings(UserSettings settings)
+        catch (System.Windows.Markup.XamlParseException)
         {
-            try
-            {
-                Directory.CreateDirectory(SettingsFolder);
-                var userSettingsFile = Path.Combine(SettingsFolder, UserConfigFileName);
+            MessageBox.Show(
+                SIGame.Properties.Resources.Error_NetBroken,
+                CommonSettings.AppName,
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
 
-                if (Monitor.TryEnter(UserConfigFileName, 2000))
-                {
-                    try
-                    {
-                        using var stream = File.Create(userSettingsFile);
-                        settings.Save(stream);
-                    }
-                    finally
-                    {
-                        Monitor.Exit(UserConfigFileName);
-                    }
-                }
-            }
-            catch (Exception exc)
+            Shutdown();
+        }
+        catch (Exception exc)
+        {
+            MessageBox.Show(exc.Message, CommonSettings.AppName, MessageBoxButton.OK, MessageBoxImage.Error);
+            Shutdown();
+        }
+    }
+
+    private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) =>
+        _logger.LogError("Common game error: {error}", e.ExceptionObject);
+
+    private void Default_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(UserSettings.Sound))
+        {
+            if (!UserSettings.Default.Sound)
             {
-                MessageBox.Show($"{SIGame.Properties.Resources.Error_SettingsSaving}: {exc.Message}", ProductName, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                _manager.PlaySoundInternal();
             }
         }
     }
+
+#if UPDATE
+    private async void CheckUpdate()
+    {
+        try
+        {
+            var updateInfo = await SearchForUpdatesAsync();
+
+            if (updateInfo != null)
+            {
+                SearchForUpdatesFinished(updateInfo);
+            }
+        }
+        catch (Exception exc)
+        {
+            _logger.LogError(exc, "Update error: {error}", exc.Message);
+
+            MessageBox.Show(
+                string.Format(SIGame.Properties.Resources.UpdateException, exc.Message),
+                ProductName,
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
+    }
+
+    /// <summary>
+    /// Произвести поиск обновлений
+    /// </summary>
+    /// <returns>Нужно ли завершить приложение для выполнения обновления</returns>
+    private async Task<AppInfo?> SearchForUpdatesAsync()
+    {
+        using var appService = _host.Services.GetRequiredService<IAppServiceClient>();
+
+        var assembly = Assembly.GetAssembly(typeof(MainViewModel));
+
+        if (assembly == null)
+        {
+            throw new Exception("assembly == null");
+        }
+
+        var currentVersion = assembly.GetName().Version;
+        var product = await appService.GetProductAsync("SI");
+
+        if (product?.Version > currentVersion)
+        {
+            return product;
+        }
+
+        return null;
+    }
+
+    private void SearchForUpdatesFinished(AppInfo updateInfo)
+    {
+        var updateUri = updateInfo.Uri;
+
+        var mainViewModel = (MainViewModel)MainWindow.DataContext;
+
+        mainViewModel.StartMenu.UpdateVersion = updateInfo.Version;
+        mainViewModel.StartMenu.Update = new CustomCommand(obj => Update_Executed(updateUri));
+    }
+
+    private bool _isUpdating = false;
+
+    private async void Update_Executed(Uri updateUri)
+    {
+        if (_isUpdating)
+        {
+            return;
+        }
+
+        _isUpdating = true;
+
+        try
+        {
+            var localFile = Path.Combine(Path.GetTempPath(), "SIGame.Setup.exe");
+
+            using (var httpClient = new HttpClient { DefaultRequestVersion = HttpVersion.Version20 })
+            using (var stream = await httpClient.GetStreamAsync(updateUri))
+            using (var fs = File.Create(localFile))
+            {
+                await stream.CopyToAsync(fs);
+            }
+
+            Process.Start(localFile, "/passive");
+            Current.Shutdown();
+        }
+        catch (Exception exc)
+        {
+            _isUpdating = false;
+            MessageBox.Show(exc.Message, ProductName, MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+    }
+#endif
+
+    private async void Application_Exit(object sender, ExitEventArgs e)
+    {
+        if (_host != null)
+        {
+            await _host.StopAsync();
+        }
+    }
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+        if (CommonSettings.Default != null)
+        {
+            SettingsManager.SaveCommonSettings(CommonSettings.Default);
+        }
+
+        if (UserSettings.Default != null)
+        {
+            SettingsManager.SaveUserSettings(UserSettings.Default);
+        }
+
+        SettingsManager.SaveAppState(_appState);
+
+        base.OnExit(e);
+    }
+
+    private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) =>
+        e.Handled = new ExceptionHandler(_host.Services.GetRequiredService<IErrorManager>()).Handle(e.Exception);
+
+    
 }

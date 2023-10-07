@@ -7,9 +7,11 @@
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
     <Authors>Vladimir Khil</Authors>
     <Company>Khil-soft</Company>
-    <Version>7.6.0</Version>
+    <Version>7.7.3</Version>
     <Description>SIGame players logic</Description>
-    <Copyright>Copyright © Khil-soft 2012 - 2022</Copyright>
+    <Copyright>Copyright © Khil-soft 2012 - 2023</Copyright>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>none</DebugType>
@@ -35,7 +37,6 @@
     <ProjectReference Include="..\SICore.Network\SICore.Network.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Threading.Channels" Version="6.0.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
   </ItemGroup>

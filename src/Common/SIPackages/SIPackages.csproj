@@ -1,15 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
+	<TargetFramework>net6.0</TargetFramework>
+	<SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
     <Description>SIGame packages processor</Description>
     <Company>Khil-soft</Company>
-    <Version>7.6.0</Version>
+    <Version>7.10.0</Version>
     <Authors>Vladimir Khil</Authors>
-    <Copyright>Copyright © Khil-soft 2007 - 2022</Copyright>
+    <Copyright>Copyright © Khil-soft 2007 - 2023</Copyright>
     <PackageProjectUrl>https://github.com/VladimirKhil/SI</PackageProjectUrl>
     <RepositoryUrl>https://github.com/VladimirKhil/SI</RepositoryUrl>
     <PackageTags>SIGame</PackageTags>
@@ -17,13 +15,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <WarningLevel>2</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <None Include="key.snk" />
@@ -33,7 +29,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Ensure.That" Version="10.1.0" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+    <PackageReference Include="VKhil.ZipUtils" Version="1.0.5" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

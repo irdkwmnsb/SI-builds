@@ -1,32 +1,226 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
-namespace Utils
+namespace Utils;
+
+/// <summary>
+/// Provides an await-friendly locking mechanism.
+/// </summary>
+public sealed class Lock : IDisposable
 {
-    /// <summary>
-    /// Provides an await-friendly locking mechanism.
-    /// </summary>
-    public sealed class Lock : IDisposable
+    private readonly SemaphoreSlim _semaphore = new(1, 1);
+
+    private readonly string _name;
+
+    public Lock(string name)
     {
-        private readonly SemaphoreSlim _semaphore = new(1, 1);
+        _name = name;
+    }
 
-        private readonly string _name;
+    public void WithLock(Action action, CancellationToken cancellationToken = default)
+    {
+        _semaphore.Wait(cancellationToken);
 
-        public Lock(string name)
+        try
         {
-            _name = name;
+            action();
+        }
+        finally
+        {
+            try
+            {
+                _semaphore.Release();
+            }
+            catch (ObjectDisposedException)
+            {
+
+            }
+        }
+    }
+
+    public void WithLock(Action action, int millisecondsTimeout)
+    {
+        _semaphore.Wait(millisecondsTimeout);
+
+        try
+        {
+            action();
+        }
+        finally
+        {
+            try
+            {
+                _semaphore.Release();
+            }
+            catch (ObjectDisposedException)
+            {
+
+            }
+        }
+    }
+
+    public async ValueTask WithLockAsync(Action action, CancellationToken cancellationToken = default)
+    {
+        await _semaphore.WaitAsync(cancellationToken);
+
+        try
+        {
+            action();
+        }
+        finally
+        {
+            try
+            {
+                _semaphore.Release();
+            }
+            catch (ObjectDisposedException)
+            {
+
+            }
+        }
+    }
+
+    public async ValueTask WithLockAsync(Action action, int millisecondsTimeout)
+    {
+        await _semaphore.WaitAsync(millisecondsTimeout);
+
+        try
+        {
+            action();
+        }
+        finally
+        {
+            try
+            {
+                _semaphore.Release();
+            }
+            catch (ObjectDisposedException)
+            {
+
+            }
+        }
+    }
+
+    public T WithLock<T>(Func<T> func, CancellationToken cancellationToken = default)
+    {
+        _semaphore.Wait(cancellationToken);
+
+        try
+        {
+            return func();
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
+    }
+
+    public T WithLock<T>(Func<T> func, int millisecondsTimeout)
+    {
+        _semaphore.Wait(millisecondsTimeout);
+
+        try
+        {
+            return func();
+        }
+        finally
+        {
+            try
+            {
+                _semaphore.Release();
+            }
+            catch (ObjectDisposedException)
+            {
+
+            }
+        }
+    }
+
+    public async ValueTask<T> WithLockAsync<T>(Func<T> func, CancellationToken cancellationToken = default)
+    {
+        await _semaphore.WaitAsync(cancellationToken);
+
+        try
+        {
+            return func();
+        }
+        finally
+        {
+            try
+            {
+                _semaphore.Release();
+            }
+            catch (ObjectDisposedException)
+            {
+
+            }
+        }
+    }
+
+    public async ValueTask WithLockAsync(Func<Task> asyncAction, CancellationToken cancellationToken = default)
+    {
+        await _semaphore.WaitAsync(cancellationToken);
+
+        try
+        {
+            await asyncAction();
+        }
+        finally
+        {
+            try
+            {
+                _semaphore.Release();
+            }
+            catch (ObjectDisposedException)
+            {
+
+            }
+        }
+    }
+
+    public async ValueTask<T> WithLockAsync<T>(Func<Task<T>> asyncFunc, CancellationToken cancellationToken = default)
+    {
+        await _semaphore.WaitAsync(cancellationToken);
+
+        try
+        {
+            return await asyncFunc();
+        }
+        finally
+        {
+            try
+            {
+                _semaphore.Release();
+            }
+            catch (ObjectDisposedException)
+            {
+
+            }
+        }
+    }
+
+    public async ValueTask<bool> TryLockAsync(
+        Action action,
+        int millisecondsTimeout,
+        bool force = false,
+        CancellationToken cancellationToken = default)
+    {
+        var lockAquired = await _semaphore.WaitAsync(millisecondsTimeout, cancellationToken);
+
+        if (!lockAquired)
+        {
+            Trace.TraceError($"Cannot aquire lock {_name} in {millisecondsTimeout}!");
         }
 
-        public void WithLock(Action action, CancellationToken cancellationToken = default)
+        try
         {
-            _semaphore.Wait(cancellationToken);
-            try
+            if (lockAquired || force)
             {
                 action();
             }
-            finally
+        }
+        finally
+        {
+            if (lockAquired)
             {
                 try
                 {
@@ -39,221 +233,93 @@ namespace Utils
             }
         }
 
-        public void WithLock(Action action, int millisecondsTimeout)
-        {
-            _semaphore.Wait(millisecondsTimeout);
+        return lockAquired;
+    }
 
-            try
+    public async ValueTask<(T?, bool)> TryLockAsync<T>(
+        Func<T> func,
+        int millisecondsTimeout,
+        bool force = false,
+        CancellationToken cancellationToken = default)
+    {
+        var lockAquired = await _semaphore.WaitAsync(millisecondsTimeout, cancellationToken);
+
+        if (!lockAquired)
+        {
+            Trace.TraceError($"Cannot aquire lock {_name} in {millisecondsTimeout}!");
+        }
+
+        try
+        {
+            if (lockAquired || force)
             {
-                action();
+                return (func(), lockAquired);
             }
-            finally
+        }
+        finally
+        {
+            if (lockAquired)
             {
-                _semaphore.Release();
+                try
+                {
+                    _semaphore.Release();
+                }
+                catch (ObjectDisposedException)
+                {
+
+                }
             }
         }
 
-        public async ValueTask WithLockAsync(Action action, CancellationToken cancellationToken = default)
+        return (default, lockAquired);
+    }
+
+    public async ValueTask<bool> TryLockAsync(
+        Func<Task> asyncAction,
+        int millisecondsTimeout,
+        bool force = false,
+        CancellationToken cancellationToken = default)
+    {
+        var lockAquired = false;
+
+        try
         {
-            await _semaphore.WaitAsync(cancellationToken);
-            try
-            {
-                action();
-            }
-            finally
-            {
-                _semaphore.Release();
-            }
+            lockAquired = await _semaphore.WaitAsync(millisecondsTimeout, cancellationToken);
+        }
+        catch (ObjectDisposedException)
+        {
+
         }
 
-        public async ValueTask WithLockAsync(Action action, int millisecondsTimeout)
+        if (!lockAquired)
         {
-            await _semaphore.WaitAsync(millisecondsTimeout);
-
-            try
-            {
-                action();
-            }
-            finally
-            {
-                _semaphore.Release();
-            }
+            Trace.TraceError($"Cannot aquire lock {_name} in {millisecondsTimeout}!");
         }
 
-        public T WithLock<T>(Func<T> func, CancellationToken cancellationToken = default)
+        try
         {
-            _semaphore.Wait(cancellationToken);
-            try
-            {
-                return func();
-            }
-            finally
-            {
-                _semaphore.Release();
-            }
-        }
-
-        public T WithLock<T>(Func<T> func, int millisecondsTimeout)
-        {
-            _semaphore.Wait(millisecondsTimeout);
-
-            try
-            {
-                return func();
-            }
-            finally
-            {
-                _semaphore.Release();
-            }
-        }
-
-        public async ValueTask<T> WithLockAsync<T>(Func<T> func, CancellationToken cancellationToken = default)
-        {
-            await _semaphore.WaitAsync(cancellationToken);
-            try
-            {
-                return func();
-            }
-            finally
-            {
-                _semaphore.Release();
-            }
-        }
-
-        public async ValueTask WithLockAsync(Func<Task> asyncAction, CancellationToken cancellationToken = default)
-        {
-            await _semaphore.WaitAsync(cancellationToken);
-            try
+            if (lockAquired || force)
             {
                 await asyncAction();
             }
-            finally
-            {
-                _semaphore.Release();
-            }
         }
-
-        public async ValueTask<T> WithLockAsync<T>(Func<Task<T>> asyncFunc, CancellationToken cancellationToken = default)
+        finally
         {
-            await _semaphore.WaitAsync(cancellationToken);
-            try
+            if (lockAquired)
             {
-                return await asyncFunc();
-            }
-            finally
-            {
-                _semaphore.Release();
-            }
-        }
-
-        public async ValueTask<bool> TryLockAsync(
-            Action action,
-            int millisecondsTimeout,
-            bool force = false,
-            CancellationToken cancellationToken = default)
-        {
-            var lockAquired = await _semaphore.WaitAsync(millisecondsTimeout, cancellationToken);
-
-            if (!lockAquired)
-            {
-                Trace.TraceError($"Cannot aquire lock {_name} in {millisecondsTimeout}!");
-            }
-
-            try
-            {
-                if (lockAquired || force)
-                {
-                    action();
-                }
-            }
-            finally
-            {
-                if (lockAquired)
+                try
                 {
                     _semaphore.Release();
                 }
-            }
+                catch (ObjectDisposedException)
+                {
 
-            return lockAquired;
+                }
+            }
         }
 
-        public async ValueTask<(T, bool)> TryLockAsync<T>(
-            Func<T> func,
-            int millisecondsTimeout,
-            bool force = false,
-            CancellationToken cancellationToken = default)
-        {
-            var lockAquired = await _semaphore.WaitAsync(millisecondsTimeout, cancellationToken);
-
-            if (!lockAquired)
-            {
-                Trace.TraceError($"Cannot aquire lock {_name} in {millisecondsTimeout}!");
-            }
-
-            try
-            {
-                if (lockAquired || force)
-                {
-                    return (func(), lockAquired);
-                }
-            }
-            finally
-            {
-                if (lockAquired)
-                {
-                    _semaphore.Release();
-                }
-            }
-
-            return (default, lockAquired);
-        }
-
-        public async ValueTask<bool> TryLockAsync(
-            Func<Task> asyncAction,
-            int millisecondsTimeout,
-            bool force = false,
-            CancellationToken cancellationToken = default)
-        {
-            var lockAquired = false;
-            try
-            {
-                lockAquired = await _semaphore.WaitAsync(millisecondsTimeout, cancellationToken);
-            }
-            catch (ObjectDisposedException)
-            {
-
-            }
-
-            if (!lockAquired)
-            {
-                Trace.TraceError($"Cannot aquire lock {_name} in {millisecondsTimeout}!");
-            }
-
-            try
-            {
-                if (lockAquired || force)
-                {
-                    await asyncAction();
-                }
-            }
-            finally
-            {
-                if (lockAquired)
-                {
-                    try
-                    {
-                        _semaphore.Release();
-                    }
-                    catch (ObjectDisposedException)
-                    {
-
-                    }
-                }
-            }
-
-            return lockAquired;
-        }
-
-        public void Dispose() => _semaphore.Dispose();
+        return lockAquired;
     }
+
+    public void Dispose() => _semaphore.Dispose();
 }

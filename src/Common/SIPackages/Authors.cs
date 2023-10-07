@@ -1,33 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using SIPackages.Core;
+﻿using SIPackages.Core;
+using SIPackages.Helpers;
+using SIPackages.Properties;
 
-namespace SIPackages
+namespace SIPackages;
+
+/// <summary>
+/// Defines a list of package object authors names.
+/// </summary>
+public sealed class Authors : List<string>, IEquatable<Authors>
 {
     /// <summary>
-    /// Авторы объекта в пакете
+    /// Initializes a new instance of <see cref="Authors" /> class.
     /// </summary>
-    public sealed class Authors : List<string>
-    {
-        /// <summary>
-        /// Создание списка авторов
-        /// </summary>
-        public Authors() { }
+    public Authors() { }
 
-        /// <summary>
-        /// Создание списка авторов
-        /// </summary>
-        /// <param name="collection"></param>
-        public Authors(IList<string> collection)
-            : base(collection)
-        {
+    /// <summary>
+    /// Initializes a new instance of <see cref="Authors" /> class.
+    /// </summary>
+    /// <param name="collection">Initial authors names collection.</param>
+    public Authors(IList<string> collection) : base(collection) { }
 
-        }
+    /// <inheritdoc />
+    public override string ToString() => $"{Resources.Authors}: {this.ToCommonString()}";
 
-        /// <summary>
-        /// Строковое представление авторов
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString() => $"Авторы: {this.ToCommonString()}";
-    }
+    /// <inheritdoc />
+    public override bool Equals(object? obj) => obj is Authors other && Equals(other);
+
+    /// <inheritdoc />
+    public bool Equals(Authors? other) => other is not null && this.SequenceEqual(other);
+
+    /// <inheritdoc />
+    public override int GetHashCode() => this.GetCollectionHashCode();
 }

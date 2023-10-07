@@ -1,83 +1,68 @@
 ﻿using SIPackages;
 using SIPackages.Core;
-using System.Threading.Tasks;
 
-namespace SIQuester.ViewModel
+namespace SIQuester.ViewModel;
+
+/// <summary>
+/// Represents question scenario atom view model.
+/// </summary>
+/// <inheritdoc cref="MediaOwnerViewModel" />
+public sealed class AtomViewModel : MediaOwnerViewModel
 {
-    public sealed class AtomViewModel : ModelViewBase, IMediaOwner
+    /// <summary>
+    /// Original model wrapped by this view model.
+    /// </summary>
+    public Atom Model { get; }
+
+    /// <summary>
+    /// Media item type.
+    /// </summary>
+    public override string Type => Model.Type switch
     {
+        AtomTypes.Image => CollectionNames.ImagesStorageName,
+        AtomTypes.Audio => CollectionNames.AudioStorageName,
+        AtomTypes.AudioNew => CollectionNames.AudioStorageName,
+        AtomTypes.Video => CollectionNames.VideoStorageName,
+        AtomTypes.Html => CollectionNames.HtmlStorageName,
+        _ => Model.Type,
+    };
 
-        public Atom Model { get; }
+    /// <summary>
+    /// Scenario view model that contains current view model.
+    /// </summary>
+    public ScenarioViewModel? OwnerScenario { get; set; }
 
-        public ScenarioViewModel OwnerScenario { get; set; }
+    private bool _isExpanded = true;
 
-        private IMedia _mediaSource = null;
-
-        public IMedia MediaSource
+    public bool IsExpanded
+    {
+        get => _isExpanded;
+        set
         {
-            get
+            if (_isExpanded != value)
             {
-                if (_mediaSource == null)
-                {
-                    LoadMedia();
-                }
-
-                return _mediaSource;
+                _isExpanded = value;
+                OnPropertyChanged();
             }
-            set
-            {
-                if (_mediaSource != value)
-                {
-                    _mediaSource = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public IMedia LoadMedia()
-        {
-            if (_mediaSource != null)
-            {
-                return _mediaSource;
-            }
-
-            IItemViewModel root = OwnerScenario.Owner;
-            while (root.Owner != null)
-                root = root.Owner;
-
-            if (!(root is PackageViewModel packageViewModel))
-            {
-                return null;
-            }
-
-            _mediaSource = packageViewModel.Document.Wrap(this);
-
-            return _mediaSource;
-        }
-
-        public Task<IMedia> LoadMediaAsync()
-        {
-            return Task.FromResult(LoadMedia());
-        }
-
-        private bool _isExpanded = true;
-
-        public bool IsExpanded
-        {
-            get { return _isExpanded; }
-            set
-            {
-                if (_isExpanded != value)
-                {
-                    _isExpanded = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public AtomViewModel(Atom model)
-        {
-            Model = model;
         }
     }
+
+    public AtomViewModel(Atom model) => Model = model;
+
+    protected override IMedia GetMedia()
+    {
+        if (OwnerScenario == null)
+        {
+            throw new InvalidOperationException("OwnerScenario is undefined");
+        }
+
+        if (OwnerScenario.OwnerDocument == null)
+        {
+            throw new InvalidOperationException("OwnerDocument is undefined");
+        }
+
+        return OwnerScenario.OwnerDocument.Wrap(Model);
+    }
+
+    protected override void OnError(Exception exc) => OwnerScenario?.OwnerDocument?.OnError(exc);
 }

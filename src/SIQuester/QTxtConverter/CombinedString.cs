@@ -1,84 +1,75 @@
 ﻿using Notions;
-using System.Collections.Generic;
 
-namespace QTxtConverter
+namespace QTxtConverter;
+
+/// <summary>
+/// Represents a string which is a result of combinations (intersectons) of a set of soure strings.
+/// </summary>
+public sealed class CombinedString
 {
+    private string _value;
+
     /// <summary>
-    /// Строка-комбинация других строк (задаваемых номерами)
+    /// Source strings indicies in source array.
     /// </summary>
-    public sealed class CombinedString
+    public List<int> Sources { get; } = new();
+
+    /// <summary>
+    /// Initializes a new instance of <see cref="CombinedString" /> class.
+    /// </summary>
+    /// <param name="value">String value.</param>
+    /// <param name="sourceIndicies">Source strings indicies in source array.</param>
+    public CombinedString(string value, params int[] sourceIndicies)
     {
-        private string _content;
-
-        /// <summary>
-        /// Получить список номеров строк-источников
-        /// </summary>
-        public List<int> Sources { get; } = new List<int>();
-
-        /// <summary>
-        /// Создание комбинированной строки
-        /// </summary>
-        /// <param name="s">Содержание</param>
-        /// <param name="num">Список номеров строк-источников</param>
-        public CombinedString(string s, params int[] num)
-        {
-            _content = s;
-            foreach (var n in num)
-            {
-                Sources.Add(n);
-            }
-        }
-
-        /// <summary>
-        /// Создание комбинированной строки
-        /// </summary>
-        /// <param name="s">Список строк-источников</param>
-        public CombinedString(params CombinedString[] s)
-        {
-            var index = 0;
-            foreach (CombinedString str in s)
-            {
-                if (index == 0)
-                {
-                    _content = str.ToString();
-                    foreach (int n in str.Sources)
-                    {
-                        Sources.Add(n);
-                    }
-                }
-                else
-                {
-                    CombineWith(str);
-                }
-
-                index++;
-            }
-        }
-
-        private void CombineWith(CombinedString str)
-        {
-            int len = _content.Length;
-            _content = len > 0
-                ? StringManager.BestCommonSubString(
-                    _content,
-                    str._content,
-                    new StringManager.StringNorm(StringManager.TemplateSearchingNorm),
-                    true)
-                : "";
-
-            foreach (int n in str.Sources)
-            {
-                if (!Sources.Contains(n))
-                {
-                    Sources.Add(n);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Содержание строки
-        /// </summary>
-        /// <returns>Содержание строки</returns>
-        override public string ToString() => _content;
+        _value = value;
+        Sources.AddRange(sourceIndicies);
     }
+
+    /// <summary>
+    /// Initializes a new instance of <see cref="CombinedString" /> class based on other combined strings.
+    /// </summary>
+    /// <param name="sources">Source strings.</param>
+    public CombinedString(params CombinedString[] sources)
+    {
+        if (sources.Length == 0)
+        {
+            throw new ArgumentException("sources must not be empty", nameof(sources));
+        }
+
+        _value = sources[0].ToString();
+
+        foreach (var index in sources[0].Sources)
+        {
+            Sources.Add(index);
+        }
+
+        for (int i = 1; i < sources.Length; i++)
+        {
+            CombineWith(sources[i]);
+        }
+    }
+
+    private void CombineWith(CombinedString combinedString)
+    {
+        var length = _value.Length;
+
+        _value = length > 0
+            ? StringManager.BestCommonSubString(
+                _value,
+                combinedString.ToString(),
+                new StringManager.StringNorm(StringManager.TemplateSearchingNorm),
+                true)
+            : "";
+
+        foreach (var index in combinedString.Sources)
+        {
+            if (!Sources.Contains(index))
+            {
+                Sources.Add(index);
+            }
+        }
+    }
+
+    /// <inheritdoc />
+    override public string ToString() => _value;
 }

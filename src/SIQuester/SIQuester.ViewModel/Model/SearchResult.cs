@@ -1,19 +1,19 @@
 ﻿using SIPackages.Core;
 
-namespace SIQuester.Model
+namespace SIQuester.Model;
+
+/// <summary>
+/// Represents a search match inside a file.
+/// </summary>
+public sealed class SearchResult
 {
     /// <summary>
-    /// Результат поиска
+    /// File name.
     /// </summary>
-    public sealed class SearchResult
-    {
-        /// <summary>
-        /// Имя файла
-        /// </summary>
-        public string FileName { get; set; }
-        /// <summary>
-        /// Найденный фрагмент из трёх частей (до совпадения, совпадение, после совпадения)
-        /// </summary>
-        public SearchMatch Fragment { get; set; }
-    }
+    public string FileName { get; set; }
+
+    /// <summary>
+    /// Found fragment with highlighted area.
+    /// </summary>
+    public SearchMatch Fragment { get; set; }
 }

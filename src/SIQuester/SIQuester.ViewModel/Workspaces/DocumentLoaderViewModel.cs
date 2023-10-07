@@ -1,44 +1,53 @@
 ﻿using SIQuester.ViewModel.Properties;
-using System;
-using System.Threading.Tasks;
 
-namespace SIQuester.ViewModel
+namespace SIQuester.ViewModel;
+
+// TODO: show load progress
+
+/// <summary>
+/// Defines a view model that displays document load process.
+/// </summary>
+public sealed class DocumentLoaderViewModel : WorkspaceViewModel
 {
-    public sealed class DocumentLoaderViewModel: WorkspaceViewModel
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
+    private Task<QDocument>? _loadTask;
+    
+    public override string Header => Resources.DocumentLoading;
+
+    public string Title { get; private set; }
+
+    public DocumentLoaderViewModel(string title) => Title = title;
+
+    protected override void Dispose(bool disposing)
     {
-        public override string Header => Resources.DocumentLoading;
+        _cancellationTokenSource.Cancel();
+        // TODO: await _loadTask if not null
+        _cancellationTokenSource.Dispose();
 
-        public string Title { get; private set; }
+        base.Dispose(disposing);
+    }
 
-        private string _errorMessage;
-
-        public string ErrorMessage
+    /// <summary>
+    /// Loads the document.
+    /// </summary>
+    /// <param name="loader">Loader that should return the document.</param>
+    public async Task<QDocument> LoadAsync(Func<CancellationToken, Task<QDocument>> loader)
+    {
+        try
         {
-            get => _errorMessage;
-            set { _errorMessage = value; OnPropertyChanged(); }
+            _loadTask = loader(_cancellationTokenSource.Token);
+
+            var document = await _loadTask;
+
+            OnNewItem(document);
+            OnClosed();
+
+            return document;
         }
-
-        public DocumentLoaderViewModel(string title, Func<Task<QDocument>> loader, Action onSuccess = null)
+        catch (Exception exc)
         {
-            Title = title;
-
-            Load(loader, onSuccess);
-        }
-
-        private async void Load(Func<Task<QDocument>> loader, Action onSuccess = null)
-        {
-            try
-            {
-                var qDocument = await loader();
-                onSuccess?.Invoke();
-
-                OnNewItem(qDocument);
-                OnClosed();
-            }
-            catch (Exception exc)
-            {
-                ErrorMessage = $"{Title}: {exc.Message}";
-            }
+            ErrorMessage = $"{Title}: {exc.Message}";
+            throw;
         }
     }
 }

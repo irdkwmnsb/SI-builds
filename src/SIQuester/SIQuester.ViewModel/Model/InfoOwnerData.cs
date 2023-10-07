@@ -1,179 +1,224 @@
 ﻿using SIPackages;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using SIPackages.Core;
+using SIQuester.ViewModel;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
-namespace SIQuester.Model
+namespace SIQuester.Model;
+
+/// <summary>
+/// Contains package object data used in copy-paste and drag-and-drop operations.
+/// </summary>
+[Serializable]
+public sealed class InfoOwnerData
 {
-    [Serializable]
-    public sealed class InfoOwnerData : IDisposable
+    public enum Level { Package, Round, Theme, Question };
+
+    public Level ItemLevel { get; set; }
+
+    public string ItemData { get; set; }
+
+    public AuthorInfo[] Authors { get; set; }
+
+    public SourceInfo[] Sources { get; set; }
+
+    public Dictionary<string, string> Images { get; set; } = new();
+
+    public Dictionary<string, string> Audio { get; set; } = new();
+
+    public Dictionary<string, string> Video { get; set; } = new();
+
+    public Dictionary<string, string> Html { get; set; } = new();
+
+    public InfoOwnerData(QDocument document, IItemViewModel item)
     {
-        public enum Level { Package, Round, Theme, Question };
+        var model = item.GetModel();
 
-        public Level ItemLevel { get; set; }
-        public string ItemData { get; set; }
-        public List<AuthorInfo> Authors { get; set; }
-        public List<SourceInfo> Sources { get; set; }
-        public Dictionary<string, StreamProxy> Images { get; set; }
-        public Dictionary<string, StreamProxy> Audio { get; set; }
-        public Dictionary<string, StreamProxy> Video { get; set; }
+        var sb = new StringBuilder();
 
-        public InfoOwnerData(InfoOwner item)
+        using (var writer = XmlWriter.Create(sb, new XmlWriterSettings { OmitXmlDeclaration = true }))
         {
-            var sb = new StringBuilder();
-            using (var writer = XmlWriter.Create(sb, new XmlWriterSettings { OmitXmlDeclaration = true }))
-            {
-                item.WriteXml(writer);
-            }
-
-            ItemData = sb.ToString();
-            ItemLevel =
-                item is Package ? Level.Package :
-                item is Round ? Level.Round :
-                item is Theme ? Level.Theme : Level.Question;
+            model.WriteXml(writer);
         }
 
-        public InfoOwner GetItem()
+        ItemData = sb.ToString();
+
+        ItemLevel =
+            model is Package ? Level.Package :
+            model is Round ? Level.Round :
+            model is Theme ? Level.Theme : Level.Question;
+
+        GetFullData(document, item);
+    }
+
+    public InfoOwner GetItem()
+    {
+        InfoOwner item = ItemLevel switch
         {
-            InfoOwner item = ItemLevel switch
+            Level.Package => new Package(),
+            Level.Round => new Round(),
+            Level.Theme => new Theme(),
+            _ => new Question(),
+        };
+
+        using (var sr = new StringReader(ItemData))
+        {
+            using var reader = XmlReader.Create(sr);
+            reader.Read();
+            item.ReadXml(reader);
+        }
+
+        return item;
+    }
+
+    /// <summary>
+    /// Gets full object data including attached objects.
+    /// </summary>
+    /// <param name="documentViewModel">Document which contains the object.</param>
+    /// <param name="item">Object having necessary data.</param>
+    private void GetFullData(QDocument documentViewModel, IItemViewModel item)
+    {
+        var model = item.GetModel();
+        var document = documentViewModel.Document;
+
+        var length = model.Info.Authors.Count;
+
+        var authors = new HashSet<AuthorInfo>();
+
+        for (int i = 0; i < length; i++)
+        {
+            var docAuthor = document.GetLink(model.Info.Authors, i);
+
+            if (docAuthor != null)
             {
-                Level.Package => new Package(),
-                Level.Round => new Round(),
-                Level.Theme => new Theme(),
-                _ => new Question(),
+                authors.Add(docAuthor);
+            }
+        }
+
+        Authors = authors.ToArray();
+
+        length = model.Info.Sources.Count;
+
+        var sources = new HashSet<SourceInfo>();
+
+        for (int i = 0; i < length; i++)
+        {
+            var docSource = document.GetLink(model.Info.Sources, i);
+
+            if (docSource != null)
+            {
+                sources.Add(docSource);
+            }
+        }
+
+        Sources = sources.ToArray();
+
+        GetMedia(documentViewModel, model);
+    }
+
+    private void GetMedia(QDocument documentViewModel, InfoOwner model)
+    {
+        if (model is Question question)
+        {
+            GetQuestion(documentViewModel, question);
+        }
+
+        if (model is Theme theme)
+        {
+            GetTheme(documentViewModel, theme);
+        }
+
+        if (model is Round round)
+        {
+            GetRound(documentViewModel, round);
+        }
+    }
+
+    private void GetRound(QDocument documentViewModel, Round round)
+    {
+        foreach (var theme in round.Themes)
+        {
+            GetTheme(documentViewModel, theme);
+        }
+    }
+
+    private void GetTheme(QDocument documentViewModel, Theme theme)
+    {
+        foreach (var question in theme.Questions)
+        {
+            GetQuestion(documentViewModel, question);
+        }
+    }
+
+    private void GetQuestion(QDocument documentViewModel, Question question)
+    {
+        foreach (var contentItem in question.GetContent())
+        {
+            if (!contentItem.IsRef)
+            {
+                continue;
+            }
+
+            var collection = documentViewModel.TryGetCollectionByMediaType(contentItem.Type);
+
+            if (collection == null)
+            {
+                continue;
+            }
+
+            var targetCollection = contentItem.Type switch
+            {
+                AtomTypes.Image => Images,
+                AtomTypes.Audio => Audio,
+                AtomTypes.AudioNew => Audio,
+                AtomTypes.Video => Video,
+                AtomTypes.Html => Html,
+                _ => null,
             };
 
-            using (var sr = new StringReader(ItemData))
+            if (targetCollection == null)
             {
-                using var reader = XmlReader.Create(sr);
-                reader.Read();
-                item.ReadXml(reader);
+                continue;
             }
 
-            return item;
-        }
+            var link = contentItem.Value;
 
-        public void Dispose()
-        {
-            if (Images != null)
+            if (!targetCollection.ContainsKey(link))
             {
-                foreach (var item in Images.Values)
-                {
-                    item.Dispose();
-                }
-            }
-
-            if (Audio != null)
-            {
-                foreach (var item in Audio.Values)
-                {
-                    item.Dispose();
-                }
-            }
-
-            if (Video != null)
-            {
-                foreach (var item in Video.Values)
-                {
-                    item.Dispose();
-                }
+                var preparedMedia = collection.Wrap(link);
+                targetCollection.Add(link, preparedMedia.Uri);
             }
         }
 
-        /// <summary>
-        /// Получить полные данные для объекта, включая присоединённые элементы коллекций
-        /// </summary>
-        /// <returns></returns>
-        public void GetFullData(SIDocument document, InfoOwner owner)
+        foreach (var atom in question.Scenario)
         {
-            var length = owner.Info.Authors.Count;
-            for (int i = 0; i < length; i++)
+            if (!atom.IsLink)
             {
-                var docAuthor = document.GetLink(owner.Info.Authors, i);
-                if (docAuthor != null)
-                {
-                    if (Authors == null)
-                        Authors = new List<AuthorInfo>();
-
-                    if (!Authors.Contains(docAuthor))
-                        Authors.Add(docAuthor);
-                }
+                continue;
             }
 
-            length = owner.Info.Sources.Count;
-            for (int i = 0; i < length; i++)
-            {
-                var docSource = document.GetLink(owner.Info.Sources, i);
-                if (docSource != null)
-                {
-                    if (Sources == null)
-                        Sources = new List<SourceInfo>();
+            var collection = documentViewModel.TryGetCollectionByMediaType(atom.Type);
 
-                    if (!Sources.Contains(docSource))
-                        Sources.Add(docSource);
-                }
-            }
-        }
-
-        public async Task ApplyDataAsync(SIDocument document)
-        {
-            if (Authors != null)
+            if (collection == null)
             {
-                foreach (var author in Authors)
-                {
-                    if (!document.Authors.Any(x => x.Id == author.Id))
-                    {
-                        document.Authors.Add(author);
-                    }
-                }
+                continue;
             }
 
-            if (Sources != null)
+            var targetCollection = atom.Type switch
             {
-                foreach (var source in Sources)
-                {
-                    if (!document.Sources.Any(x => x.Id == source.Id))
-                    {
-                        document.Sources.Add(source);
-                    }
-                }
-            }
+                AtomTypes.Image => Images,
+                AtomTypes.Audio => Audio,
+                AtomTypes.AudioNew => Audio,
+                AtomTypes.Video => Video,
+                _ => null,
+            };
 
-            if (Images != null)
-            {
-                foreach (var item in Images)
-                {
-                    if (!document.Images.Contains(item.Key))
-                    {
-                        await document.Images.AddFileAsync(item.Key, item.Value.Stream);
-                    }
-                }
-            }
+            var link = atom.Text[1..];
 
-            if (Audio != null)
+            if (!targetCollection.ContainsKey(link))
             {
-                foreach (var item in Audio)
-                {
-                    if (!document.Audio.Contains(item.Key))
-                    {
-                        await document.Audio.AddFileAsync(item.Key, item.Value.Stream);
-                    }
-                }
-            }
-
-            if (Video != null)
-            {
-                foreach (var item in Video)
-                {
-                    if (!document.Video.Contains(item.Key))
-                    {
-                        await document.Video.AddFileAsync(item.Key, item.Value.Stream);
-                    }
-                }
+                var preparedMedia = collection.Wrap(link);
+                targetCollection.Add(link, preparedMedia.Uri);
             }
         }
     }

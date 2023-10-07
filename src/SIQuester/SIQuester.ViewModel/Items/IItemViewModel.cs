@@ -1,19 +1,29 @@
 ﻿using SIPackages;
 using System.Windows.Input;
 
-namespace SIQuester.ViewModel
+namespace SIQuester.ViewModel;
+
+/// <summary>
+/// Defines a package item view model.
+/// </summary>
+public interface IItemViewModel
 {
-    public interface IItemViewModel
-    {
-        bool IsSelected { get; set; }
-        bool IsExpanded { get; set; }
+    bool IsSelected { get; set; }
 
-        InfoOwner GetModel();
+    bool IsExpanded { get; set; }
 
-        IItemViewModel Owner { get; }
-        InfoViewModel Info { get; }
+    bool IsDragged { get; set; }
 
-        ICommand Add { get; }
-        ICommand Remove { get; }
-    }
+    InfoOwner GetModel();
+
+    /// <summary>
+    /// View model that owns current view model.
+    /// </summary>
+    IItemViewModel? Owner { get; }
+
+    InfoViewModel Info { get; }
+
+    ICommand Add { get; }
+
+    ICommand Remove { get; }
 }

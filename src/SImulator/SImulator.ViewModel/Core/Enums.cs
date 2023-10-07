@@ -1,43 +1,41 @@
-﻿namespace SImulator.ViewModel.Core
+﻿namespace SImulator.ViewModel.Core;
+
+public enum GameMode
 {
-    public enum GameMode
-    {
-        Start,
-        Moderator,
-        View
-    }
-
-    public enum ModeTransition
-    {
-        None,
-        StartToModerator,
-        StartToView,
-        ModeratorToStart,
-        ViewToStart
-    }
-
-    public enum PlayerKeysModes
-    {
-        None,
-        External,
-        Keyboard,
-        Joystick,
-        Com,
-        Web
-    }
-
-    /// <summary>
-    /// Режим отображения таблицы игроков
-    /// </summary>
-    public enum PlayersViewMode
-    {
-        Hidden,
-        Visible,
-        Separate
-    }
-
-    /// <summary>
-    /// Платформенно-независимый аналог перечисления Key
-    /// </summary>
-    public enum GameKey { }
+    Start,
+    Moderator,
 }
+
+public enum ModeTransition
+{
+    StartToModerator,
+    ModeratorToStart,
+}
+
+/// <summary>
+/// Defines supported player key managers.
+/// </summary>
+public enum PlayerKeysModes
+{
+    None,
+    External,
+    Keyboard,
+    Joystick,
+    Com,
+    Web
+}
+
+/// <summary>
+/// Defines players table display mode.
+/// </summary>
+public enum PlayersViewMode
+{
+    Hidden,
+    Visible,
+    Separate
+}
+
+/// <summary>
+/// Defines a platform-independent key value.
+/// </summary>
+public enum GameKey { }

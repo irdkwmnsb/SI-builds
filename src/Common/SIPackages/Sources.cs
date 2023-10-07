@@ -1,29 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using SIPackages.Core;
+﻿using SIPackages.Core;
+using SIPackages.Helpers;
+using SIPackages.Properties;
 
-namespace SIPackages
+namespace SIPackages;
+
+/// <summary>
+/// Defines a package item sources.
+/// </summary>
+public sealed class Sources : List<string>, IEquatable<Sources>
 {
     /// <summary>
-    /// Источники объекта в пакете
+    /// Initializes a new instance of <see cref="Sources" /> class.
     /// </summary>
-    public sealed class Sources : List<string>
-    {
-        /// <summary>
-        /// Создание списка источников
-        /// </summary>
-        public Sources() { }
+    public Sources() { }
 
-        public Sources(IList<string> collection)
-            : base(collection)
-        {
+    /// <summary>
+    /// Initializes a new instance of <see cref="Sources" /> class.
+    /// </summary>
+    /// <param name="collection">Sources collection.</param>
+    public Sources(IEnumerable<string> collection) : base(collection) { }
 
-        }
+    /// <inheritdoc />
+    public override string ToString() => $"{Resources.Sources}: {this.ToCommonString()}";
 
-        /// <summary>
-        /// Строковое представление истчоников
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString() => $"Источники: {this.ToCommonString()}";
-    }
+    /// <inheritdoc />
+    public override bool Equals(object? obj) => obj is Sources other && Equals(other);
+
+    /// <inheritdoc />
+    public bool Equals(Sources? other) => other is not null && this.SequenceEqual(other);
+
+    /// <inheritdoc />
+    public override int GetHashCode() => this.GetCollectionHashCode();
 }

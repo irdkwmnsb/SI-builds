@@ -5,10 +5,15 @@
     <Company>Khil-soft</Company>
     <Product>SIUI</Product>
     <Description>SIGame table ui</Description>
-    <Copyright>Copyright © Khil-soft 2010 - 2022</Copyright>
-    <Version>7.6.0</Version>
+    <Copyright>Copyright © Khil-soft 2010 - 2023</Copyright>
+    <Version>7.7.3</Version>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <UseWPF>true</UseWPF>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SatelliteResourceLanguages>ru-RU</SatelliteResourceLanguages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -28,6 +33,7 @@
     <Resource Include="Fonts\Clefs.ttf" />
     <Resource Include="Fonts\DINCondensedC.ttf" />
     <None Include="key.snk" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1823.32" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

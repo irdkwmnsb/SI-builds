@@ -1,52 +1,73 @@
-﻿using SIQuester.ViewModel.Commands;
-using System;
-using System.Threading.Tasks;
+﻿using Utils.Commands;
 
-namespace SIQuester.ViewModel
+namespace SIQuester.ViewModel;
+
+/// <summary>
+/// Defines an application workspace view model.
+/// </summary>
+public abstract class WorkspaceViewModel : ModelViewBase
 {
     /// <summary>
-    /// Рабочая область приложения
+    /// Close workspace.
     /// </summary>
-    public abstract class WorkspaceViewModel: ModelViewBase
+    public IAsyncCommand Close { get; private set; }
+
+    /// <summary>
+    /// Workspace name.
+    /// </summary>
+    public abstract string Header { get; }
+
+    private string? _errorMessage = null;
+
+    /// <summary>
+    /// Workspace error message.
+    /// </summary>
+    public string? ErrorMessage
     {
-        /// <summary>
-        /// Закрыть рабочую область
-        /// </summary>
-        public IAsyncCommand Close { get; private set; }
-        /// <summary>
-        /// Название рабочей области
-        /// </summary>
-        public abstract string Header { get; }
-        /// <summary>
-        /// Подсказка рабочей области
-        /// </summary>
-        public virtual string ToolTip { get; } = null;
-
-        /// <summary>
-        /// Ошибка, возникшая в момент выполнения какой-либо операции
-        /// </summary>
-        public event Action<Exception> Error;
-        public event Action<WorkspaceViewModel> Closed;
-        public event Action<WorkspaceViewModel> NewItem;
-
-        protected WorkspaceViewModel()
+        get => _errorMessage;
+        set
         {
-            Close = new AsyncCommand(Close_Executed);
+            if (_errorMessage != value)
+            {
+                _errorMessage = value;
+                OnPropertyChanged();
+            }
         }
-
-        protected virtual Task Close_Executed(object arg)
-        {
-            OnClosed();
-
-            return Task.CompletedTask;
-        }
-
-        protected internal void OnError(Exception exc) => Error?.Invoke(exc);
-
-        protected void OnClosed() => Closed?.Invoke(this);
-
-        protected void OnNewItem(WorkspaceViewModel viewModel) => NewItem?.Invoke(viewModel);
-
-        protected internal virtual Task SaveIfNeeded(bool temp, bool full) => Task.CompletedTask;
     }
+
+    /// <summary>
+    /// Workspace tooltip.
+    /// </summary>
+    public virtual string? ToolTip { get; } = null;
+
+    /// <summary>
+    /// Workspace operation error event.
+    /// </summary>
+    public event Action<Exception, string?>? Error;
+
+    public event Action<WorkspaceViewModel>? Closed;
+
+    public event Action<WorkspaceViewModel>? NewItem;
+
+    protected WorkspaceViewModel()
+    {
+        Close = new AsyncCommand(Close_Executed);
+    }
+
+    protected virtual Task Close_Executed(object? arg)
+    {
+        OnClosed();
+
+        return Task.CompletedTask;
+    }
+
+    protected internal void OnError(Exception exc, string? message = null) => Error?.Invoke(exc, message);
+
+    protected void OnClosed() => Closed?.Invoke(this);
+
+    protected void OnNewItem(WorkspaceViewModel viewModel) => NewItem?.Invoke(viewModel);
+
+    protected internal virtual ValueTask SaveToTempAsync(CancellationToken cancellationToken = default) => new();
+
+    protected internal virtual ValueTask SaveIfNeededAsync(CancellationToken cancellationToken = default) => new();
 }

@@ -1,75 +1,110 @@
 ﻿using Microsoft.Extensions.Logging;
-using Services.SI.ViewModel;
+using SIQuester.ViewModel.Configuration;
 using SIQuester.ViewModel.Properties;
-using System;
+using SIStorageService.ViewModel;
 using System.ComponentModel;
-using System.IO;
-using System.Net.Http;
-using System.Threading.Tasks;
+using System.Net;
 
-namespace SIQuester.ViewModel
+namespace SIQuester.ViewModel;
+
+public sealed class ImportSIStorageViewModel : WorkspaceViewModel
 {
-    public sealed class ImportSIStorageViewModel: WorkspaceViewModel
+    private static readonly HttpClient HttpClient = new() { DefaultRequestVersion = HttpVersion.Version20 };
+
+    public SIStorage Storage { get; }
+
+    public override string Header => Resources.SIStorage;
+
+    private readonly StorageContextViewModel _storageContextViewModel;
+
+    public bool IsProgress => Storage.IsLoading || Storage.IsLoadingPackages;
+
+    private readonly AppOptions _appOptions;
+    private readonly ILoggerFactory _loggerFactory;
+
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
+
+    public ImportSIStorageViewModel(
+        StorageContextViewModel storageContextViewModel,
+        SIStorage siStorage,
+        AppOptions appOptions,
+        ILoggerFactory loggerFactory)
     {
-        private static readonly HttpClient HttpClient = new HttpClient();
+        _storageContextViewModel = storageContextViewModel;
+        _appOptions = appOptions;
+        _loggerFactory = loggerFactory;
 
-        public SIStorageNew Storage { get; } = new SIStorageNew();
+        Storage = siStorage;
 
-        public override string Header => Resources.SIStorage;
+        Storage.Error += OnError;
+        Storage.PropertyChanged += Storage_PropertyChanged;
+    }
 
-        private readonly StorageContextViewModel _storageContextViewModel;
+    internal Task OpenAsync() => Storage.OpenAsync(_cancellationTokenSource.Token);
 
-        public bool IsProgress => Storage.IsLoading || Storage.IsLoadingPackages;
-
-        private readonly ILoggerFactory _loggerFactory;
-
-        public ImportSIStorageViewModel(StorageContextViewModel storageContextViewModel, ILoggerFactory loggerFactory)
+    private void Storage_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(SIStorage.IsLoading) || e.PropertyName == nameof(SIStorage.IsLoadingPackages))
         {
-            _storageContextViewModel = storageContextViewModel;
-            _loggerFactory = loggerFactory;
+            OnPropertyChanged(nameof(IsProgress));
+        }
+    }
 
-            Storage.Error += OnError;
-            Storage.PropertyChanged += Storage_PropertyChanged;
-            Storage.Open();
+    public async void Select()
+    {
+        if (Storage.CurrentPackage == null)
+        {
+            return;
         }
 
-        private void Storage_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        async Task<QDocument> loader(CancellationToken cancellationToken)
         {
-            if (e.PropertyName == nameof(SIStorageNew.IsLoading) || e.PropertyName == nameof(SIStorageNew.IsLoadingPackages))
+            var packageLink = await Storage.LoadSelectedPackageUriAsync(cancellationToken);
+
+            var ms = new MemoryStream();
+
+            using var response = await HttpClient.GetAsync(packageLink.Uri, cancellationToken);
+
+            if (!response.IsSuccessStatusCode)
             {
-                OnPropertyChanged(nameof(IsProgress));
+                throw new Exception(await response.Content.ReadAsStringAsync(cancellationToken));
             }
-        }
 
-        public void Select()
-        {
-            if (Storage.CurrentPackage == null)
+            await response.Content.CopyToAsync(ms, cancellationToken);
+
+            ms.Position = 0;
+            var doc = SIPackages.SIDocument.Load(ms);
+
+            if (_appOptions.UpgradeNewPackages)
             {
-                return;
+                doc.Upgrade();
             }
 
-            async Task<QDocument> loader()
-            {
-                var packageUri = await Storage.LoadSelectedPackageUriAsync();
+            return new QDocument(doc, _storageContextViewModel, _loggerFactory) { FileName = doc.Package.Name };
+        };
 
-                var ms = new MemoryStream();
+        var loaderViewModel = new DocumentLoaderViewModel(Storage.CurrentPackage.Description ?? "");
+        OnNewItem(loaderViewModel);
 
-                using var response = await HttpClient.GetAsync(packageUri);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new Exception(await response.Content.ReadAsStringAsync());
-                }
-
-                await response.Content.CopyToAsync(ms);
-
-                ms.Position = 0;
-                var doc = SIPackages.SIDocument.Load(ms);
-
-                return new QDocument(doc, _storageContextViewModel, _loggerFactory) { FileName = doc.Package.Name };
-            };
-
-            OnNewItem(new DocumentLoaderViewModel(Storage.CurrentPackage.Description, loader));
+        try
+        {
+            await loaderViewModel.LoadAsync(loader);
         }
+        catch (TaskCanceledException)
+        {
+
+        }
+        catch (Exception ex)
+        {
+            OnError(ex);
+        }
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
+
+        base.Dispose(disposing);
     }
 }

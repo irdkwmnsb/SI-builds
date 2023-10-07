@@ -160,7 +160,7 @@
     <value>Для создания сетевой игры нужно играть по локальной сети, иметь реальный IP или настроить NAT</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>Следующий</value>
+    <value>Следующий пакет</value>
   </data>
   <data name="Options" xml:space="preserve">
     <value>Опции</value>
@@ -175,7 +175,7 @@
     <value>Номер порта</value>
   </data>
   <data name="QuestionLibrary" xml:space="preserve">
-    <value>Библиотека вопросов…</value>
+    <value>Онлайн Библиотека вопросов</value>
   </data>
   <data name="QuestionPack" xml:space="preserve">
     <value>Пакет вопросов</value>
@@ -214,7 +214,7 @@
     <value>Начата</value>
   </data>
   <data name="StartGame" xml:space="preserve">
-    <value>Начать игру</value>
+    <value>Создать комнату</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Статус</value>
@@ -385,10 +385,10 @@
     <value>Вести логи</value>
   </data>
   <data name="Messages" xml:space="preserve">
-    <value>СООБЩЕНИЯ</value>
+    <value>Сообщения</value>
   </data>
   <data name="Persons" xml:space="preserve">
-    <value>УЧАСТНИКИ</value>
+    <value>Участники</value>
   </data>
   <data name="TimeSettings" xml:space="preserve">
     <value>Настройки времени</value>
@@ -1019,5 +1019,122 @@
   </data>
   <data name="ServerLicense" xml:space="preserve">
     <value>Лицензия сервера</value>
+  </data>
+  <data name="MaximumReplicTextLength" xml:space="preserve">
+    <value>Максимальная длина реплики</value>
+  </data>
+  <data name="MaximumTableTextLength" xml:space="preserve">
+    <value>Максимальная длина текста на табло</value>
+  </data>
+  <data name="Sec" xml:space="preserve">
+    <value>с</value>
+  </data>
+  <data name="Apellations" xml:space="preserve">
+    <value>Апелляции ответов</value>
+  </data>
+  <data name="ApellationsHint" xml:space="preserve">
+    <value>Кнопки "Я прав" и "Я против"</value>
+  </data>
+  <data name="EnableMediaLoad" xml:space="preserve">
+    <value>Разрешить загрузку стороннего медиа</value>
+  </data>
+  <data name="AppBroken" xml:space="preserve">
+    <value>Ваше приложение повреждено. Попробуйте переустановить его</value>
+  </data>
+  <data name="MainSubheader" xml:space="preserve">
+    <value>20 лет проекту</value>
+  </data>
+  <data name="BannedList" xml:space="preserve">
+    <value>Список забаненных</value>
+  </data>
+  <data name="GameInfo" xml:space="preserve">
+    <value>Информация об игре</value>
+  </data>
+  <data name="Unban" xml:space="preserve">
+    <value>Снять бан</value>
+  </data>
+  <data name="Table" xml:space="preserve">
+    <value>Табло</value>
+  </data>
+  <data name="EditTable" xml:space="preserve">
+    <value>Редактировать таблицу вопросов во время паузы</value>
+  </data>
+  <data name="MediaLoaded" xml:space="preserve">
+    <value>Медиа загружено</value>
+  </data>
+  <data name="WebViewWrongFormat" xml:space="preserve">
+    <value>HTML компонент сломался. Текущая архитектура x64: {0}</value>
+  </data>
+  <data name="VKHint" xml:space="preserve">
+    <value>Перейти в группу ВКонтакте</value>
+  </data>
+  <data name="Emoji" xml:space="preserve">
+    <value>Эмодзи</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Требуется пароль</value>
+  </data>
+  <data name="LocalLibrary" xml:space="preserve">
+    <value>Локальная библиотека</value>
+  </data>
+  <data name="SelectMenu" xml:space="preserve">
+    <value>Выбрать…</value>
+  </data>
+  <data name="DialogPlaceholder" xml:space="preserve">
+    <value>Здесь будут отображаться игровые диалоги</value>
+  </data>
+  <data name="DialogWindow" xml:space="preserve">
+    <value>Окно диалогов</value>
+  </data>
+  <data name="PopupHint" xml:space="preserve">
+    <value>Открыть в новом окне</value>
+  </data>
+  <data name="SetHost" xml:space="preserve">
+    <value>Сделать хостом</value>
+  </data>
+  <data name="VoiceChat" xml:space="preserve">
+    <value>Голосовой чат</value>
+  </data>
+  <data name="PlayAllQuestionsInFinalRound" xml:space="preserve">
+    <value>Играть все вопросы в финальном раунде</value>
+  </data>
+  <data name="AllowEveryoneToPlayHiddenStakes" xml:space="preserve">
+    <value>Все могут играть общий вопрос со ставками (финал)</value>
+  </data>
+  <data name="TypeUsePingPenalty" xml:space="preserve">
+    <value>замедление пинга</value>
+  </data>
+  <data name="EvenWithNegativeScore" xml:space="preserve">
+    <value>даже с 0 или отрицательным счётом</value>
+  </data>
+  <data name="Accept200Percent" xml:space="preserve">
+    <value>Зачесть удвоенную сумму</value>
+  </data>
+  <data name="Accept50Percent" xml:space="preserve">
+    <value>Зачесть половину суммы</value>
+  </data>
+  <data name="AllowPlayersToActInOralGame" xml:space="preserve">
+    <value>Разрешать игрокам делать выбор в устной игре</value>
+  </data>
+  <data name="ChangeActivePlayer_Hint" xml:space="preserve">
+    <value>Передать ход игроку</value>
+  </data>
+  <data name="JoinMode" xml:space="preserve">
+    <value>Режим входа</value>
+  </data>
+  <data name="JoinModeAnyRole" xml:space="preserve">
+    <value>С любой ролью</value>
+  </data>
+  <data name="JoinModeForbidden" xml:space="preserve">
+    <value>Вход запрещён</value>
+  </data>
+  <data name="JoinModeViewer" xml:space="preserve">
+    <value>Только зрителем</value>
+  </data>
+  <data name="DisplaySources" xml:space="preserve">
+    <value>Показывать источники вопросов</value>
+  </data>
+  <data name="HasMove" xml:space="preserve">
+    <value>Право хода</value>
   </data>
 </root>

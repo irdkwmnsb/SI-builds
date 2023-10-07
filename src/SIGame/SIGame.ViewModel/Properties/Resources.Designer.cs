@@ -97,6 +97,15 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Your avatar is bigger than 1 MB. Other players will not see it.
+        /// </summary>
+        public static string AvatarTooBig {
+            get {
+                return ResourceManager.GetString("AvatarTooBig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на This pack can&apos;t be used to play on the server.
         /// </summary>
         public static string BadPackage {
@@ -111,6 +120,15 @@ namespace SIGame.ViewModel.Properties {
         public static string BirthDateRequired {
             get {
                 return ResourceManager.GetString("BirthDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Cannot join game.
+        /// </summary>
+        public static string CannotJoinGame {
+            get {
+                return ResourceManager.GetString("CannotJoinGame", resourceCulture);
             }
         }
         
@@ -394,6 +412,15 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на classic.
+        /// </summary>
+        public static string GameRule_Classic {
+            get {
+                return ResourceManager.GetString("GameRule_Classic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на ignore wrong.
         /// </summary>
         public static string GameRule_IgnoreWrong {
@@ -417,6 +444,15 @@ namespace SIGame.ViewModel.Properties {
         public static string GameRule_Oral {
             get {
                 return ResourceManager.GetString("GameRule_Oral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ping penalty.
+        /// </summary>
+        public static string GameRule_PingPenalty {
+            get {
+                return ResourceManager.GetString("GameRule_PingPenalty", resourceCulture);
             }
         }
         
@@ -534,6 +570,15 @@ namespace SIGame.ViewModel.Properties {
         public static string ImportOk {
             get {
                 return ResourceManager.GetString("ImportOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Invalid avatar data.
+        /// </summary>
+        public static string InvalidAvatarData {
+            get {
+                return ResourceManager.GetString("InvalidAvatarData", resourceCulture);
             }
         }
         
@@ -1024,7 +1069,7 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Time to choose a final round theme.
+        ///   Ищет локализованную строку, похожую на Сhoosing a final round theme.
         /// </summary>
         public static string TimeSettings_ChoosingFinalTheme {
             get {
@@ -1033,7 +1078,7 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Time to choose a question by players.
+        ///   Ищет локализованную строку, похожую на Choosing a question.
         /// </summary>
         public static string TimeSettings_ChoosingQuestion {
             get {
@@ -1042,7 +1087,7 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Time to think on a final question.
+        ///   Ищет локализованную строку, похожую на Thinking on final question.
         /// </summary>
         public static string TimeSettings_FinalThinking {
             get {
@@ -1051,7 +1096,7 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Time to give the &quot;Secret question&quot; away.
+        ///   Ищет локализованную строку, похожую на Giving the &quot;Secret question&quot;.
         /// </summary>
         public static string TimeSettings_GivingCat {
             get {
@@ -1060,7 +1105,7 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Time to make a bet in an &quot;Bet question&quot; and in the final question.
+        ///   Ищет локализованную строку, похожую на Making a bet in an &quot;Stake question&quot; and in a final question.
         /// </summary>
         public static string TimeSettings_MakingStake {
             get {
@@ -1069,7 +1114,7 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Time to pause while showing media.
+        ///   Ищет локализованную строку, похожую на Pause while showing media.
         /// </summary>
         public static string TimeSettings_MediaDelay {
             get {
@@ -1078,7 +1123,7 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Time to enter the answer after pressing the button.
+        ///   Ищет локализованную строку, похожую на Entering the answer after pressing the button.
         /// </summary>
         public static string TimeSettings_PrintingAnswer {
             get {
@@ -1087,7 +1132,7 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Time to show right answer.
+        ///   Ищет локализованную строку, похожую на Showing right answer.
         /// </summary>
         public static string TimeSettings_RightAnswer {
             get {
@@ -1096,7 +1141,7 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Round time.
+        ///   Ищет локализованную строку, похожую на Round.
         /// </summary>
         public static string TimeSettings_Round {
             get {
@@ -1105,7 +1150,7 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Time for making decisions by the showman.
+        ///   Ищет локализованную строку, похожую на Making decisions and accepting answers by showman.
         /// </summary>
         public static string TimeSettings_ShowmanDecisions {
             get {
@@ -1114,7 +1159,7 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Time to think on a question.
+        ///   Ищет локализованную строку, похожую на Thinking on a question.
         /// </summary>
         public static string TimeSettings_ThinkingOnQuestion {
             get {
@@ -1123,7 +1168,7 @@ namespace SIGame.ViewModel.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Time to think on a special question.
+        ///   Ищет локализованную строку, похожую на Thinking on a special question.
         /// </summary>
         public static string TimeSettings_ThinkingOnSpecial {
             get {
@@ -1173,6 +1218,15 @@ namespace SIGame.ViewModel.Properties {
         public static string WrongAddressFormat {
             get {
                 return ResourceManager.GetString("WrongAddressFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на You need to upgrade application to join this game.
+        /// </summary>
+        public static string YouNeedToUpgradeClientToJoinGame {
+            get {
+                return ResourceManager.GetString("YouNeedToUpgradeClientToJoinGame", resourceCulture);
             }
         }
     }

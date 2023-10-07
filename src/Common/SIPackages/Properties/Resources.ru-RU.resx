@@ -120,6 +120,12 @@
   <data name="Audio" xml:space="preserve">
     <value>Аудио</value>
   </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Комментарии</value>
+  </data>
+  <data name="Authors" xml:space="preserve">
+    <value>Авторы</value>
+  </data>
   <data name="Image" xml:space="preserve">
     <value>Изображение</value>
   </data>
@@ -135,10 +141,16 @@
   <data name="RoundTrailing" xml:space="preserve">
     <value>-й раунд</value>
   </data>
+  <data name="Sources" xml:space="preserve">
+    <value>Источники</value>
+  </data>
   <data name="Theme" xml:space="preserve">
     <value>Тема</value>
   </data>
   <data name="Video" xml:space="preserve">
     <value>Видео</value>
+  </data>
+  <data name="UnsupportedVersion" xml:space="preserve">
+    <value>Версия пакета {0} не поддерживается. Максимальная поддерживаемая версия: {1}</value>
   </data>
 </root>

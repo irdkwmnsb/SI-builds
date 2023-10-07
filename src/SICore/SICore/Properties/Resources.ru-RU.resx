@@ -683,9 +683,6 @@
   <data name="Until" xml:space="preserve">
     <value>до</value>
   </data>
-  <data name="AvatarTooBig" xml:space="preserve">
-    <value>Ваш аватар по размеру превышает 1 Мб и не будет виден другим участникам!</value>
-  </data>
   <data name="UnknownSenderMessage" xml:space="preserve">
     <value>Сообщение от неизвестного отправителя</value>
   </data>
@@ -708,7 +705,7 @@
     <value>Выберите стол для удаления</value>
   </data>
   <data name="ExternalLink" xml:space="preserve">
-    <value>Внешняя ссылка: {0} . Включить автоматическую загрузку внешних ссылок можно в настройках игры</value>
+    <value>Внешняя ссылка: {0} . Загрузка внешних ссылок может быть небезопасной и отключена</value>
   </data>
   <data name="ApellatedAnswers" xml:space="preserve">
     <value>Апеллированные ответы</value>
@@ -758,13 +755,88 @@
   <data name="DownloadFileError" xml:space="preserve">
     <value>Ошибка загрузки файла</value>
   </data>
-  <data name="InvalidAvatarData" xml:space="preserve">
-    <value>Неверные данные аватара</value>
-  </data>
   <data name="File" xml:space="preserve">
     <value>Файл</value>
   </data>
   <data name="OversizedFile" xml:space="preserve">
-    <value>{0} {1} превышает рекомендуемый размер {2} КБ и может загружаться с задержкой</value>
+    <value>{0} в вопросе {1} превышает рекомендуемый размер {2} КБ и может загружаться с задержкой</value>
+  </data>
+  <data name="FileLoadError" xml:space="preserve">
+    <value>Ошибка загрузки файла "{0}"</value>
+  </data>
+  <data name="PersonAlreadyExists" xml:space="preserve">
+    <value>Участник {0} уже есть в игре!</value>
+  </data>
+  <data name="MediaFiltered" xml:space="preserve">
+    <value>Медиафайл превышает допустимый размер и будет пропущен</value>
+  </data>
+  <data name="UserUnbanned" xml:space="preserve">
+    <value>Пользователь {0} был разбанен</value>
+  </data>
+  <data name="FailedToAppellateForWrongAnswer" xml:space="preserve">
+    <value>Игрок {0} попытался оспорить последний правильный ответ, но в настоящий момент в игре недостаточно других игроков для оспаривания ответа</value>
+  </data>
+  <data name="ContactUri" xml:space="preserve">
+    <value>Контакты авторов</value>
+  </data>
+  <data name="GameName" xml:space="preserve">
+    <value>Название игры</value>
+  </data>
+  <data name="LocalGame" xml:space="preserve">
+    <value>Локальная игра</value>
+  </data>
+  <data name="QuestionRemoved" xml:space="preserve">
+    <value>{0} удалил вопрос {1}, {2}</value>
+  </data>
+  <data name="QuestionRestored" xml:space="preserve">
+    <value>{0} восстановил вопрос {1}, {2}</value>
+  </data>
+  <data name="AvatarNotFound" xml:space="preserve">
+    <value>Аватар не найден: {0}</value>
+  </data>
+  <data name="Cost2" xml:space="preserve">
+    <value>Стоимость</value>
+  </data>
+  <data name="CannotSetHostToBot" xml:space="preserve">
+    <value>Ботов нельзя сделать хостом</value>
+  </data>
+  <data name="CannotSetHostToYourself" xml:space="preserve">
+    <value>Вы уже хост!</value>
+  </data>
+  <data name="VoiceChatLink" xml:space="preserve">
+    <value>Голосовой чат (Discord)</value>
+  </data>
+  <data name="LetsPlayNextTheme" xml:space="preserve">
+    <value>Давайте сыграем остальные темы</value>
+  </data>
+  <data name="WeWillPlayAllOfThem" xml:space="preserve">
+    <value>Мы сыграем их все</value>
+  </data>
+  <data name="TypeAllowEveryoneToPlayStakes" xml:space="preserve">
+    <value>вопрос с закрытыми ставками играют все</value>
+  </data>
+  <data name="HintSelectActivePlayer" xml:space="preserve">
+    <value>Выберите, кому передать ход</value>
+  </data>
+  <data name="JoinModeSwitchedToAny" xml:space="preserve">
+    <value>{0} разрешил(а) входить под любой ролью</value>
+  </data>
+  <data name="JoinModeSwitchedToForbidden" xml:space="preserve">
+    <value>{0} запретил вход в игру</value>
+  </data>
+  <data name="JoinModeSwitchedToViewers" xml:space="preserve">
+    <value>{0} разрешил(а) входить только как зритель</value>
+  </data>
+  <data name="JoinForbidden" xml:space="preserve">
+    <value>Подключение к этой игре запрещено</value>
+  </data>
+  <data name="JoinRoleForbidden" xml:space="preserve">
+    <value>Подключение к игре под данной ролью запрещено</value>
+  </data>
+  <data name="SetChooser" xml:space="preserve">
+    <value>{0} передал(а) ход {1}</value>
+  </data>
+  <data name="TypeUsePingPenalty" xml:space="preserve">
+    <value>замедление пинга</value>
   </data>
 </root>

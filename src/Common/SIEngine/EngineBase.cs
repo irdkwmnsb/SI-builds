@@ -1,422 +1,417 @@
-﻿using SIPackages;
+﻿using SIEngine.Core;
+using SIEngine.Rules;
+using SIPackages;
 using SIPackages.Core;
-using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace SIEngine
+namespace SIEngine;
+
+/// <inheritdoc cref="ISIEngine" />
+public abstract class EngineBase : ISIEngine, IDisposable, INotifyPropertyChanged
 {
-    /// <inheritdoc cref="ISIEngine" />
-    public abstract class EngineBase : ISIEngine, IDisposable, INotifyPropertyChanged
+    private bool _isDisposed = false;
+
+    protected ISIEnginePlayHandler PlayHandler { get; }
+
+    protected Func<EngineOptions> OptionsProvider { get; }
+
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
+
+    protected GameStage _stage = GameStage.Begin;
+
+    /// <summary>
+    /// Current game state.
+    /// </summary>
+    public GameStage Stage
     {
-        private bool _isDisposed = false;
-
-        protected IEngineSettingsProvider _settingsProvider;
-
-        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-
-        protected GameStage _stage = GameStage.Begin;
-
-        /// <summary>
-        /// Стадия игры
-        /// </summary>
-        public GameStage Stage
+        get => _stage;
+        protected set
         {
-            get => _stage;
-            protected set
+            if (_stage != value)
             {
-                if (_stage != value)
-                {
-                    _stage = value;
-                    OnPropertyChanged();
-                }
+                _stage = value;
+                OnPropertyChanged();
             }
         }
+    }
 
-        protected readonly SIDocument _document;
+    protected abstract GameRules GameRules { get; }
 
-        protected int _roundIndex = -1, _themeIndex = 0, _questionIndex = 0, _atomIndex = 0;
-        protected bool _isMedia;
+    protected readonly SIDocument _document;
 
-        protected Round _activeRound;
-        protected Theme _activeTheme;
-        protected Question _activeQuestion;
+    public SIDocument Document => _document;
 
-        protected bool _inAutoMode;
-        protected object _autoLock = new object();
+    protected int _roundIndex = -1, _themeIndex = 0, _questionIndex = 0;
 
-        protected bool _timeout = false;
+    protected Round? _activeRound;
 
-        protected bool _useAnswerMarker = false;
+    protected Theme? _activeTheme;
 
-        private bool _canMoveNext = true;
-        private bool _canMoveBack;
+    protected Question? _activeQuestion;
 
-        private bool _canMoveNextRound;
-        private bool _canMoveBackRound;
+    protected bool _inAutoMode;
 
-        public string PackageName => _document.Package.Name;
+    protected object _autoLock = new();
 
-        public int RoundIndex => _roundIndex;
-        public int ThemeIndex => _themeIndex;
-        public int QuestionIndex => _questionIndex;
+    protected bool _timeout = false;
 
-        private Atom ActiveAtom => _atomIndex < _activeQuestion.Scenario.Count ? _activeQuestion.Scenario[_atomIndex] : null;
+    private bool _canMoveNext = true;
 
-        public bool CanMoveNext
+    private bool _canMoveBack;
+
+    private bool _canMoveNextRound;
+
+    private bool _canMoveBackRound;
+
+    public string PackageName => _document.Package.Name;
+
+    public string ContactUri => _document.Package.ContactUri;
+
+    public int RoundIndex => _roundIndex;
+
+    public int ThemeIndex => _themeIndex;
+
+    public int QuestionIndex => _questionIndex;
+
+    private readonly QuestionEngineFactory _questionEngineFactory;
+
+    protected QuestionEngine? QuestionEngine { get; private set; }
+
+    public bool CanMoveNext
+    {
+        get => _canMoveNext;
+        protected set
         {
-            get => _canMoveNext;
-            protected set
+            if (_canMoveNext != value)
             {
-                if (_canMoveNext != value)
-                {
-                    _canMoveNext = value;
-                    OnPropertyChanged();
-                }
+                _canMoveNext = value;
+                OnPropertyChanged();
             }
         }
+    }
 
-        public bool CanMoveBack
+    public bool CanMoveBack
+    {
+        get => _canMoveBack;
+        protected set
         {
-            get => _canMoveBack;
-            protected set
+            if (_canMoveBack != value)
             {
-                if (_canMoveBack != value)
-                {
-                    _canMoveBack = value;
-                    OnPropertyChanged();
-                }
+                _canMoveBack = value;
+                OnPropertyChanged();
+                UpdateCanMoveNextRound();
             }
         }
+    }
 
-        public bool CanMoveNextRound
+    public bool CanMoveNextRound
+    {
+        get => _canMoveNextRound;
+        protected set
         {
-            get => _canMoveNextRound;
-            protected set
+            if (_canMoveNextRound != value)
             {
-                if (_canMoveNextRound != value)
-                {
-                    _canMoveNextRound = value;
-                    OnPropertyChanged();
-                }
+                _canMoveNextRound = value;
+                OnPropertyChanged();
             }
         }
-        public bool CanMoveBackRound
+    }
+    public bool CanMoveBackRound
+    {
+        get => _canMoveBackRound;
+        protected set
         {
-            get => _canMoveBackRound;
-            protected set
+            if (_canMoveBackRound != value)
             {
-                if (_canMoveBackRound != value)
-                {
-                    _canMoveBackRound = value;
-                    OnPropertyChanged();
-                }
+                _canMoveBackRound = value;
+                OnPropertyChanged();
             }
         }
+    }
 
-        public bool CanChangeSum() =>
-            _stage == GameStage.Question
-            || _stage == GameStage.RoundTable
-            || _stage == GameStage.AfterFinalThink
-            || _stage == GameStage.QuestionPostInfo
-            || _stage == GameStage.RightAnswer;
+    public bool CanChangeSum() =>
+        _stage == GameStage.Question
+        || _stage == GameStage.RoundTable
+        || _stage == GameStage.AfterFinalThink;
 
-        public bool CanReturnToQuestion() => _activeRound != null
-            && _activeRound.Type != RoundTypes.Final
-            && _activeQuestion != null && _activeQuestion.Type.Name == QuestionTypes.Simple;
+    public bool IsQuestion() => _stage == GameStage.Question;
 
-        public bool CanPress() =>
-            _activeQuestion.Type.Name == QuestionTypes.Simple
-            && (_stage == GameStage.RightAnswer || _stage == GameStage.QuestionPostInfo);
-
-        public bool IsQuestion() => _stage == GameStage.Question;
-
-        public bool IsWaitingForPress() =>
-            _stage == GameStage.Question
-            || _stage == GameStage.RightAnswer
-            || _stage == GameStage.QuestionPostInfo;
-
-        public bool IsQuestionFinished() => _activeQuestion != null && _atomIndex == _activeQuestion.Scenario.Count;
-
-        public void OnIntroFinished()
+    public void OnIntroFinished()
+    {
+        if (_stage == GameStage.GameThemes)
         {
-            if (_stage == GameStage.GameThemes)
+            AutoNext(1000);
+        }
+    }
+
+    /// <summary>
+    /// Is engine currently staying in the intro stage.
+    /// </summary>
+    public bool IsIntro() => _roundIndex == -1;
+
+    #region Events
+
+    public event Action<Package>? Package;
+    public event Action<string[]>? GameThemes;
+    public event Action<bool>? NextRound;
+    public event Action<Round>? Round;
+    public event Action? RoundSkip;
+    public event Action<Theme[]>? RoundThemes;
+    public event Action<Theme>? Theme;
+    public event Action<Question>? Question;
+    public event Action<int, int, Theme, Question>? QuestionSelected;
+
+    public event Action? QuestionPostInfo;
+
+    public event Action? ShowScore;
+    public event Action? LogScore;
+    public event Action<int, int>? EndQuestion;
+    public event Action? QuestionFinish;
+    public event Action? RoundEmpty;
+    public event Action? NextQuestion;
+    public event Action? RoundTimeout;
+
+    public event Action<Theme[], bool, bool>? FinalThemes;
+    public event Action? WaitDelete;
+    public event Action<int>? ThemeSelected;
+    public event Action<Theme, Question>? PrepareFinalQuestion;
+
+    [Obsolete]
+    public event Action<string>? Sound;
+
+    public event Action<string>? Error;
+
+    public event Action? EndGame;
+
+    #endregion
+
+    protected EngineBase(
+        SIDocument document,
+        Func<EngineOptions> optionsProvider,
+        ISIEnginePlayHandler playHandler,
+        QuestionEngineFactory questionEngineFactory)
+    {
+        _document = document ?? throw new ArgumentNullException(nameof(document));
+        OptionsProvider = optionsProvider ?? throw new ArgumentNullException(nameof(optionsProvider));
+        PlayHandler = playHandler;
+        _questionEngineFactory = questionEngineFactory;
+    }
+
+    /// <summary>
+    /// Moves engine to the next game state.
+    /// </summary>
+    public abstract void MoveNext();
+
+    public abstract Tuple<int, int, int> MoveBack();
+
+    #region Fire events
+
+    protected void OnPackage(Package package) => Package?.Invoke(package);
+
+    protected void OnGameThemes(string[] gameThemes) => GameThemes?.Invoke(gameThemes);
+
+    protected void OnNextRound(bool showSign = true) => NextRound?.Invoke(showSign);
+
+    protected void OnRound(Round round) => Round?.Invoke(round);
+
+    protected void OnRoundSkip() => RoundSkip?.Invoke();
+
+    protected void OnRoundThemes(Theme[] roundThemes) => RoundThemes?.Invoke(roundThemes);
+
+    protected void OnTheme(Theme theme) => Theme?.Invoke(theme);
+
+    protected void OnQuestion(Question question) => Question?.Invoke(question);
+
+    protected void OnQuestionSelected(int themeIndex, int questionIndex, Theme theme, Question question) =>
+        QuestionSelected?.Invoke(themeIndex, questionIndex, theme, question);
+
+    protected void OnQuestionPostInfo() => QuestionPostInfo?.Invoke();
+
+    protected void OnShowScore() => ShowScore?.Invoke();
+
+    protected void OnLogScore() => LogScore?.Invoke();
+
+    protected void OnQuestionFinish() => QuestionFinish?.Invoke();
+
+    protected void OnEndQuestion(int themeIndex, int questionIndex) => EndQuestion?.Invoke(themeIndex, questionIndex);
+
+    protected void OnRoundEmpty() => RoundEmpty?.Invoke();
+
+    protected void OnNextQuestion() => NextQuestion?.Invoke();
+
+    protected void OnRoundTimeout() => RoundTimeout?.Invoke();
+
+    protected void OnFinalThemes(Theme[] finalThemes, bool willPlayAllThemes, bool isFirstPlay) =>
+        FinalThemes?.Invoke(finalThemes, willPlayAllThemes, isFirstPlay);
+
+    protected void OnWaitDelete() => WaitDelete?.Invoke();
+
+    protected void OnThemeSelected(int themeIndex) => ThemeSelected?.Invoke(themeIndex);
+
+    protected void OnPrepareFinalQuestion(Theme theme, Question question) => PrepareFinalQuestion?.Invoke(theme, question);
+
+    [Obsolete]
+    protected void OnSound(string name = "") => Sound?.Invoke(name);
+
+    protected void OnError(string error) => Error?.Invoke(error);
+
+    protected void OnEndGame() => EndGame?.Invoke();
+
+    #endregion
+
+    public object SyncRoot { get; } = new object();
+
+    /// <summary>
+    /// Number of unanswered questions in round.
+    /// </summary>
+    public abstract int LeftQuestionsCount { get; }
+
+    /// <summary>
+    /// Move game futher automatically after specified amount of time.
+    /// </summary>
+    /// <param name="milliseconds">Amount of time in milliseconds to delay before moving futher.</param>
+    protected async void AutoNext(int milliseconds)
+    {
+        try
+        {
+            if (milliseconds < 0)
             {
-                AutoNext(1000);
+                throw new ArgumentException(
+                    $"Value of milliseconds ({milliseconds}) must be greater or equal to 0",
+                    nameof(milliseconds));
             }
-        }
 
-        /// <summary>
-        /// Is engine currently staying in the intro stage.
-        /// </summary>
-        public bool IsIntro() => _roundIndex == -1;
-
-        #region Events
-
-        public event Action<Package> Package;
-        public event Action<string[]> GameThemes;
-        public event Action<bool> NextRound;
-        public event Action<Round> Round;
-        public event Action<Theme[]> RoundThemes;
-        public event Action<Theme> Theme;
-        public event Action<Question> Question;
-        public event Action<int, int, Theme, Question> QuestionSelected;
-
-        public event Action<Atom> QuestionAtom;
-        public event Action<string, IMedia> QuestionText;
-        public event Action<string> QuestionOral;
-        public event Action<IMedia, IMedia> QuestionImage;
-        public event Action<IMedia> QuestionSound;
-        public event Action<IMedia> QuestionVideo;
-        public event Action<Atom> QuestionOther;
-        public event Action<Question, bool, bool> QuestionProcessed;
-        public event Action QuestionFinished;
-        public event Action<Question, bool> WaitTry;
-        public event Action<string> SimpleAnswer;
-        public event Action RightAnswer;
-        public event Action QuestionPostInfo;
-
-        public event Action ShowScore;
-        public event Action LogScore;
-        public event Action<int, int> EndQuestion;
-        public event Action RoundEmpty;
-        public event Action NextQuestion;
-        public event Action RoundTimeout;
-
-        public event Action<Theme[]> FinalThemes;
-        public event Action WaitDelete;
-        public event Action<int> ThemeSelected;
-        public event Action<Theme, Question> PrepareFinalQuestion;
-
-        [Obsolete]
-        public event Action<string> Sound;
-
-        public event Action<string> Error;
-
-        public event Action EndGame;
-
-        #endregion
-
-        protected EngineBase(SIDocument document, IEngineSettingsProvider settingsProvider)
-        {
-            _document = document ?? throw new ArgumentNullException(nameof(document));
-            _settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
-        }
-
-        public abstract void MoveNext();
-        public abstract Tuple<int, int, int> MoveBack();
-
-        #region Fire events
-
-        protected void OnPackage(Package package) => Package?.Invoke(package);
-
-        protected void OnGameThemes(string[] gameThemes) => GameThemes?.Invoke(gameThemes);
-
-        protected void OnNextRound(bool showSign = true) => NextRound?.Invoke(showSign);
-
-        protected void OnRound(Round round) => Round?.Invoke(round);
-
-        protected void OnRoundThemes(Theme[] roundThemes) => RoundThemes?.Invoke(roundThemes);
-
-        protected void OnTheme(Theme theme) => Theme?.Invoke(theme);
-
-        protected void OnQuestion(Question question) => Question?.Invoke(question);
-
-        protected void OnQuestionSelected(int themeIndex, int questionIndex, Theme theme, Question question) => QuestionSelected?.Invoke(themeIndex, questionIndex, theme, question);
-
-        protected void OnQuestionAtom(Atom atom) => QuestionAtom?.Invoke(atom);
-
-        protected void OnQuestionText(string text, IMedia sound) => QuestionText?.Invoke(text, sound);
-
-        protected void OnQuestionOral(string oralText) => QuestionOral?.Invoke(oralText);
-
-        protected void OnQuestionImage(IMedia image, IMedia sound) => QuestionImage?.Invoke(image, sound);
-
-        protected void OnQuestionSound(IMedia sound) => QuestionSound?.Invoke(sound);
-
-        protected void OnQuestionVideo(IMedia video) => QuestionVideo?.Invoke(video);
-
-        protected void OnQuestionOther(Atom atom) => QuestionOther?.Invoke(atom);
-
-        protected void OnQuestionProcessed(Question question, bool finished, bool pressMode) => QuestionProcessed?.Invoke(question, finished, pressMode);
-
-        protected void OnQuestionFinished() => QuestionFinished?.Invoke();
-
-        protected void OnWaitTry(Question question, bool final = false) => WaitTry?.Invoke(question, final);
-
-        protected void OnSimpleAnswer(string answer) => SimpleAnswer?.Invoke(answer);
-
-        protected void OnRightAnswer() => RightAnswer?.Invoke();
-
-        protected void OnQuestionPostInfo() => QuestionPostInfo?.Invoke();
-
-        protected void OnShowScore() => ShowScore?.Invoke();
-
-        protected void OnLogScore() => LogScore?.Invoke();
-
-        protected void OnEndQuestion(int themeIndex, int questionIndex) => EndQuestion?.Invoke(themeIndex, questionIndex);
-
-        protected void OnRoundEmpty() => RoundEmpty?.Invoke();
-
-        protected void OnNextQuestion() => NextQuestion?.Invoke();
-
-        protected void OnRoundTimeout() => RoundTimeout?.Invoke();
-
-        protected void OnFinalThemes(Theme[] finalThemes) => FinalThemes?.Invoke(finalThemes);
-
-        protected void OnWaitDelete() => WaitDelete?.Invoke();
-
-        protected void OnThemeSelected(int themeIndex) => ThemeSelected?.Invoke(themeIndex);
-
-        protected void OnPrepareFinalQuestion(Theme theme, Question question) => PrepareFinalQuestion?.Invoke(theme, question);
-
-        [Obsolete]
-        protected void OnSound(string name = "") => Sound?.Invoke(name);
-
-        protected void OnError(string error) => Error?.Invoke(error);
-
-        protected void OnEndGame() => EndGame?.Invoke();
-
-        #endregion
-
-        public object SyncRoot { get; } = new object();
-
-        /// <summary>
-        /// Number of unanswered questions in the round.
-        /// </summary>
-        public abstract int LeftQuestionsCount { get; }
-
-        /// <summary>
-        /// Move game futher automatically after specified amount of time.
-        /// </summary>
-        /// <param name="milliseconds">Amount of time in milliseconds to delay before moving futher.</param>
-        protected async void AutoNext(int milliseconds)
-        {
-            try
+            if (OptionsProvider().AutomaticGame)
             {
-                if (milliseconds < 0)
+                lock (_autoLock)
                 {
-                    throw new ArgumentException(
-                        $"Value of milliseconds ({milliseconds}) must be greater or equal to 0",
-                        nameof(milliseconds));
-                }
-
-                if (_settingsProvider.AutomaticGame)
-                {
-                    lock (_autoLock)
+                    if (_inAutoMode)
                     {
-                        if (_inAutoMode)
-                        {
-                            return;
-                        }
-
-                        _inAutoMode = true;
+                        return;
                     }
 
-                    await Task.Delay(milliseconds, _cancellationTokenSource.Token);
+                    _inAutoMode = true;
+                }
 
-                    lock (SyncRoot)
+                await Task.Delay(milliseconds, _cancellationTokenSource.Token);
+
+                lock (SyncRoot)
+                {
+                    if (_isDisposed)
                     {
-                        if (_isDisposed)
-                        {
-                            return;
-                        }
-
-                        AutoNextCore();
-                        MoveNext();
+                        return;
                     }
 
-                    lock (_autoLock)
-                    {
-                        _inAutoMode = false;
-                    }
+                    AutoNextCore();
+                    MoveNext();
                 }
-            }
-            catch (TaskCanceledException) { }
-            catch (Exception exc)
-            {
-                OnError($"Engine error: {exc}");
+
+                lock (_autoLock)
+                {
+                    _inAutoMode = false;
+                }
             }
         }
-
-        protected virtual void AutoNextCore() { }
-
-        /// <summary>
-        /// Moves to the next round.
-        /// </summary>
-        /// <param name="showSign">Should the logo be shown.</param>
-        public virtual bool MoveNextRound(bool showSign = true)
+        catch (TaskCanceledException) { }
+        catch (Exception exc)
         {
-            var moved = true;
-            do
-            {
-                if (_roundIndex + 1 < _document.Package.Rounds.Count)
-                {
-                    _roundIndex++;
-                    SetActiveRound();
-                    Stage = GameStage.Round;
-                }
-                else
-                {
-                    Stage = GameStage.End;
-                    OnEndGame();
-                    moved = false;
-                }
-            } while (_stage == GameStage.Round && !AcceptRound(_activeRound));
-
-            CanMoveNextRound = _roundIndex + 1 < _document.Package.Rounds.Count;
-            CanMoveBackRound = _roundIndex > 0;
-
-            UpdateCanNext();
-
-            if (moved)
-            {
-                OnNextRound(showSign);
-            }
-
-            CanMoveBack = false;
-            return moved;
+            OnError($"Engine error: {exc}");
         }
+    }
 
-        public virtual bool MoveToRound(int roundIndex, bool showSign = true)
+    protected virtual void AutoNextCore() { }
+
+    /// <summary>
+    /// Moves to the next round.
+    /// </summary>
+    /// <param name="showSign">Should the logo be shown.</param>
+    public virtual bool MoveNextRound(bool showSign = true)
+    {
+        var moved = true;
+        do
         {
-            if (_roundIndex == roundIndex ||
-                roundIndex < 0 ||
-                roundIndex >= _document.Package.Rounds.Count ||
-                !AcceptRound(_document.Package.Rounds[roundIndex]))
+            if (_roundIndex + 1 < _document.Package.Rounds.Count)
             {
-                return false;
+                _roundIndex++;
+                SetActiveRound();
+                Stage = GameStage.Round;
             }
+            else
+            {
+                Stage = GameStage.End;
+                OnEndGame();
+                moved = false;
+            }
+        } while (_stage == GameStage.Round && !AcceptRound(_activeRound));
 
-            _roundIndex = roundIndex;
-            SetActiveRound();
-            Stage = GameStage.Round;
+        CanMoveBack = false;
+        UpdateCanMoveNextRound();
+        UpdateCanNext();
 
-            CanMoveNextRound = _roundIndex + 1 < _document.Package.Rounds.Count;
-            CanMoveBackRound = _roundIndex > 0;
-
-            UpdateCanNext();
+        if (moved)
+        {
             OnNextRound(showSign);
-
-            CanMoveBack = false;
-            return true;
         }
 
-        public virtual bool AcceptRound(Round round) =>
-            round.Themes.Any(theme => theme.Questions.Any(q => q.Price != SIPackages.Question.InvalidPrice));
+        return moved;
+    }
 
-        public virtual bool MoveBackRound()
+    protected void UpdateCanMoveNextRound() => CanMoveNextRound = _roundIndex + 1 < _document.Package.Rounds.Count;
+
+    protected void UpdateCanMoveBackRound() => CanMoveBackRound = _roundIndex > 0 || CanMoveBack;
+
+    public virtual bool MoveToRound(int roundIndex, bool showSign = true)
+    {
+        if (_roundIndex == roundIndex)
         {
-            if (!CanMoveBackRound)
+            if (CanMoveBack)
             {
-                return false;
+                return MoveBackRound();
             }
 
-            var moved = true;
+            return false;
+        }
+
+        if (roundIndex < 0 ||
+            roundIndex >= _document.Package.Rounds.Count ||
+            !AcceptRound(_document.Package.Rounds[roundIndex]))
+        {
+            return false;
+        }
+
+        _roundIndex = roundIndex;
+        SetActiveRound();
+        Stage = GameStage.Round;
+
+        CanMoveBack = false;
+        UpdateCanMoveNextRound();
+        UpdateCanNext();
+        OnNextRound(showSign);
+
+        return true;
+    }
+
+    public static bool AcceptRound(Round? round) =>
+        round != null
+        && round.Themes.Any(theme => theme.Questions.Any(q => q.Price != SIPackages.Question.InvalidPrice)
+        && (round.Type != RoundTypes.Final || round.Themes.Any(theme => theme.Name != null)));
+
+    public virtual bool MoveBackRound()
+    {
+        if (!CanMoveBackRound)
+        {
+            return false;
+        }
+
+        var moved = true;
+
+        if (CanMoveBack)
+        {
+            Stage = GameStage.Round;
+        }
+        else
+        {
             do
             {
                 if (_roundIndex == 0)
@@ -430,366 +425,160 @@ namespace SIEngine
 
                 Stage = GameStage.Round;
             } while (!AcceptRound(_activeRound));
-
-            CanMoveNextRound = _roundIndex + 1 < _document.Package.Rounds.Count;
-            CanMoveBackRound = _roundIndex > 0;
-            UpdateCanNext();
-
-            CanMoveBack = false;
-            return moved;
         }
 
-        public abstract bool CanNext();
+        CanMoveBack = false;
+        UpdateCanNext();
 
-        public void UpdateCanNext() => CanMoveNext = CanNext();
+        return moved;
+    }
 
-        protected void SetActiveRound() => _activeRound = _roundIndex < _document.Package.Rounds.Count ? _document.Package.Rounds[_roundIndex] : null;
+    public abstract bool CanNext();
 
-        public void SetTimeout() => _timeout = true;
+    public void UpdateCanNext() => CanMoveNext = CanNext();
 
-        public void SkipQuestion() => Stage = _activeRound.Type != RoundTypes.Final ? GameStage.EndQuestion : GameStage.AfterFinalThink;
+    protected void SetActiveRound() => _activeRound = _roundIndex < _document.Package.Rounds.Count ? _document.Package.Rounds[_roundIndex] : null;
 
-        /// <summary>
-        /// Skips rest of the question and goes directly to the answer.
-        /// </summary>
-        public void MoveToAnswer()
+    public void SetTimeout() => _timeout = true;
+
+    public void SkipQuestion()
+    {
+        if (_activeRound == null)
         {
-            if (Stage == GameStage.Question && _atomIndex < _activeQuestion.Scenario.Count)
-            {
-                do
-                {
-                    if (ActiveAtom.Type == AtomTypes.Marker)
-                    {
-                        _atomIndex++;
-                        if (_atomIndex < _activeQuestion.Scenario.Count)
-                        {
-                            _useAnswerMarker = true;
-                        }
-
-                        break;
-                    }
-
-                    _atomIndex++;
-                } while (_atomIndex < _activeQuestion.Scenario.Count);
-            }
-
-            SetAnswerStage();
+            throw new InvalidOperationException("_activeRound is null");
         }
 
-        private void SetAnswerStage()
+        Stage = _activeRound.Type != RoundTypes.Final ? GameStage.EndQuestion : GameStage.AfterFinalThink;
+    }
+
+    /// <summary>
+    /// Skips rest of the question and goes directly to answer.
+    /// </summary>
+    public void MoveToAnswer()
+    {
+        if (QuestionEngine == null)
         {
-            Stage = _settingsProvider.ShowRight || _useAnswerMarker ? GameStage.RightAnswer : GameStage.QuestionPostInfo;
+            throw new InvalidOperationException("QuestionEngine == null");
         }
 
-        protected void OnQuestion()
-        {
-            var playMode = PlayQuestionAtom();
-            var pressMode = _settingsProvider.IsPressMode(_isMedia);
-            if (playMode == QuestionPlayMode.AlreadyFinished)
-            {
-                OnQuestionFinished();
-                SetAnswerStage();
+        QuestionEngine.MoveToAnswer();
+    }
 
-                if (pressMode)
-                {
-                    OnWaitTry(_activeQuestion);
-                    AutoNext(1000 * Math.Min(5, _settingsProvider.ThinkingTime));
-                }
-                else
-                {
-                    MoveNext();
-                }
-            }
-            else
-            {
-                OnQuestionProcessed(_activeQuestion, playMode == QuestionPlayMode.JustFinished, pressMode);
-                AutoNext(1000 * (Math.Min(1, _settingsProvider.ThinkingTime) + _activeQuestion.Scenario.ToString().Length / 20));
-            }
+    protected void OnQuestion()
+    {
+        if (QuestionEngine == null)
+        {
+            throw new InvalidOperationException("QuestionEngine == null");
         }
 
-        /// <summary>
-        /// Отобразить вопрос (его часть)
-        /// </summary>
-        /// <returns>
-        /// <see cref="QuestionPlayMode.JustFinished" />, если вопрос был показан полностью
-        /// <see cref="QuestionPlayMode.InProcess" />, если вопрос был показан не полностью,
-        /// <see cref="QuestionPlayMode.AlreadyFinished" />, если вопрос уже был показан ранее
-        /// </returns>
-        protected QuestionPlayMode PlayQuestionAtom()
+        if (!QuestionEngine.PlayNext())
         {
-            if (_atomIndex == _activeQuestion.Scenario.Count)
-            {
-                return QuestionPlayMode.AlreadyFinished;
-            }
-
-            var activeAtom = ActiveAtom;
-            _isMedia = false;
-            switch (activeAtom.Type)
-            {
-                case AtomTypes.Text:
-                    {
-                        var text = CollectText();
-                        var sound = GetBackgroundSound();
-                        _isMedia = sound != null;
-
-                        OnQuestionText(text, sound);
-
-                        _atomIndex++;
-                        break;
-                    }
-
-                case AtomTypes.Oral:
-                    var oralText = CollectText(AtomTypes.Oral);
-                    OnQuestionOral(oralText);
-
-                    _atomIndex++;
-
-                    break;
-
-                case AtomTypes.Image:
-                case AtomTypes.Audio:
-                case AtomTypes.Video:
-                    {
-                        // Multimedia content
-                        var media = GetMedia();
-
-                        if (media == null)
-                        {
-                            break;
-                        }
-
-                        var isSound = activeAtom.Type == AtomTypes.Audio;
-                        var isImage = activeAtom.Type == AtomTypes.Image;
-
-                        if (isImage)
-                        {
-                            var sound = GetBackgroundSound();
-                            _isMedia = sound != null;
-
-                            OnQuestionImage(media, sound);
-                        }
-                        else
-                        {
-                            if (isSound)
-                            {
-                                var backItem = GetBackgroundImageOrText();
-
-                                if (backItem != null)
-                                {
-                                    if (backItem.Item1 != null)
-                                    {
-                                        OnQuestionImage(backItem.Item1, media);
-                                    }
-                                    else
-                                    {
-                                        OnQuestionText(backItem.Item2, media);
-                                    }
-                                }
-                                else
-                                {
-                                    OnQuestionSound(media);
-                                }
-                            }
-                            else
-                            {
-                                OnQuestionVideo(media);
-                            }
-
-                            _isMedia = true;
-                        }
-
-                        _atomIndex++;
-                        break;
-                    }
-
-                case AtomTypes.Marker:
-                    _atomIndex++;
-
-                    if (_atomIndex < _activeQuestion.Scenario.Count)
-                    {
-                        _useAnswerMarker = true; // Прерываем отыгрыш вопроса: остальное - ответ
-                    }
-
-                    return QuestionPlayMode.AlreadyFinished;
-
-                default:
-                    OnQuestionOther(activeAtom);
-                    _atomIndex++; // Прочие типы не выводятся
-                    break;
-            }
-
-            OnQuestionAtom(activeAtom);
-
-            if (_atomIndex == _activeQuestion.Scenario.Count)
-            {
-                return QuestionPlayMode.JustFinished;
-            }
-
-            if (ActiveAtom.Type == AtomTypes.Marker)
-            {
-                if (_atomIndex + 1 < _activeQuestion.Scenario.Count)
-                {
-                    _useAnswerMarker = true;
-                }
-
-                return QuestionPlayMode.JustFinished;
-            }
-
-            return QuestionPlayMode.InProcess;
-        }
-
-        protected void ProcessRightAnswer()
-        {
-            OnRightAnswer();
-
-            if (!_useAnswerMarker)
-            {
-                OnSimpleAnswer(_activeQuestion.Right.FirstOrDefault() ?? " ");
-            }
-            else // Ответ находится в тексте вопроса
-            {
-                PlayQuestionAtom();
-                Stage = GameStage.RightAnswerProceed;
-                AutoNext(3000);
-                return;
-            }
-
-            Stage = GameStage.QuestionPostInfo;
+            OnQuestionPostInfo();
+            Stage = _activeRound.Type != RoundTypes.Final ? GameStage.EndQuestion : GameStage.AfterFinalThink;
             AutoNext(3000);
         }
-
-        /// <summary>
-        /// Собрать текст последовательно расположенных элементов вопроса
-        /// </summary>
-        /// <returns>Собранный текст</returns>
-        private string CollectText(string atomType = AtomTypes.Text)
-        {
-            var text = new StringBuilder();
-            while (ActiveAtom != null && ActiveAtom.Type == atomType)
-            {
-                if (text.Length > 0)
-                    text.AppendLine();
-
-                text.Append(ActiveAtom.Text);
-
-                _atomIndex++;
-            }
-
-            _atomIndex--;
-
-            return text.ToString();
-        }
-
-        /// <summary>
-        /// Задать дополнительный звук к текущему элементу
-        /// </summary>
-        /// <returns></returns>
-        private IMedia GetBackgroundSound()
-        {
-            if (ActiveAtom != null && ActiveAtom.AtomTime == -1 && _atomIndex + 1 < _activeQuestion.Scenario.Count) // Объединить со следующим
-            {
-                var nextAtom = _activeQuestion.Scenario[_atomIndex + 1];
-                if (nextAtom.Type == AtomTypes.Audio)
-                {
-                    _atomIndex++;
-                    return GetMedia();
-                }
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Задать дополнительные изображение или текст к текущему элементу
-        /// </summary>
-        /// <returns></returns>
-        private Tuple<IMedia, string> GetBackgroundImageOrText()
-        {
-            if (ActiveAtom != null && ActiveAtom.AtomTime == -1 && _atomIndex + 1 < _activeQuestion.Scenario.Count) // Объединить со следующим
-            {
-                var nextAtom = _activeQuestion.Scenario[_atomIndex + 1];
-                if (nextAtom.Type == AtomTypes.Image)
-                {
-                    _atomIndex++;
-
-                    var media = GetMedia();
-                    if (media != null)
-                        return Tuple.Create(media, (string)null);
-                }
-                else if (nextAtom.Type == AtomTypes.Text)
-                {
-                    _atomIndex++;
-                    return Tuple.Create((IMedia)null, CollectText());
-                }
-            }
-
-            return null;
-        }
-
-        private IMedia GetMedia()
-        {
-            try
-            {
-                return _document.GetLink(ActiveAtom);
-            }
-            catch (Exception exc)
-            {
-                OnError(string.Format("При попытке обнаружить ссылку на медиа файл \"{0}\" обнаружена ошибка: {1}", ActiveAtom.Text, exc.Message));
-                _atomIndex++;
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Завершить раунд сразу либо сначала показать счёт
-        /// </summary>
-        protected void DoFinishRound()
-        {
-            OnLogScore();
-            if (_settingsProvider.ShowScore)
-            {
-                Stage = GameStage.Score;
-                OnShowScore();
-                UpdateCanNext();
-            }
-            else
-            {
-                MoveNextRound();
-            }
-
-            AutoNext(5000);
-        }
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (_isDisposed)
-            {
-                return;
-            }
-
-            _cancellationTokenSource.Cancel();
-            _document.Dispose();
-
-            _isDisposed = true;
-        }
-
-        public abstract void SelectQuestion(int theme, int question);
-
-        public abstract int OnReady(out bool more);
-
-        public abstract void SelectTheme(int publicThemeIndex);
     }
+
+    protected void OnFinalQuestion()
+    {
+        if (QuestionEngine == null)
+        {
+            throw new InvalidOperationException("QuestionEngine == null");
+        }
+
+        if (!QuestionEngine.PlayNext())
+        {
+            OnQuestionPostInfo();
+            Stage = _activeRound.Type != RoundTypes.Final ? GameStage.EndQuestion : GameStage.AfterFinalThink;
+            AutoNext(3000);
+        }
+    }
+
+    public void EndRound()
+    {
+        OnRoundEmpty();
+        DoFinishRound();
+    }
+
+    /// <summary>
+    /// Ends round and optionally shows current score.
+    /// </summary>
+    protected void DoFinishRound()
+    {
+        OnLogScore();
+
+        if (OptionsProvider().ShowScore)
+        {
+            Stage = GameStage.Score;
+            OnShowScore();
+            UpdateCanNext();
+        }
+        else
+        {
+            MoveNextRound();
+        }
+
+        AutoNext(5000);
+    }
+
+    protected void OnMoveToQuestion()
+    {
+        var isFinal = _activeRound!.Type == RoundTypes.Final;
+        Stage = isFinal ? GameStage.FinalQuestion : GameStage.Question;
+
+        var options = OptionsProvider();
+
+        if (_activeQuestion == null)
+        {
+            throw new InvalidOperationException("_activeQuestion == null");
+        }
+
+        QuestionEngine = _questionEngineFactory.CreateEngine(
+            _activeQuestion,
+            new QuestionEngineOptions
+            {
+                FalseStarts = options.IsPressMode
+                    ? (options.IsMultimediaPressMode ? FalseStartMode.Enabled : FalseStartMode.TextContentOnly)
+                    : FalseStartMode.Disabled,
+
+                ShowSimpleRightAnswers = options.ShowRight,
+
+                DefaultTypeName = GameRules.GetRulesForRoundType(_activeRound!.Type).DefaultQuestionType,
+                ForceDefaultTypeName = isFinal
+            });
+    }
+
+    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_isDisposed)
+        {
+            return;
+        }
+
+        _cancellationTokenSource.Cancel();
+        _document.Dispose();
+
+        _isDisposed = true;
+    }
+
+    public abstract void SelectQuestion(int themeIndex, int questionIndex);
+
+    public abstract int OnReady(out bool more);
+
+    public abstract void SelectTheme(int publicThemeIndex);
+
+    public abstract bool RemoveQuestion(int themeIndex, int questionIndex);
+
+    public abstract int? RestoreQuestion(int themeIndex, int questionIndex);
 }

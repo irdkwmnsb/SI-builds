@@ -1,9 +1,22 @@
-﻿namespace SI.GameServer.Contract
+﻿namespace SI.GameServer.Contract;
+
+/// <summary>
+/// Contains basic information about a game.
+/// </summary>
+public class SimpleGameInfo
 {
-    public class SimpleGameInfo
-    {
-        public int GameID { get; set; }
-        public string GameName { get; set; }
-        public bool PasswordRequired { get; set; }
-    }
+    /// <summary>
+    /// Unique game identifier.
+    /// </summary>
+    public int GameID { get; set; }
+
+    /// <summary>
+    /// Game name.
+    /// </summary>
+    public string GameName { get; set; } = "";
+
+    /// <summary>
+    /// Does the game require a password to enter.
+    /// </summary>
+    public bool PasswordRequired { get; set; }
 }

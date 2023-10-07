@@ -1,59 +1,62 @@
-﻿namespace SICore
+﻿namespace SICore;
+
+/// <summary>
+/// Contains well-known unlocalizable game constants.
+/// </summary>
+public static class Constants
 {
     /// <summary>
-    /// Игровые константы (не путать с ресурсами, переводить нельзя)
+    /// Game host name placeholder in game host Uri.
     /// </summary>
-    public static class Constants
-    {
-        /// <summary>
-        /// Обозначение имени игрового хоста в Uri
-        /// </summary>
-        public const string GameHost = "<GAMEHOST>";
-        public const string ServerHost = "<SERVERHOST>";
+    public const string GameHost = "<GAMEHOST>";
 
-        /// <summary>
-        /// Свободный (пустой аккаунт)
-        /// </summary>
-        public const string FreePlace = " ";
+    /// <summary>
+    /// Server host name placeholder in server host Uri.
+    /// </summary>
+    public const string ServerHost = "<SERVERHOST>";
 
-        /// <summary>
-        /// Частичный текст вопроса
-        /// </summary>
-        public const string PartialText = "partial";
+    /// <summary>
+    /// Свободный (пустой аккаунт)
+    /// </summary>
+    public const string FreePlace = " ";
 
-        /// <summary>
-        /// Максимальное количество игроков в игре
-        /// </summary>
-        public const int MaxPlayers = 12;
+    /// <summary>
+    /// Частичный текст вопроса
+    /// </summary>
+    public const string PartialText = "partial";
 
-        /// <summary>
-        /// Интервал запуска автоматической игры
-        /// </summary>
-        public const int AutomaticGameStartDuration = 300;
+    /// <summary>
+    /// Максимальное количество игроков в игре
+    /// </summary>
+    public const int MaxPlayers = 12;
 
-        /// <summary>
-        /// Ведущий
-        /// </summary>
-        public const string Showman = "showman";
+    /// <summary>
+    /// Интервал запуска автоматической игры
+    /// </summary>
+    public const int AutomaticGameStartDuration = 300;
 
-        /// <summary>
-        /// Игрок
-        /// </summary>
-        public const string Player = "player";
+    /// <summary>
+    /// Ведущий
+    /// </summary>
+    public const string Showman = "showman";
 
-        /// <summary>
-        /// Viewer.
-        /// </summary>
-        public const string Viewer = "viewer";
+    /// <summary>
+    /// Игрок
+    /// </summary>
+    public const string Player = "player";
 
-        /// <summary>
-        /// Место для подстановки ответа
-        /// </summary>
-        public const string AnswerPlaceholder = "#";
+    /// <summary>
+    /// Viewer.
+    /// </summary>
+    public const string Viewer = "viewer";
 
-        /// <summary>
-        /// Number of ingame timers.
-        /// </summary>
-        public const int TimersCount = 3;
-    }
+    /// <summary>
+    /// Место для подстановки ответа
+    /// </summary>
+    public const string AnswerPlaceholder = "#";
+
+    /// <summary>
+    /// Number of ingame timers.
+    /// </summary>
+    public const int TimersCount = 3;
 }

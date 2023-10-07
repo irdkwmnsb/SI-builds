@@ -1,8 +1,8 @@
-﻿namespace SIGame.ViewModel
+﻿namespace SIGame.ViewModel;
+
+public interface IHumanPlayerOwner
 {
-    public interface IHumanPlayerOwner
-    {
-        string HumanPlayerName { get; set; }
-        AppSettings AppSettings { get; }
-    }
+    string HumanPlayerName { get; set; }
+
+    AppSettings AppSettings { get; }
 }

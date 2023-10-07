@@ -9,6 +9,7 @@ namespace SICore
     public sealed class StoredComputerAccount : ComputerAccount
     {
         private const string UnsetName = "#";
+
         private const string DefaultCulture = "en";
 
         [JsonProperty]
@@ -34,7 +35,7 @@ namespace SICore
                 return Names.First().Value;
             }
 
-            return UnsetName + new Random().Next(short.MaxValue);
+            return UnsetName + Random.Shared.Next(short.MaxValue);
         }
     }
 }

@@ -130,7 +130,7 @@
     <value>Автор</value>
   </data>
   <data name="AuthorSiteUrl" xml:space="preserve">
-    <value>http://ur-quan1986.livejournal.com/74013.html?mode=reply&amp;subject=Замечания по SIQuester'у</value>
+    <value>https://vk.com/si_game</value>
   </data>
   <data name="BaseAuthors" xml:space="preserve">
     <value>Автор</value>
@@ -169,7 +169,7 @@
     <value>-й раунд</value>
   </data>
   <data name="EnumerationError" xml:space="preserve">
-    <value>В следующей теме обнаружена ошибка нумерации.</value>
+    <value>В следующей теме обнаружена ошибка нумерации. Ожидается, что текст всех вопросов в каждой теме начинается с номера, последовательно возрастающего от вопроса к вопросу</value>
   </data>
   <data name="ExportToSns" xml:space="preserve">
     <value>Экспорт в формат СНС</value>
@@ -384,7 +384,7 @@ theme - тема Кота</value>
     <value>База вопросов</value>
   </data>
   <data name="DBStorageComment" xml:space="preserve">
-    <value>Пакет хранится в Базе http://db.chgk.info/ под именем {0}</value>
+    <value>Пакет хранится в Базе {0} под именем {1}</value>
   </data>
   <data name="Editors" xml:space="preserve">
     <value>Редакторы</value>
@@ -424,5 +424,260 @@ theme - тема Кота</value>
   </data>
   <data name="InputMediaUri" xml:space="preserve">
     <value>Введите адрес мультимедиа-объекта</value>
+  </data>
+  <data name="RestoreConfirmation" xml:space="preserve">
+    <value>Обнаружены файлы, которые не были корректно сохранены при последней работе с программой. Восстановить их?</value>
+  </data>
+  <data name="DocumentSavingError" xml:space="preserve">
+    <value>Ошибка сохранения документа</value>
+  </data>
+  <data name="SIQuestions" xml:space="preserve">
+    <value>Вопросы СИ</value>
+  </data>
+  <data name="FileSizeLimitExceed" xml:space="preserve">
+    <value>Размер файла превышает допустимое значение для игры через Игровой сервер ({0} байт)!</value>
+  </data>
+  <data name="HowToUseApp" xml:space="preserve">
+    <value>Как использовать программу</value>
+  </data>
+  <data name="AddQuestion" xml:space="preserve">
+    <value>Добавить вопрос</value>
+  </data>
+  <data name="AddRound" xml:space="preserve">
+    <value>Добавить раунд</value>
+  </data>
+  <data name="AddTheme" xml:space="preserve">
+    <value>Добавить тему</value>
+  </data>
+  <data name="MediaFileTooLarge" xml:space="preserve">
+    <value>Файл {0} превышает рекомендуемый размер в {1} КБ</value>
+  </data>
+  <data name="QuestionPlay" xml:space="preserve">
+    <value>Проигрывание вопроса</value>
+  </data>
+  <data name="UnsupportedFragment" xml:space="preserve">
+    <value>Неподдерживаемый фрагмент: {0}</value>
+  </data>
+  <data name="FileSearch" xml:space="preserve">
+    <value>Поиск файлов</value>
+  </data>
+  <data name="MediaFileExtensionIsNotRecommened" xml:space="preserve">
+    <value>Расширение мультимедиа файла не относится к рекомендуемым ({0})!</value>
+  </data>
+  <data name="MediaFileSizeExceedsRecommenedValue" xml:space="preserve">
+    <value>Размер мультимедиа файла превышает рекомендуемое значение ({0} МБ)!</value>
+  </data>
+  <data name="YamlFiles" xml:space="preserve">
+    <value>YAML файлы</value>
+  </data>
+  <data name="TxtFilesFilter" xml:space="preserve">
+    <value>Файлы вопросов (*.txt) | *.txt</value>
+  </data>
+  <data name="XmlFilesFilter" xml:space="preserve">
+    <value>Файлы вопросов (*.xml) | *.xml</value>
+  </data>
+  <data name="YamlFilesFilter" xml:space="preserve">
+    <value>YAML файлы (*.yaml) | *.yaml</value>
+  </data>
+  <data name="TextImport" xml:space="preserve">
+    <value>Импорт текста</value>
+  </data>
+  <data name="Untitled" xml:space="preserve">
+    <value>Безымянный</value>
+  </data>
+  <data name="SplittingError" xml:space="preserve">
+    <value>Ошибка при поиске вопросов</value>
+  </data>
+  <data name="Statistic" xml:space="preserve">
+    <value>Статистика</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Изображения</value>
+  </data>
+  <data name="ExportAndPrint" xml:space="preserve">
+    <value>экспорт и печать</value>
+  </data>
+  <data name="GamePackageTooLarge" xml:space="preserve">
+    <value>Размер файла превышает 100 Мб!</value>
+  </data>
+  <data name="NewPackage" xml:space="preserve">
+    <value>Новый пакет</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="PackageServerFull" xml:space="preserve">
+    <value>в настоящий момент на сервере нет места для принятия новых пакетов</value>
+  </data>
+  <data name="SendPackageErrorHeader" xml:space="preserve">
+    <value>Не удалось отправить пакет</value>
+  </data>
+  <data name="SendPackageSuccess" xml:space="preserve">
+    <value>Пакет успешно отправлен!</value>
+  </data>
+  <data name="SendToGame" xml:space="preserve">
+    <value>Отправка пакета в компьютерную игру</value>
+  </data>
+  <data name="SIGameQuestions" xml:space="preserve">
+    <value>Вопросы SIGame</value>
+  </data>
+  <data name="ThemesSelection" xml:space="preserve">
+    <value>выбор тем</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>и</value>
+  </data>
+  <data name="ConversionError" xml:space="preserve">
+    <value>Ошибка конвертации</value>
+  </data>
+  <data name="SecretNoQuestion" xml:space="preserve">
+    <value>Вопрос с секретом без вопроса</value>
+  </data>
+  <data name="SecretPublicPrice" xml:space="preserve">
+    <value>Вопрос с секретом и объявленной стоимостью</value>
+  </data>
+  <data name="StakeAllQuestion" xml:space="preserve">
+    <value>Вопрос со ставками для всех</value>
+  </data>
+  <data name="FileOpenError" xml:space="preserve">
+    <value>Ошибка открытия файла</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="OpenAutosaveFolder" xml:space="preserve">
+    <value>Открыть папку автосохранений</value>
+  </data>
+  <data name="OpenLogsFolder" xml:space="preserve">
+    <value>Открыть папку с логами</value>
+  </data>
+  <data name="PackageCorruptedHint" xml:space="preserve">
+    <value>Файл с вопросами повреждён! Попробуйте извлечь данные из него при помощи архиватора (открыв его как архив)</value>
+  </data>
+  <data name="PackageCorruptedHintAutoSave" xml:space="preserve">
+    <value>или получить данные из автосохранения</value>
+  </data>
+  <data name="PackageCorruptedHintLogs" xml:space="preserve">
+    <value>Если не получится, отправьте автору программы логи, чтобы можно было избежать проблемы в будущем</value>
+  </data>
+  <data name="FileInMultipleCategories" xml:space="preserve">
+    <value>Файл {0} содержится в пакете в разных категориях!</value>
+  </data>
+  <data name="FileIsDuplicated" xml:space="preserve">
+    <value>Файл {0} содержится в пакете дважды!</value>
+  </data>
+  <data name="MissingLogoFile" xml:space="preserve">
+    <value>Логотип пакета: отсутствует файл {0}!</value>
+  </data>
+  <data name="ExternalLinksAreForbidden" xml:space="preserve">
+    <value>Внешние ссылки не допускаются</value>
+  </data>
+  <data name="MissingFile" xml:space="preserve">
+    <value>отсутствует файл</value>
+  </data>
+  <data name="UnusedFile" xml:space="preserve">
+    <value>Файл {0} не используется. Удалите его</value>
+  </data>
+  <data name="ConfirmFilesRemoval" xml:space="preserve">
+    <value>Вы действительно хотите удалить все неиспользуемые в пакете медиафайлы</value>
+  </data>
+  <data name="DocxFiles" xml:space="preserve">
+    <value>Документы DOCX</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="HtmlFiles" xml:space="preserve">
+    <value>Файлы HTML</value>
+  </data>
+  <data name="RtfFiles" xml:space="preserve">
+    <value>Документы RTF</value>
+  </data>
+  <data name="TextFiles" xml:space="preserve">
+    <value>Текстовые файлы</value>
+  </data>
+  <data name="XpsFiles" xml:space="preserve">
+    <value>Документы XPS</value>
+  </data>
+  <data name="Authors" xml:space="preserve">
+    <value>Авторы</value>
+  </data>
+  <data name="Sources" xml:space="preserve">
+    <value>Источники</value>
+  </data>
+  <data name="PackageClassicDescription" xml:space="preserve">
+    <value>Такой же пакет, как и в Телевизионном аналоге SIGame</value>
+  </data>
+  <data name="PackageClassicName" xml:space="preserve">
+    <value>Стандартный пакет для SIGame</value>
+  </data>
+  <data name="PackageEmptyDescription" xml:space="preserve">
+    <value>Пакет, изначально ничего не содержащий</value>
+  </data>
+  <data name="PackageEmptyName" xml:space="preserve">
+    <value>Пустой пакет</value>
+  </data>
+  <data name="PackageSpecialDescription" xml:space="preserve">
+    <value>Пакет, содержащий какое-то иное число раундов, тем или вопросов, чем в стандартной SIGame</value>
+  </data>
+  <data name="PackageSpecialName" xml:space="preserve">
+    <value>Нестандартный пакет</value>
+  </data>
+  <data name="PackageThemesCollectionDescription" xml:space="preserve">
+    <value>Просто набор тем</value>
+  </data>
+  <data name="PackageThemesCollectionName" xml:space="preserve">
+    <value>Коллекция тем</value>
+  </data>
+  <data name="TemplateName" xml:space="preserve">
+    <value>Имя шаблона</value>
+  </data>
+  <data name="TemplateWithThisNameAlreadyExists" xml:space="preserve">
+    <value>Шаблон с таким именем уже существует!</value>
+  </data>
+  <data name="RemoveTemplateConfirm" xml:space="preserve">
+    <value>Вы действительно хотите удалить шаблон "{0}"?</value>
+  </data>
+  <data name="Link" xml:space="preserve">
+    <value>(ссылка…)</value>
+  </data>
+  <data name="ExportToHtml" xml:space="preserve">
+    <value>экспорт в HTML</value>
+  </data>
+  <data name="ExportToHtmlHeader" xml:space="preserve">
+    <value>Вопросы "SIGame"</value>
+  </data>
+  <data name="ExportTableHeader" xml:space="preserve">
+    <value>Экспорт в формат таблицы</value>
+  </data>
+  <data name="MircAudio" xml:space="preserve">
+    <value>звук</value>
+  </data>
+  <data name="MircImage" xml:space="preserve">
+    <value>изображение</value>
+  </data>
+  <data name="MircVideo" xml:space="preserve">
+    <value>видео</value>
+  </data>
+  <data name="Restriction" xml:space="preserve">
+    <value>Ограничение</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="Separator" xml:space="preserve">
+    <value>Разделитель</value>
+  </data>
+  <data name="Trash" xml:space="preserve">
+    <value>Мусор</value>
+  </data>
+  <data name="OfThemes" xml:space="preserve">
+    <value>тем</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Инфо</value>
+  </data>
+  <data name="Played" xml:space="preserve">
+    <value>Играно</value>
   </data>
 </root>

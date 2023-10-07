@@ -1,7 +1,14 @@
-﻿namespace SImulator.Implementation.ButtonManagers.Web
+﻿namespace SImulator.Implementation.ButtonManagers.Web;
+
+/// <summary>
+/// Manages a button host.
+/// </summary>
+public interface IButtonProcessor
 {
-    public interface IButtonProcessor
-    {
-        string Press(string connectionId);
-    }
+    /// <summary>
+    /// Handles button press. Resolves a player name by their token.
+    /// </summary>
+    /// <param name="token">Player unique token.</param>
+    /// <returns>Player name.</returns>
+    PressResponse Press(string token);
 }

@@ -1,86 +1,88 @@
 ﻿using System.ComponentModel;
 
-namespace SIQuester.Model
+namespace SIQuester.Model;
+
+/// <summary>
+/// Defines well-known packge export formats.
+/// </summary>
+public enum ExportFormats
+{
+    [Description("ExportFormatsDinabank")]
+    Dinabank,
+    [Description("ExportFormatsTvSI")]
+    TvSI,
+    [Description("ExportFormatsSns")]
+    Sns,
+    [Description("ExportFormatsDb")]
+    Db
+}
+
+public enum Orientation
+{
+    [Description("OrientationVertical")]
+    Vertical,
+    [Description("OrientationHorizontal")]
+    Horizontal
+}
+
+/// <summary>
+/// Defines document view modes.
+/// </summary>
+public enum ViewMode
 {
     /// <summary>
-    /// Тип пакета
+    /// Tree view mode.
     /// </summary>
-    public enum PackageType
-    {
-        [PackageTypeName("Стандартный пакет для SIGame")]
-        [Description("Такой же пакет, как и в Телевизионном аналоге SIGame")]
-        [Category("SIGame")]
-        Classic,
-        [PackageTypeName("Нестандартный пакет")]
-        [Description("Пакет, содержащий какое-то иное число раундов, тем или вопросов, чем в стандартной SIGame")]
-        [Category("SIGame")]
-        Special,
-        [PackageTypeName("Коллекция тем")]
-        [Description("Просто набор тем")]
-        [Category("SIGame")]
-        ThemesCollection,
-        [PackageTypeName("Пустой пакет")]
-        [Description("Пакет, изначально ничего не содержащий")]
-        [Category("Общее")]
-        Empty
-    }
-
+    [Description("ViewModeTree")]
+    TreeFull,
     /// <summary>
-    /// Формат экспорта
+    /// Flat view mode.
     /// </summary>
-    public enum ExportFormats
-    {
-        [Description("Динабанк")]
-        Dinabank,
-        [Description("Телевизионный аналог SIGame")]
-        TvSI,
-        [Description("СНС")]
-        Sns,
-        [Description("База вопросов")]
-        Db
-    }
+    [Description("ViewModeFlat")]
+    Flat
+}
 
-    public enum Orientation
-    {
-        [Description("в столбец")]
-        Vertical,
-        [Description("в строку")]
-        Horizontal
-    }
-
-    public enum ViewMode
-    {
-        [Description("Дерево")]
-        TreeFull,
-        [Description("Плитки")]
-        Flat
-    }
-
+/// <summary>
+/// Defines document layout modes in the flat view.
+/// </summary>
+public enum FlatLayoutMode
+{
     /// <summary>
-    /// Режим редактирования
+    /// Table layout.
     /// </summary>
-    public enum EditMode
-    {
-        [Description("Только чтение")]
-        None,
-        [Description("Фиксированная панель")]
-        FixedPanel,
-        [Description("Плавающая панель")]
-        FloatPanel
-    }
-
+    [Description("FlatLayoutModeTable")]
+    Table,
     /// <summary>
-    /// Масштаб плиточного представления
+    /// List layout.
     /// </summary>
-    public enum FlatScale
-    {
-        [Description("Пакет")]
-        Package,
-        [Description("Раунд")]
-        Round,
-        [Description("Тема")]
-        Theme,
-        [Description("Вопрос")]
-        Question
-    }
+    [Description("FlatLayoutModeList")]
+    List
+}
+
+/// <summary>
+/// Режим редактирования
+/// </summary>
+public enum EditMode
+{
+    [Description("EditModeNone")]
+    None,
+    [Description("EditModeFixedPanel")]
+    FixedPanel,
+    [Description("EditModeFloatPanel")]
+    FloatPanel
+}
+
+/// <summary>
+/// Масштаб плиточного представления
+/// </summary>
+public enum FlatScale
+{
+    [Description("Package")]
+    Package,
+    [Description("Round")]
+    Round,
+    [Description("Theme")]
+    Theme,
+    [Description("Question")]
+    Question
 }

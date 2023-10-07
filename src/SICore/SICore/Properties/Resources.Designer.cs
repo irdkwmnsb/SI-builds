@@ -160,11 +160,11 @@ namespace SICore.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Your avatar is bigger than 1 MB. Other players will not see it.
+        ///   Ищет локализованную строку, похожую на Avatar not found: {0}.
         /// </summary>
-        public static string AvatarTooBig {
+        public static string AvatarNotFound {
             get {
-                return ResourceManager.GetString("AvatarTooBig", resourceCulture);
+                return ResourceManager.GetString("AvatarNotFound", resourceCulture);
             }
         }
         
@@ -246,6 +246,24 @@ namespace SICore.Properties {
         public static string CannotKickYouself {
             get {
                 return ResourceManager.GetString("CannotKickYouself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Cannot set bot as host.
+        /// </summary>
+        public static string CannotSetHostToBot {
+            get {
+                return ResourceManager.GetString("CannotSetHostToBot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Your are host already!.
+        /// </summary>
+        public static string CannotSetHostToYourself {
+            get {
+                return ResourceManager.GetString("CannotSetHostToYourself", resourceCulture);
             }
         }
         
@@ -340,11 +358,29 @@ namespace SICore.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Authors contact.
+        /// </summary>
+        public static string ContactUri {
+            get {
+                return ResourceManager.GetString("ContactUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Cost.
         /// </summary>
         public static string Cost {
             get {
                 return ResourceManager.GetString("Cost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Cost.
+        /// </summary>
+        public static string Cost2 {
+            get {
+                return ResourceManager.GetString("Cost2", resourceCulture);
             }
         }
         
@@ -448,11 +484,20 @@ namespace SICore.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на External link: {0} . You can enable automatic loading of external links in game settings.
+        ///   Ищет локализованную строку, похожую на External link: {0} . External link download could be unsafe and is disabled.
         /// </summary>
         public static string ExternalLink {
             get {
                 return ResourceManager.GetString("ExternalLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Player {0} tried to appellate the last right answer, but there are not enough players to win the appellation currently in the game.
+        /// </summary>
+        public static string FailedToAppellateForWrongAnswer {
+            get {
+                return ResourceManager.GetString("FailedToAppellateForWrongAnswer", resourceCulture);
             }
         }
         
@@ -462,6 +507,15 @@ namespace SICore.Properties {
         public static string File {
             get {
                 return ResourceManager.GetString("File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на File &quot;{0}&quot; loading error.
+        /// </summary>
+        public static string FileLoadError {
+            get {
+                return ResourceManager.GetString("FileLoadError", resourceCulture);
             }
         }
         
@@ -498,6 +552,15 @@ namespace SICore.Properties {
         public static string GameBeginning {
             get {
                 return ResourceManager.GetString("GameBeginning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Game name.
+        /// </summary>
+        public static string GameName {
+            get {
+                return ResourceManager.GetString("GameName", resourceCulture);
             }
         }
         
@@ -691,6 +754,15 @@ namespace SICore.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Select new active player.
+        /// </summary>
+        public static string HintSelectActivePlayer {
+            get {
+                return ResourceManager.GetString("HintSelectActivePlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Select a player to give the question to.
         /// </summary>
         public static string HintSelectCatPlayer {
@@ -799,15 +871,6 @@ namespace SICore.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Invalid avatar data.
-        /// </summary>
-        public static string InvalidAvatarData {
-            get {
-                return ResourceManager.GetString("InvalidAvatarData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на is apellating his own answer.
         /// </summary>
         public static string IsApellating {
@@ -831,6 +894,51 @@ namespace SICore.Properties {
         public static string ItsShowmanIs {
             get {
                 return ResourceManager.GetString("ItsShowmanIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Join to this game is forbidden.
+        /// </summary>
+        public static string JoinForbidden {
+            get {
+                return ResourceManager.GetString("JoinForbidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {0} allowed to join as any role.
+        /// </summary>
+        public static string JoinModeSwitchedToAny {
+            get {
+                return ResourceManager.GetString("JoinModeSwitchedToAny", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {0} disables join.
+        /// </summary>
+        public static string JoinModeSwitchedToForbidden {
+            get {
+                return ResourceManager.GetString("JoinModeSwitchedToForbidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {0} allowed to join only is viewer.
+        /// </summary>
+        public static string JoinModeSwitchedToViewers {
+            get {
+                return ResourceManager.GetString("JoinModeSwitchedToViewers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Join to this game under this role is forbidden.
+        /// </summary>
+        public static string JoinRoleForbidden {
+            get {
+                return ResourceManager.GetString("JoinRoleForbidden", resourceCulture);
             }
         }
         
@@ -880,11 +988,29 @@ namespace SICore.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Let&apos;s play next theme.
+        /// </summary>
+        public static string LetsPlayNextTheme {
+            get {
+                return ResourceManager.GetString("LetsPlayNextTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на So, let&apos;s look at the players&apos; answers;It&apos;s time to look at our players&apos; answers.
         /// </summary>
         public static string LetsSee {
             get {
                 return ResourceManager.GetString("LetsSee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Local game.
+        /// </summary>
+        public static string LocalGame {
+            get {
+                return ResourceManager.GetString("LocalGame", resourceCulture);
             }
         }
         
@@ -921,6 +1047,15 @@ namespace SICore.Properties {
         public static string MediaFileNotSupported {
             get {
                 return ResourceManager.GetString("MediaFileNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Media file is too large and will be skipped.
+        /// </summary>
+        public static string MediaFiltered {
+            get {
+                return ResourceManager.GetString("MediaFiltered", resourceCulture);
             }
         }
         
@@ -1186,7 +1321,7 @@ namespace SICore.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на {0} {1} exceeds recommended size of {2} KB and could be loaded with delay.
+        ///   Ищет локализованную строку, похожую на {0} in question {1} exceeds recommended size of {2} KB and could be loaded with delay.
         /// </summary>
         public static string OversizedFile {
             get {
@@ -1236,6 +1371,15 @@ namespace SICore.Properties {
         public static string PComments {
             get {
                 return ResourceManager.GetString("PComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Person {0} already exists in the game!.
+        /// </summary>
+        public static string PersonAlreadyExists {
+            get {
+                return ResourceManager.GetString("PersonAlreadyExists", resourceCulture);
             }
         }
         
@@ -1344,6 +1488,24 @@ namespace SICore.Properties {
         public static string Question {
             get {
                 return ResourceManager.GetString("Question", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {0} removes question {1}, {2}.
+        /// </summary>
+        public static string QuestionRemoved {
+            get {
+                return ResourceManager.GetString("QuestionRemoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {0} restores question {1}, {2}.
+        /// </summary>
+        public static string QuestionRestored {
+            get {
+                return ResourceManager.GetString("QuestionRestored", resourceCulture);
             }
         }
         
@@ -1461,6 +1623,15 @@ namespace SICore.Properties {
         public static string Score {
             get {
                 return ResourceManager.GetString("Score", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {0} set {1} as active player.
+        /// </summary>
+        public static string SetChooser {
+            get {
+                return ResourceManager.GetString("SetChooser", resourceCulture);
             }
         }
         
@@ -1726,6 +1897,15 @@ namespace SICore.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на everyone can play hiden stakes question.
+        /// </summary>
+        public static string TypeAllowEveryoneToPlayStakes {
+            get {
+                return ResourceManager.GetString("TypeAllowEveryoneToPlayStakes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на classic.
         /// </summary>
         public static string TypeClassic {
@@ -1780,6 +1960,15 @@ namespace SICore.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на ping penalty.
+        /// </summary>
+        public static string TypeUsePingPenalty {
+            get {
+                return ResourceManager.GetString("TypeUsePingPenalty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Unknown person.
         /// </summary>
         public static string UnknownPerson {
@@ -1816,6 +2005,15 @@ namespace SICore.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на User {0} was unbanned.
+        /// </summary>
+        public static string UserUnbanned {
+            get {
+                return ResourceManager.GetString("UserUnbanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на ALL-IN!!!.
         /// </summary>
         public static string VaBank {
@@ -1825,11 +2023,29 @@ namespace SICore.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Voice chat (Discord).
+        /// </summary>
+        public static string VoiceChatLink {
+            get {
+                return ResourceManager.GetString("VoiceChatLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Here we go!; We&apos;re starting!.
         /// </summary>
         public static string WeBeginRound {
             get {
                 return ResourceManager.GetString("WeBeginRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на We will play all of them.
+        /// </summary>
+        public static string WeWillPlayAllOfThem {
+            get {
+                return ResourceManager.GetString("WeWillPlayAllOfThem", resourceCulture);
             }
         }
         

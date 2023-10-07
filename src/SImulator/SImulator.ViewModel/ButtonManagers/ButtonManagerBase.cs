@@ -1,29 +1,15 @@
-﻿using SImulator.ViewModel.Core;
-using SImulator.ViewModel.Model;
-using System;
-using System.Threading.Tasks;
+﻿namespace SImulator.ViewModel.ButtonManagers;
 
-namespace SImulator.ViewModel.ButtonManagers
+/// <inheritdoc cref="IButtonManager" />
+public abstract class ButtonManagerBase : IButtonManager
 {
-    /// <inheritdoc cref="IButtonManager" />
-    public abstract class ButtonManagerBase : IButtonManager
-    {
-        public abstract bool Run();
+    protected IButtonManagerListener Listener { get; }
 
-        public abstract void Stop();
+    public ButtonManagerBase(IButtonManagerListener buttonManagerListener) => Listener = buttonManagerListener;
 
-        public event Func<GameKey, bool> KeyPressed;
+    public abstract bool Start();
 
-        public event Func<string, bool, PlayerInfo> GetPlayerById;
+    public abstract void Stop();
 
-        public event Func<PlayerInfo, bool> PlayerPressed;
-
-        public virtual ValueTask DisposeAsync() => new();
-
-        protected bool OnKeyPressed(GameKey key) => KeyPressed != null && KeyPressed(key);
-
-        protected PlayerInfo OnGetPlayerById(string playerId, bool strict) => GetPlayerById != null ? GetPlayerById(playerId, strict) : null;
-
-        protected bool OnPlayerPressed(PlayerInfo player) => PlayerPressed != null && PlayerPressed(player);
-    }
+    public virtual ValueTask DisposeAsync() => new();
 }

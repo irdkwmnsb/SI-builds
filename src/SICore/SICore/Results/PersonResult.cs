@@ -1,8 +1,8 @@
-﻿namespace SICore.Results
+﻿namespace SICore.Results;
+
+public sealed class PersonResult
 {
-    public sealed class PersonResult
-    {
-        public string Name { get; set; }
-        public int Sum { get; set; }
-    }
+    public string Name { get; set; }
+
+    public int Sum { get; set; }
 }

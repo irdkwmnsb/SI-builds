@@ -70,6 +70,33 @@ namespace SIPackages.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Authors.
+        /// </summary>
+        public static string Authors {
+            get {
+                return ResourceManager.GetString("Authors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Comments.
+        /// </summary>
+        public static string Comments {
+            get {
+                return ResourceManager.GetString("Comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на HTML.
+        /// </summary>
+        public static string Html {
+            get {
+                return ResourceManager.GetString("Html", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Image.
         /// </summary>
         public static string Image {
@@ -115,11 +142,29 @@ namespace SIPackages.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Sources.
+        /// </summary>
+        public static string Sources {
+            get {
+                return ResourceManager.GetString("Sources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Theme.
         /// </summary>
         public static string Theme {
             get {
                 return ResourceManager.GetString("Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Package version {0} is not supported. Maximum supported version is {1}.
+        /// </summary>
+        public static string UnsupportedVersion {
+            get {
+                return ResourceManager.GetString("UnsupportedVersion", resourceCulture);
             }
         }
         

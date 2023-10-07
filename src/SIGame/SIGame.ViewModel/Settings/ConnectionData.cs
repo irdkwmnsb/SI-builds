@@ -2,28 +2,24 @@
 using System.Xml.Serialization;
 using SIGame.ViewModel;
 
-namespace SIGame
+namespace SIGame;
+
+/// <summary>
+/// Информация о подключении к другому серверу
+/// </summary>
+public sealed class ConnectionData : IHumanPlayerOwner
 {
-    /// <summary>
-    /// Информация о подключении к другому серверу
-    /// </summary>
-    public sealed class ConnectionData : IHumanPlayerOwner
+    [XmlAttribute]
+    [DefaultValue("")]
+    public string Address { get; set; } = "";
+
+    [XmlIgnore]
+    public string HumanPlayerName
     {
-        [XmlAttribute]
-        [DefaultValue("")]
-        public string Address { get; set; } = "";
-
-        [XmlIgnore]
-        public string HumanPlayerName
-        {
-            get { return UserSettings.Default.GameSettings.HumanPlayerName; }
-            set { UserSettings.Default.GameSettings.HumanPlayerName = value; }
-        }
-
-        [XmlIgnore]
-        public AppSettings AppSettings
-        {
-            get { return UserSettings.Default.GameSettings.AppSettings; }
-        }
+        get => UserSettings.Default.GameSettings.HumanPlayerName;
+        set => UserSettings.Default.GameSettings.HumanPlayerName = value;
     }
+
+    [XmlIgnore]
+    public AppSettings AppSettings => UserSettings.Default.GameSettings.AppSettings;
 }

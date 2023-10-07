@@ -1,18 +1,21 @@
-﻿using System;
+﻿namespace SIGame.ViewModel.PlatformSpecific;
 
-namespace SIGame.ViewModel.PlatformSpecific
+/// <summary>
+/// Defines a game timer.
+/// </summary>
+public interface IAnimatableTimer : IDisposable
 {
-    public interface IAnimatableTimer : IDisposable
-    {
-        int MaxTime { get; set; }
-        double Time { get; }
+    int MaxTime { get; set; }
 
-        TimerState State { get; }
+    double Time { get; }
 
-        event Action<IAnimatableTimer> TimeChanged;
+    TimerState State { get; }
 
-        void Run(int maxTime, bool byUser);
-        void Stop();
-        void Pause(int currentTime, bool byUser);
-    }
+    event Action<IAnimatableTimer> TimeChanged;
+
+    void Run(int maxTime, bool byUser, double? fromValue = null);
+
+    void Stop();
+
+    void Pause(int currentTime, bool byUser);
 }
